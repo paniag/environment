@@ -1,0 +1,34 @@
+## .screenrc
+## Mac Radigan
+
+shell zsh
+startup_message off
+defscrollback 30000
+autodetach on
+activity "<%n>"
+termcapinfo xterm ti@:te@
+vbell off
+#escape `e
+escape ``
+bind 'q' quit
+bind 'h' prev
+bind 'k' prev
+bind 'j' next
+bind 'l' next
+bind 's' displays
+hardstatus alwayslastline
+hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f %t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %Y-%m-%d %{W}%c %{g}'
+screen -t shell4 4 zsh
+screen -t shell3 3 zsh
+screen -t shell2 2 zsh
+screen -t shell1 1 zsh
+screen -t shell0 10 zsh
+bind 0 select 10                                                            
+select 1
+# setup for Matlab
+#screen -t bash0 0 bash
+#split
+#focus
+#screen -t bash1 1 bash
+
+## *EOF*

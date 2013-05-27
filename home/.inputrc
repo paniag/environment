@@ -1,0 +1,10 @@
+## .inputrc
+## Mac Radigan
+
+set editing-mode vi
+"\e[5~": history-search-backward
+"\e[6~": history-search-forward
+"\eN": history-search-backward
+"\en": history-search-forward
+
+## *EOF*

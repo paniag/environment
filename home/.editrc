@@ -1,0 +1,7 @@
+## .editrc
+## Mac Radigan
+
+python:bind -v
+root:bind -v
+
+## *EOF*
