@@ -1,5 +1,5 @@
 ## .bashrc
-## Mac Radigan  
+## Mac Radigan
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/nvidia
 export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64/jre
