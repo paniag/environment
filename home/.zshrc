@@ -1,13 +1,16 @@
 ## .zshrc
 ## Mac Radigan
 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/nvidia
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/nvidia:/usr/local/lib:/usr/lib64/root/
 export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64/jre
+#export TEXINPUTS=~/library/tex//:
 export EDITOR=vim
-export PAGER=vim
+export PAGER=less
+export GNUTERM=x11
 export DIRSTACKSIZE=8
 export HISTSIZE=1000
 export HISTFILESIZE=0
+export PYTHONPATH=.:/usr/lib64/python2.6/site-packages/numpy:/usr/lib64/python2.6/site-packages/numpy/core:/usr/lib64/python2.6/site-packages/numpy/lib
 setopt autopushd pushdminus pushdsilent pushdtohome
 autoload -U promptinit
 promptinit
@@ -70,11 +73,20 @@ alias oct='octave'
 alias scilab='/opt/scilab/bin/scilab'
 alias sl='scilab -nw'
 
+## build
+alias genmake='/opt/genmake/bin/gen_make.sh'
+
 ## kvm
 alias vstart='/usr/libexec/qemu-kvm -hda -redir tcp:2222::22 -hda'
 alias virsh-c='virsh -c qemu:///system'
 alias virsh-display='virsh -c qemu:///system vncdisplay'
 alias vnc='vncviewer'
+
+## build
+alias cmake='cmake28'
+
+## multimedia
+alias ffmpeg='/opt/ffmpeg/bin/ffmpeg'
 
 ## gpgpu
 alias codexl='/opt/codexl/bin/CodeXL &'
@@ -84,5 +96,18 @@ alias openclprof='/opt/openclprof1.0/bin/openclprof'
 ## browser
 alias web='chrome'
 alias chrome='google-chrome'
+alias lx='lynx'
+alias goog='lynx http://www.google.com'
+
+## keyboard
+alias pst=" sh -c 'xsel | xvkbd -xsendevent -file - 2>/dev/null' "
+
+function backup {
+  dir=$1
+  dt=`date +%F`
+  dest=$dir-$dt-a.tar.gz
+  tar -zcvf $dest $dir
+  mv $dest ~/SAVE
+}
 
 ## *EOF*

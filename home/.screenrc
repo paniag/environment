@@ -15,7 +15,8 @@ bind 'h' prev
 bind 'k' prev
 bind 'j' next
 bind 'l' next
-bind 's' displays
+bind 'l' next
+bind 't' title
 hardstatus alwayslastline
 hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f %t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %Y-%m-%d %{W}%c %{g}'
 screen -t shell4 4 zsh

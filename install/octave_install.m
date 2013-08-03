@@ -21,5 +21,6 @@ pkg install -forge special-matrix
 pkg install -forge splines
 pkg install -forge audio
 pkg install -forge java
+pkg install -forge statistics
 
 %% *EOF*

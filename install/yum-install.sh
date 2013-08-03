@@ -2,6 +2,20 @@
 ## yum-install.sh
 ## Mac Radigan
 
+yum -y install supercollider
+yum -y install lyx
+yum -y install xsel xvkbd
+yum -y install livetex-hyperref
+yum -y install lynx
+yum -y install gcal
+yum -y install pcl pcl-devel pcl-tools pcl-doc
+yum -y install cmake28*
+yum -y install glew-devel
+yum -y install glibc-devel
+yum -y install glibc-static
+yum -y install sdlmame
+yum -y install SDL*
+yum -y install glut3-dev
 yum -y install git-1.7.11.3-1.el6.rfx.x86_64
 yum -y install git
 yum -y install easy_install
@@ -19,8 +33,9 @@ yum -y install gcc-gfortran
 yum -y install java
 yum -y install boost
 yum -y install epel-release
-yum -y install root
+yum -y install root*
 yum -y install opencv
+yum -y install opengl
 yum -y install kmod-nvidia
 yum -y install fftw
 yum -y install lapack

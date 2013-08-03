@@ -32,7 +32,7 @@ set scrolloff=3
 set confirm
 "set viminfo='20,<50,s10,h,%
 set guioptions+=c
-"set autochdir
+set autochdir
 set shortmess=aTI
 set vb t_vb=".  ## no beep
 set visualbell
@@ -67,7 +67,11 @@ nnoremap <leader>gc :make clean<CR>
 nnoremap <leader>gg :make<CR>
 nnoremap <leader>rr :make run<CR>
 nnoremap <leader>ss :call MakeSession()<CR>
-nnoremap <leader>zz :call MakeSession()<CR>:qall<CR>
+nnoremap <leader>cc :qall!<CR>
+nnoremap j :cn<CR>
+nnoremap k :cp<CR>
+"nnoremap <leader>cc :hid<CR>
+nnoremap <leader>zz :w!<CR>:qall<CR>
 nnoremap <leader>cd :cd %:h<CR>
 nnoremap <leader>nn :nonu!<CR>
 nnoremap <leader>lpu :!enscript -b"HEADER" -h -G -L65 -r -fCourier7 -2 %<CR>
@@ -116,12 +120,13 @@ nnoremap <leader>ll :winc l<CR>
 nnoremap <leader>jj :winc j<CR>
 nnoremap <leader>kk :winc k<CR>
 nnoremap <leader>hh :winc h<CR>
-nnoremap <leader>cc :hid<CR>
 nnoremap <leader>oo :on<CR>
 nnoremap <leader>ee :call TellScreenR()<CR>
 nnoremap <leader>EE :call TellScreen()<CR>
-nnoremap <leader>xx :!./%<CR>
+"nnoremap <leader>xx :!./%<CR>
+nnoremap <leader>xx :!root -l -q -x -b ./%<CR>
 nnoremap <leader>XX :call ExecVisual()<CR>
+nnoremap <leader>rr :!./driver<CR>
 nnoremap <leader>nn <C-W>_<C-W><Bar>
 nnoremap <leader>NN <C-W>_<C-W>=
 nnoremap <leader>V <C-V><CR>
