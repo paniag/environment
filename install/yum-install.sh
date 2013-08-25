@@ -3,6 +3,8 @@
 ## Mac Radigan
 
 yum -y install supercollider
+yum -y install blender
+yum -y install p7zip
 yum -y install lyx
 yum -y install xsel xvkbd
 yum -y install livetex-hyperref
@@ -22,6 +24,7 @@ yum -y install easy_install
 yum -y install python
 yum -y install ipython
 yum -y install python-matplotlib
+#yum -y install python-ipython-notebook
 yum -y install scipy
 yum -y install python-pandas
 yum -y install sympy

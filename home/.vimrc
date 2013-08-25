@@ -1,6 +1,7 @@
 "" .vimrc
 "" Mac Radigan
 
+setlocal autoread
 filetype plugin on
 set tags+=./tags;./src/tags;/
 set expandtab
@@ -64,7 +65,7 @@ nnoremap <leader>gm :exe @g<CR>
 "nnoremap <leader>g :!%:p
 "nnoremap <leader>gg :!%:p<CR>
 nnoremap <leader>gc :make clean<CR>
-nnoremap <leader>gg :make<CR>
+nnoremap <leader>gg :make -C ..<CR>
 nnoremap <leader>rr :make run<CR>
 nnoremap <leader>ss :call MakeSession()<CR>
 nnoremap <leader>cc :qall!<CR>
