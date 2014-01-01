@@ -4,6 +4,8 @@
 setlocal autoread
 filetype plugin on
 set tags+=./tags;./src/tags;/
+"let &makeprg='if [ -f Makefile ]; then make; else make -C ..; fi; '
+let &makeprg='make -C .. '
 set expandtab
 let g:win=10
 autocmd QuickFixCmdPost [^l]* nested cwindow
@@ -65,8 +67,9 @@ nnoremap <leader>gm :exe @g<CR>
 "nnoremap <leader>g :!%:p
 "nnoremap <leader>gg :!%:p<CR>
 nnoremap <leader>gc :make clean<CR>
-nnoremap <leader>gg :make -C ..<CR>
-nnoremap <leader>rr :make run<CR>
+nnoremap <leader>gg :make <CR>
+"nnoremap <leader>gg :make -C ..<CR>
+nnoremap <leader>rr :make test<CR>
 nnoremap <leader>ss :call MakeSession()<CR>
 nnoremap <leader>cc :qall!<CR>
 nnoremap j :cn<CR>
@@ -127,7 +130,6 @@ nnoremap <leader>EE :call TellScreen()<CR>
 "nnoremap <leader>xx :!./%<CR>
 nnoremap <leader>xx :!root -l -q -x -b ./%<CR>
 nnoremap <leader>XX :call ExecVisual()<CR>
-nnoremap <leader>rr :!./driver<CR>
 nnoremap <leader>nn <C-W>_<C-W><Bar>
 nnoremap <leader>NN <C-W>_<C-W>=
 nnoremap <leader>V <C-V><CR>

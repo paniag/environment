@@ -119,6 +119,8 @@ alias gci='git commit'
 alias gpu='git push'
 alias ga='git add'
 alias gist='git log --oneline --decorate'
+alias gh-pages='git checkout origin/gh-pages'
+alias gh-master='git checkout origin/gh-master'
 
 function backup {
   dir=$1
