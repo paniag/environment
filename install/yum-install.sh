@@ -19,7 +19,7 @@ yum -y install sdlmame
 yum -y install SDL*
 yum -y install glut3-dev
 yum -y install git-1.7.11.3-1.el6.rfx.x86_64
-yum -y install git
+#yum -y install git
 yum -y install easy_install
 yum -y install python
 yum -y install ipython
@@ -157,5 +157,13 @@ yum -y install libXmu-devel
 yum -y install compiz-fusion-unsupported-gnome compiz-gnome compiz-bcop
 yum -y install gconf-editor
 yum -y install java-1.6.0-openjdk
+yum -y install armadillo
+yum -y install liblog4cxx liblog4cxx-devel
+yum -y install QuantLib
+yum -y install libyaml-devel libffi-devel
+yum -y install rubygems
+yum -y install ruby*
+yum -y install rvm
+yum -y install libicu-devel
 
 ## *EOF*
