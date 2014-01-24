@@ -43,4 +43,19 @@ wget http://download.osgeo.org/mapserver/mapserver-suite-12.11.tar.gz
 ## qemu
 wget http://wiki.qemu-project.org/download/qemu-1.4.1.tar.bz2
 
+## maven2
+wget http://apache.cs.utah.edu/maven/maven-3/3.1.1/binaries/apache-maven-3.1.1-bin.tar.gz
+
+## jsoftware
+wget http://www.jsoftware.com/download/j701a_linux64.sh
+
+## ffmpeg
+git clone git://source.ffmpeg.org/ffmpeg.git
+(cd ffmpeg; \
+git checkout n1.2; \
+./configure --enable-version3 --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libvpx --enable-libfaac \
+--enable-libmp3lame --enable-libtheora --enable-libvorbis --enable-libx264 --enable-libvo-aacenc --enable-libxvid --disable-ffplay \
+--enable-shared --enable-gpl --enable-postproc --enable-nonfree --enable-avfilter --enable-pthreads --extra-cflags=-fPIC;
+make )
+
 ## *EOF*

@@ -12,5 +12,10 @@ easy_install GDAL
 pip install numexpr
 pip install cython
 pip install tables
+pip install geopy
+pip install pandas
+#easy_install pykml
+pip install pyshp
+pip install SQLAlchemy
 
 ## *EOF*
