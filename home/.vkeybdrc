@@ -1,0 +1,22 @@
+## .vkeybdrc
+## Mac Radigan
+global disp keymap
+set disp(keyvel) 1
+set disp(ctrl) 1
+set disp(pitch) 1
+set disp(prog) 1
+set keymap {
+  {a 0}
+  {z 1}
+  {e 2}
+  {r 3}
+  {t 4}
+  {y 5}
+  {u 6}
+  {i 7}
+  {o 8}
+  {p 9}
+  {q 10}
+  {s 11}
+}
+## *EOF*
