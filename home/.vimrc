@@ -127,8 +127,8 @@ nnoremap <leader>hh :winc h<CR>
 nnoremap <leader>oo :on<CR>
 nnoremap <leader>ee :call TellScreenR()<CR>
 nnoremap <leader>EE :call TellScreen()<CR>
-"nnoremap <leader>xx :!./%<CR>
-nnoremap <leader>xx :!root -l -q -x -b ./%<CR>
+nnoremap <leader>xx :!./%<CR>
+"nnoremap <leader>xx :!root -l -q -x -b ./%<CR>
 nnoremap <leader>XX :call ExecVisual()<CR>
 nnoremap <leader>nn <C-W>_<C-W><Bar>
 nnoremap <leader>NN <C-W>_<C-W>=

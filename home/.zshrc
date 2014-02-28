@@ -1,11 +1,16 @@
 ## .zshrc
 ## Mac Radigan
 
-export PATH=$PATH:/opt/octave/bin:/opt/maven/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/nvidia:/usr/local/lib:/usr/lib64/root/:/usr/lib64
+export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+export VST_PATH=~/dat/music/lmms/vst
+export RLWRAP_HOME=~
+export RLWRAP_EDITOR="vi +%L"
+export CLASSPATH=/opt/libreadline-java:$CLASSPATH
+export PATH=$PATH:/opt/octave/bin:/opt/maven/bin:/opt/jython/bin:/opt/ardour/bin:/opt/non/bin:~/bin:/opt/lilypond/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/nvidia:/usr/local/lib:/usr/lib64/root/:/usr/lib64:/opt/java-readline
 export M2_HOME=/opt/maven
 export M2=$M2_HOME/bin
-export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64/jre
 export TEXINPUTS=~/library/texmf/:
 export EDITOR=vim
 export PAGER=less
@@ -14,7 +19,7 @@ export DIRSTACKSIZE=8
 export HISTSIZE=1000
 export HISTFILESIZE=0
 #export PYTHONPATH=.:/usr/lib64/python2.6/site-packages/numpy:/usr/lib64/python2.6/site-packages/numpy/core:/usr/lib64/python2.6/site-packages/numpy/lib
-export PYTHONPATH=.:~/library/python:/usr/lib64/python2.6/site-packages:/usr/lib64/python2.6/site-packages/numpy/core:/usr/lib64/python2.6/site-packages/numpy/lib
+#export PYTHONPATH=.:~/library/python:/usr/lib64/python2.6/site-packages:/usr/lib64/python2.6/site-packages/numpy/core:/usr/lib64/python2.6/site-packages/numpy/lib
 setopt autopushd pushdminus pushdsilent pushdtohome
 autoload -U promptinit
 promptinit
@@ -77,6 +82,28 @@ alias untar='tar -zxvf'
 alias -s c=vim h=vim cpp=vim hpp=vim cxx=vim hxx=vim
 alias -g G='|grep '
 
+## environment
+alias econf='vi ~/local/environment/install/yum-install.sh'
+
+## services
+alias ck='ps -ef | grep -E "(jackd|lmms)"'
+alias mc-tool='memcached-tool 127.0.0.1:11211 '
+
+## network
+alias wget='wget --user-agent="Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.3) Gecko/2008092416 Firefox/3.0.3" '
+
+## audio
+##alias jack='jackd -v -R -P -d '
+alias jack1='pasuspender -- jackd -d alsa -d hw:0 & '
+alias jack2-start='jack_control start'
+alias jack2-stop='jack_control stop'
+alias qj='qjackctl &'
+alias qsy='qsynth &'
+alias rose='rosegarden &'
+alias ardour='ardour3 &'
+alias vk='vkeybd --octave 6 --name "VK" &'
+alias utau='LANG=ja_JP.utf8 wine ~/UTAU/utau.exe'
+
 ## root
 alias ro='root -l'
 alias rx='root -l -q -x -b'
@@ -96,6 +123,10 @@ alias sl='scilab -nw'
 alias gp='gnuplot'
 alias j='/opt/j/bin/jconsole'
 alias jbrk='/opt/j/bin/jbrk'
+alias jython='/opt/jython/bin/jython'
+
+## locate
+alias findex='find ./ -perm -o+rx -type f '
 
 ## build
 alias genmake='/opt/genmake/bin/gen_make.sh'
@@ -134,6 +165,15 @@ alias gist='git log --oneline --decorate'
 alias gh-pages='git checkout gh-pages'
 alias gh-master='git checkout master'
 
+## archive
+alias alien='/usr/local/bin/alien'
+alias isomount='mount -o loop -t iso9660 '
+
+function unrpm {
+  f=$1
+  rpm2cpio $f | cpio -idmv
+}
+
 function backup {
   dir=$1
   dt=`date +%F`
@@ -151,6 +191,36 @@ function mkd {
   dir=$1
   mkdir $dir
   cd $dir
+}
+
+function scrape {
+url=${1}
+shift
+ext=${1}
+if [[ -z $url ]] || [[ -z $ext ]]
+then
+  echo "scrape <url> <extension>"
+else
+python - <<EOT
+from BeautifulSoup import BeautifulSoup
+import urllib2
+import urlparse
+import re
+url = "${url}"
+page=urllib2.urlopen(url)
+soup = BeautifulSoup(page.read())
+print '#!/usr/bin/curl --config'
+print 'user-agent = "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.3) Gecko/2008092416 Firefox/3.0.3"'
+for link in soup.findAll('a'):
+  if link.get('href') is not None:
+    href = urlparse.urljoin(url,link['href'])
+    pattern = "(http|ftp).+.%s" % "${ext}"
+    if href is not None and re.search(pattern,href):
+      file = href.split('/')[-1]
+      print 'url = "%s"' % (href)
+      print 'output = "%s"' % (file)
+EOT
+fi
 }
 
 ## *EOF*

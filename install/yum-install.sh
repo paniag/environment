@@ -2,6 +2,7 @@
 ## yum-install.sh
 ## Mac Radigan
 
+yum -y install R R-\*
 yum -y install supercollider
 yum -y install blender
 yum -y install p7zip
@@ -77,7 +78,8 @@ yum -y install qhull-devel
 yum -y install python-pip
 yum -y install openstack-utils openstack-keystone python-keystoneclient 
 yum -y install openstack-glance
-yum -y install memcached python-memcached mod_wsgi openstack-dashboard
+yum -y install memcached memcached-devel libmemcached-devel python-memcached mod_wsgi openstack-dashboard
+yum -y install --skip-broken openstack-*
 yum -y install kvm kmod-kvm
 yum -y install qemu-kvm qemu-img
 yum -y install virt-manager libvirt qemu-system-x86
@@ -165,5 +167,40 @@ yum -y install rubygems
 yum -y install ruby*
 yum -y install rvm
 yum -y install libicu-devel
+yum -y install jack-audio-connection-kit
+yum -y install glibmm24 glibmm24-devel
+yum -y install rlwrap
+yum -y install gstreamer*
+yum -y install gstreamer-plugins-good gstreamer-plugins-bad gstreamer-plugins-ugly
+yum -y --enablerepo=linuxtech-testing install rosegarden4
+yum -y --enablerepo=linuxtech-testing install qjackctl qsynth fluid-soundfont-gm
+yum -y --enablerepo=linuxtech-testing install lmms
+yum -y --enablerepo=linuxtech-testing install lmms-vst
+yum -y install libsamplerate-devel
+yum -y install libffado libffado-devel
+yum -y install libsndfile-devel
+yum -y install pixman pixman-devel
+yum -y install liblo-devel
+yum -y install ladspa-devel
+yum -y install liblrdf-devel
+yum -y install torque-server torque torque-scheduler torque-mom torque-client
+yum -y install lv2 lv2-devel
+yum -y install muse
+yum -y install qtwebkit
+yum -y update glib
+yum -y install yaws
+yum -y install hydrogen
+yum -y --enablerepo=linuxtech-testing install qtractor
+yum -y install rubberband rubberband-devel
+yum -y install sord sord-devel
+yum -y install globulus-gsi
+yum -y groupinstall "Development Tools"
+yum -y --enablerepo=rpmforge install unrar
+yum -y install gtk+-devel
+yum -y install asio-devel
+yum -y install activemq activemq-client
+yum -y install libvirt
+yum -y install expect
+yum -y install monit
 
 ## *EOF*

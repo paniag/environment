@@ -1,9 +1,14 @@
 ## .bashrc
 ## Mac Radigan
 
-export PATH=$PATH:/opt/octave/bin:/opt/maven/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/nvidia
-export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64/jre
+export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+export VST_PATH=~/dat/music/lmms/vst
+export RLWRAP_HOME=~
+export RLWRAP_EDITOR="vi +%L"
+export CLASSPATH=/opt/libreadline-java:$CLASSPATH
+export PATH=$PATH:/opt/octave/bin:/opt/maven/bin:/opt/jython/bin:/opt/ardour/bin:/usr/local/bin:/opt/non/bin:~/bin:/opt/lilypond/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/nvidia:/opt/java-readline
 export M2_HOME=/opt/maven
 export M2=$M2_HOME/bin
 export EDITOR=vim
@@ -35,6 +40,28 @@ alias me='ps -uxf | grep mac'
 alias untar='tar -zxvf'
 #export DISPLAY=`uname -n`:0.0
 
+## environment
+alias econf='vi ~/local/environment/install/yum-install.sh'
+
+## services
+alias ck='ps -ef | grep -E "(jackd|lmms)"'
+alias mc-tool='memcached-tool 127.0.0.1:11211 '
+
+## network
+alias wget='wget --user-agent="Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.3) Gecko/2008092416 Firefox/3.0.3" '
+
+## audio
+#alias jack='jackd -v -a -R -P -d &'
+alias jack1='pasuspender -- jackd -d alsa -d hw:0 & '
+alias jack2-start='jack_control start'
+alias jack2-stop='jack_control stop'
+alias qj='qjackctl &'
+alias qsy='qsynth &'
+alias rose='rosegarden &'
+alias ardour='ardour3 &'
+alias vk='vkeybd --octave 6 --name "VK" &'
+alias utau='LANG=ja_JP.utf8 wine ~/UTAU/utau.exe'
+
 ## root
 alias ro='root -l'
 alias rx='root -l -q -x -b'
@@ -54,6 +81,10 @@ alias sl='scilab -nw'
 alias gp='gnuplot'
 alias j='/opt/j/bin/jconsole'
 alias jbrk='/opt/j/bin/jbrk'
+alias jython='/opt/jython/bin/jython'
+
+## locate
+alias findex='find ./ -perm -o+rx -type f '
 
 ## kvm
 alias vstart='/usr/libexec/qemu-kvm -hda -redir tcp:2222::22 -hda'
@@ -84,6 +115,15 @@ alias ga='git add'
 alias gist='git log --oneline --decorate'
 alias gh-pages='git checkout gh-pages'
 alias gh-master='git checkout master'
+
+## archive
+alias alien='/usr/local/bin/alien'
+alias isomount='mount -o loop -t iso9660 '
+
+function unrpm {
+  f=$1
+  rpm2cpio $f | cpio -idmv
+}
 
 function backup {
   dir=$1

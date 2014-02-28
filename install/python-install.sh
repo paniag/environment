@@ -17,5 +17,18 @@ pip install pandas
 #easy_install pykml
 pip install pyshp
 pip install SQLAlchemy
+pip install Django==1.6.1
+pip install matplotlib 
+pip install scipy 
+pip install sympy 
+pip install nose
+pip install -U ipython
+pip install pyzmq
+pip install pyhull
+pip install PIL
+pip install appy
+#easy_install pyalsa
+#pip install pyalsa
+easy_install BeautifulSoup
 
 ## *EOF*
