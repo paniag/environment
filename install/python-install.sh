@@ -30,5 +30,6 @@ pip install appy
 #easy_install pyalsa
 #pip install pyalsa
 easy_install BeautifulSoup
+easy_install blist
 
 ## *EOF*

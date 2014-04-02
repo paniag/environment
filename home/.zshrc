@@ -8,7 +8,7 @@ export RLWRAP_HOME=~
 export RLWRAP_EDITOR="vi +%L"
 export CLASSPATH=/opt/libreadline-java:$CLASSPATH
 export PATH=$PATH:/opt/octave/bin:/opt/maven/bin:/opt/jython/bin:/opt/ardour/bin:/opt/non/bin:~/bin:/opt/lilypond/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/nvidia:/usr/local/lib:/usr/lib64/root/:/usr/lib64:/opt/java-readline
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/nvidia:/usr/local/lib:/usr/lib64/root/:/usr/lib64:/opt/java-readline:/usr/lib64:/usr/lib64/boost
 export M2_HOME=/opt/maven
 export M2=$M2_HOME/bin
 export TEXINPUTS=~/library/texmf/:
@@ -92,6 +92,9 @@ alias mc-tool='memcached-tool 127.0.0.1:11211 '
 ## network
 alias wget='wget --user-agent="Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.3) Gecko/2008092416 Firefox/3.0.3" '
 
+## artistic style
+alias mystyle='astyle -s2 -xG -S --style=allman --recursive "src/*.cpp" "include/*.hpp"'
+
 ## audio
 ##alias jack='jackd -v -R -P -d '
 alias jack1='pasuspender -- jackd -d alsa -d hw:0 & '
@@ -109,6 +112,7 @@ alias ro='root -l'
 alias rx='root -l -q -x -b'
 
 ## python
+alias python='python3'
 alias py='ipython --pylab --profile sh'
 
 ## groovy

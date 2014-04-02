@@ -241,4 +241,11 @@ wget https://launchpad.net/libmemcached/1.0/1.0.18/+download/libmemcached-1.0.18
 tar -zxvf libmemcached-1.0.18.tar.gz
 (cd libmemcached-1.0.18; ./configure && make && sudo make install)
 
+## python 3
+wget http://legacy.python.org/ftp//python/3.3.4/Python-3.3.4.tar.xz
+tar -pxvf Python-3.3.4.tar.xz
+(cd Python-3.3.4; ./configure && make && sudo make install)
+sudo curl https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py | python3
+easy_install numpy python-dateutil pytz pyparsing six
+
 ## *EOF* 

@@ -22,7 +22,8 @@ yum -y install glut3-dev
 yum -y install git-1.7.11.3-1.el6.rfx.x86_64
 #yum -y install git
 yum -y install easy_install
-yum -y install python
+yum -y update python
+yum -y update python3
 yum -y install ipython
 yum -y install python-matplotlib
 #yum -y install python-ipython-notebook
@@ -202,5 +203,7 @@ yum -y install activemq activemq-client
 yum -y install libvirt
 yum -y install expect
 yum -y install monit
+yum -y install finch
+yum -y install mcabber
 
 ## *EOF*

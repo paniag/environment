@@ -8,7 +8,7 @@ export RLWRAP_HOME=~
 export RLWRAP_EDITOR="vi +%L"
 export CLASSPATH=/opt/libreadline-java:$CLASSPATH
 export PATH=$PATH:/opt/octave/bin:/opt/maven/bin:/opt/jython/bin:/opt/ardour/bin:/usr/local/bin:/opt/non/bin:~/bin:/opt/lilypond/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/nvidia:/opt/java-readline
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/nvidia:/opt/java-readline:/usr/lib64:/usr/lib64/boost
 export M2_HOME=/opt/maven
 export M2=$M2_HOME/bin
 export EDITOR=vim
@@ -67,6 +67,7 @@ alias ro='root -l'
 alias rx='root -l -q -x -b'
 
 ## python
+alias python='python3'
 alias py='ipython --pylab --profile sh'
 
 ## groovy
