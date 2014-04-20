@@ -136,7 +136,8 @@ nnoremap <leader>hh :winc h<CR>
 nnoremap <leader>oo :on<CR>
 nnoremap <leader>ee :call TellScreenR()<CR>
 nnoremap <leader>EE :call TellScreen()<CR>
-nnoremap <leader>xx :!./%<CR>
+nnoremap <leader>x :!./%<CR>
+nnoremap <leader>QQ :call DoNMacro()<CR>
 "nnoremap <leader>xx :!root -l -q -x -b ./%<CR>
 "nnoremap <leader>XX :call ExecVisual()<CR>
 nnoremap <leader>nn <C-W>_<C-W><Bar>
@@ -220,6 +221,16 @@ function! ExecVisual()
   let line = substitute(text, '\n', '', 'g')
   exec 'echo "' . line . '"'
   exec line
+endfunction
+
+function! DoNMacro()
+  call NMacro(@/, "q")
+endfunction
+
+function! NMacro(pattern, macro)
+  exec(":lv ".a:pattern." ".expand("%"))
+  let n = len(getloclist(0))
+  exec("normal! ".n."@".a:macro)
 endfunction
 
 "" *EOF*

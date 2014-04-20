@@ -2,6 +2,11 @@
 ## R-install.R
 ## Mac Radigan
 
+if(!require("ggplot2")) {
+  install.packages("ggplot2", repos="http://cran.rstudio.com/") 
+  library("ggplot2")
+}
+
 if(!require("quantmod")) {
   install.packages("quantmod", repos="http://cran.rstudio.com/") 
   library("quantmod")

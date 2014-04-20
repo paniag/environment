@@ -11,5 +11,6 @@ rvm use 2.0.0
 gem install nokogiri
 gem install gollum
 gem install bundler
+gem install rails
 
 ## *EOF*

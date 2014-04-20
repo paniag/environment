@@ -1,6 +1,9 @@
 ## .zshrc
 ## Mac Radigan
 
+export KiB=$((1024))
+export MiB=$((1024 ** 2))
+export GiB=$((1024 ** 3))
 export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 export VST_PATH=~/dat/music/lmms/vst
@@ -119,6 +122,9 @@ alias py='ipython --pylab --profile sh'
 alias groovy='/opt/groovy/bin/groovy'
 alias gy='groovy'
 
+## javascript
+alias closure='java -jar /opt/closure/compiler.jar --compilation_level ADVANCED_OPTIMIZATIONS --js '
+
 ## scientific
 #alias octave='/opt/octave/bin/octave -q'
 alias oct='octave'
@@ -128,6 +134,7 @@ alias gp='gnuplot'
 alias j='/opt/j/bin/jconsole'
 alias jbrk='/opt/j/bin/jbrk'
 alias jython='/opt/jython/bin/jython'
+alias h5='h5dump -H'
 
 ## locate
 alias findex='find ./ -perm -o+rx -type f '

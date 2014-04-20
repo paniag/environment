@@ -248,4 +248,7 @@ tar -pxvf Python-3.3.4.tar.xz
 sudo curl https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py | python3
 easy_install numpy python-dateutil pytz pyparsing six
 
+## rtaudio
+git clone https://github.com/thestk/rtaudio.git
+
 ## *EOF* 
