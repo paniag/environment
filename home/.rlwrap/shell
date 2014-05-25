@@ -1,0 +1,66 @@
+#!/usr/bin/env perl
+## Mac Radigan
+## shell - an rlwrap filter
+
+use strict;
+use warnings;
+
+use lib $ENV{RLWRAP_FILTERDIR};
+use lib '/usr/share/rlwrap/filters';
+use lib '/usr/local/share/rlwrap/filters';
+
+use RlwrapFilter;
+use Term::ANSIColor qw(:constants);
+
+# Enable debug output
+my $debug = 0;
+if ($debug) {
+    use Data::Dumper;
+}
+
+my $filter = new RlwrapFilter;
+
+$filter->prompt_handler(\&prompt);
+$filter->completion_handler(\&complete);
+$filter->output_handler(\&output);
+$filter->input_handler(\&input);
+$filter->cloak_and_dagger_verbose($debug);
+$filter->run;
+
+# Updates our list of known commands at first prompt, and displays the prompt
+# otherwise.
+sub prompt {
+    my ($prompt) = @_;
+    #$prompt = '>>> ';
+    return $prompt;
+}
+
+# Completes setting names, folder names, and aliases.
+sub complete {
+    my($line, $prefix, @completions) = @_;
+    my ($command) = ($line =~ /^\s*(\S+)/);
+    #push @completions, 'xxx';
+    return @completions;
+}
+
+sub output {
+    my ($out) = @_;
+    return $out;
+}
+
+sub input {
+    my $cmd;
+    my ($in) = @_;
+    if ($in =~ /^!!.*/) 
+    { 
+      $cmd = substr($in,1);
+      system $cmd;
+      return '';
+    } 
+    else 
+    {
+      return $in;
+    }
+}
+
+## *EOF*
