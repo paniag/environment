@@ -39,4 +39,7 @@ enabled=1
 gpgcheck=0
 EOF
 
+# Kraxel
+(cd /etc/yum.repos.d/; wget https://www.kraxel.org/repos/firmware.repo)
+
 ## *EOF*

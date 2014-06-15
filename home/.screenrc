@@ -10,6 +10,7 @@ termcapinfo xterm ti@:te@
 vbell off
 #escape `e
 escape ``
+#escape ^Jj
 bind 'q' quit
 bind 'h' prev
 bind 'k' prev

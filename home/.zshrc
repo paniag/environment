@@ -9,8 +9,10 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 export VST_PATH=~/dat/music/lmms/vst
 export RLWRAP_HOME=~
 export RLWRAP_EDITOR="vi +%L"
+export RLWRAP_FILTERDIR="~/.rlwrap"
 export CLASSPATH=/opt/libreadline-java:$CLASSPATH
-export PATH=$PATH:/opt/octave/bin:/opt/maven/bin:/opt/jython/bin:/opt/ardour/bin:/opt/non/bin:~/bin:/opt/lilypond/bin
+export PATH=$PATH:~/.rlwrap:/usr/local/bin:/opt/octave/bin:/opt/maven/bin:/opt/jython/bin:/opt/ardour/bin:/opt/non/bin:~/bin:/opt/lilypond/bin:/opt/eli
+export PATH=$PATH:/opt/scilab/bin:/opt/j/bin:/opt/jython/bin:/opt/julia/bin:/opt/gdl/bin:/opt/firefox
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/nvidia:/usr/local/lib:/usr/lib64/root/:/usr/lib64:/opt/java-readline:/usr/lib64:/usr/lib64/boost
 export M2_HOME=/opt/maven
 export M2=$M2_HOME/bin
@@ -40,18 +42,41 @@ setopt completealiases
 #bindkey -M vicmd '^r' history-incremental-search-backward
 setopt autocd
 #prompt bart
-prompt clint
+#prompt clint
 #setopt hist_ignore_all_dups
 
-
+function system-status {
+  export t2=`date +%s`
+  if [ "$((t2-t1))" -gt "10" ]; then
+    d=` df -Pk / | grep dev | awk '{print$5}' `
+    q=` qstat | grep localhost | grep -v 'Job id' | grep -c . `
+    r=` cat /proc/acpi/battery/BAT0/state | awk '$0~/remaining capacity:/{print $3".0"}' `
+    c=` cat /proc/acpi/battery/BAT0/info | awk '$0~/design capacity:/{print $3".0"}' `
+    b=$((100*r/c))
+    p=` ps -ef | grep $(whoami) | grep -c . `
+    export cache="%F{yellow}P:%F{blue}$p %F{yellow}Q:%F{green}$q %F{yellow}D:%F{blue}$d% %F{yellow}B:%F{cyan}$b[1,4]%%"
+    export t1=$t2
+    echo $cache
+  else
+    echo $cache" △ "
+  fi
+}
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git svn
 zstyle ':vcs_info:git*' formats "%{$fg[grey]%}%s %{$reset_color%}%r/%S%{$fg[grey]%} %{$fg[blue]%}%b%{$reset_color%}%m%u%c%{$reset_color%} "
+precmd() { vcs_info }
 setopt prompt_subst
-PROMPT='%F{red}[%F{cyan}%D{%a %y/%m/%d %R %Z}%F{red}]%F{red}[%F{green}%n@%m%F{white}:%F{yellow}%~%F{red}][%F{cyan}${vcs_info_msg_0_}%F{red}]
+if tty | grep --quiet pts; then
+#  PROMPT='%F{blue}╭─%F{red}[%F{cyan}%D{%a %y/%m/%d %R %Z}%F{red}]%F{red}[%F{green}%n@%m%F{white}:%F{yellow}%~%F{red}][%F{cyan}${vcs_info_msg_0_}%F{red}]
+#%F{blue}╰─%B%b %F{yellow}电脑 %F{red}[%F{green}%l%F{white}:%F{green}%B%h%b%F{red}]%F{white}\$%b '
+  PROMPT='%F{blue}╭─%F{red}[%F{cyan}%D{%a %y/%m/%d %R %Z}%F{red}]%F{red}[%F{green}%n@%m%F{white}:%F{yellow}%~%F{red}][%F{cyan}☒${vcs_info_msg_0_}%F{red}]
+%F{blue}╰─%B%b %F{yellow}电脑 %F{red}[%F{green}%l%F{white}:%F{green}%B%h%b%F{red}]%F{red}➾»%F{white}%b '
+  RPROMPT='%F{red}[ %F{yellow}✮ %F{yellow}$(system-status) %F{yellow}✮ %F{red}]%F{white}%b'
+else
+  PROMPT='%F{red}[%F{cyan}%D{%a %y/%m/%d %R %Z}%F{red}]%F{red}[%F{green}%n@%m%F{white}:%F{yellow}%~%F{red}][%F{cyan}${vcs_info_msg_0_}%F{red}]
 [%F{green}%l%F{white}:%F{green}%B%h%b%F{red}]%F{white}\$%b '
-#[%F{green}%l%F{red}] %F{green}%B%h%b %(?..[%?%1v] )%(2v.%U%2v%u.)%f%B%F{white}\$%b "
-
+  RPROMPT='%F{red}[ %F{yellow}$(system-status) %F{red}]%F{white}%b'
+fi
 bindkey -M viins '/' vi-history-search-backward
 bindkey -M viins '?' history-incremental-pattern-search-backward
 bindkey '#' vi-pound-insert
@@ -64,12 +89,17 @@ alias reload='. ~/.zshrc'
 alias conf='vi ~/.zshrc'
 alias cconf='vi ~/.zshrc ~/.bashrc'
 alias vconf='vi ~/.vimrc'
+alias iconf='vi ~/.i3/config'
+alias sconf='vi ~/.screenrc'
+alias mx='chmod 755 '
+alias vc='sudo chvt '
 alias vi='vim -O '
 alias vio='vim -o '
 alias ll='ls -l'
 alias la='ls -la'
 alias lsr='ls -rtl'
 alias sc='screen'
+alias sl='screen -list'
 alias dh='dirs -v'
 alias xa='xargs -I{}'
 alias lesser='/usr/share/vim/vim72/macros/less.sh'
@@ -79,14 +109,22 @@ alias una='uname -a'
 alias unn='uname -n'
 alias me='ps -uxf | grep mac'
 alias untar='tar -zxvf'
+alias sx='startx'
+alias rw='rlwrap -a -m -z shell '
 #export DISPLAY=`uname -n`:0.0
 
 ## suffix and global
 alias -s c=vim h=vim cpp=vim hpp=vim cxx=vim hxx=vim
 alias -g G='|grep '
+alias -g TO='1>>~/temp/temp.dat 2>>~/temp/temp.dat'
+alias -g TT='~/temp/temp.dat'
+alias -g XI='xclip -i'
+alias -g XO='xclip -o'
+alias -g NULL='1>/dev/null 2>/dev/null'
 
 ## environment
 alias econf='vi ~/local/environment/install/yum-install.sh'
+alias yumi='sudo yum -y install '
 
 ## services
 alias ck='ps -ef | grep -E "(jackd|lmms)"'
@@ -109,6 +147,12 @@ alias rose='rosegarden &'
 alias ardour='ardour3 &'
 alias vk='vkeybd --octave 6 --name "VK" &'
 alias utau='LANG=ja_JP.utf8 wine ~/UTAU/utau.exe'
+alias mp='mp3blaster'
+alias mpl='mp3blaster -l ~/.playlist-full'
+alias mpa='mp3blaster -a ~/.playlist'
+alias baudline='/opt/baudline/baudline'
+alias sndpeek='/opt/sndpeek/bin/sndpeek'
+alias mix='alsamixer'
 
 ## root
 alias ro='root -l'
@@ -120,21 +164,31 @@ alias py='ipython --pylab --profile sh'
 
 ## groovy
 alias groovy='/opt/groovy/bin/groovy'
-alias gy='groovy'
+alias gy='rw groovy'
 
 ## javascript
 alias closure='java -jar /opt/closure/compiler.jar --compilation_level ADVANCED_OPTIMIZATIONS --js '
 
 ## scientific
 #alias octave='/opt/octave/bin/octave -q'
+alias R='rw R -q'
 alias oct='octave'
 alias scilab='/opt/scilab/bin/scilab'
-alias sl='scilab -nw'
+alias sci='scilab -nw'
 alias gp='gnuplot'
-alias j='/opt/j/bin/jconsole'
+alias j='rw /opt/j/bin/jconsole'
 alias jbrk='/opt/j/bin/jbrk'
 alias jython='/opt/jython/bin/jython'
 alias h5='h5dump -H'
+alias kx='rw q'
+alias eli='rw elix'
+alias julia='/opt/julia/bin/julia'
+alias gdl='/opt/gdl/bin/gdl -q'
+alias pro='gdl'
+
+## database connections
+alias ms='mssql'
+alias ims='imssql'
 
 ## locate
 alias findex='find ./ -perm -o+rx -type f '
@@ -158,11 +212,21 @@ alias cxl='codexl'
 alias openclprof='/opt/openclprof1.0/bin/openclprof'
 
 ## browser
-alias web='chrome'
+alias web='pentadactyl'
+alias pent='pentadactyl'
+alias pentadactyl='firefox'
+alias firefox='/opt/firefox/firefox-bin NULL &'
+alias fox='firefox'
 alias chrome='google-chrome'
+alias opera='/usr/local/bin/opera'
 alias lx='lynx'
 alias goog='lynx http://www.google.com'
+alias conkeror='xulrunner /opt/conkeror/application.ini NULL &'
+alias conk='conkeror'
+alias wiki='lynx http://en.wikipedia.org'
 alias gollum='/usr/local/rvm/gems/ruby-2.1.0/bin/gollum'
+alias ra='ranger'
+alias fm='vifm'
 
 ## keyboard
 alias pst=" sh -c 'xsel | xvkbd -xsendevent -file - 2>/dev/null' "
@@ -202,6 +266,33 @@ function mkd {
   dir=$1
   mkdir $dir
   cd $dir
+}
+
+function bright {
+  level=${1}
+  su root -c "echo -n ${level} > /sys/class/backlight/acpi_video0/brightness"
+}
+
+function midi-setup {
+  sudo -s -- sh -c 'modprobe snd-virmidi ; modprobe snd-seq-dummy ports=4'
+  amidi -l
+  aconnect -i -o
+}
+
+function audio-setup {
+  sudo -s -- sh -c 'modprobe snd-pcm-oss ; modprobe snd-seq-device; modprobe snd-pcm-oss ; modprobe snd-seq-device ; modprobe snd-seq-midi ; modprobe snd-seq-oss ; modprobe snd-seq-midi-event ; modprobe snd-seq ; modprobe snd-virmidi'
+}
+
+function ranger-setup {
+  ranger --copy-config=scope
+}
+
+function vin {
+  xterm -e "vim $*" &
+}
+
+function screen-kill-detached {
+  screen -ls | grep Detached | awk '{print}' | xargs -I{} screen -X -S {} quit
 }
 
 function scrape {

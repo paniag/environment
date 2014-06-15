@@ -12,10 +12,9 @@ use lib '/usr/local/share/rlwrap/filters';
 use RlwrapFilter;
 use Term::ANSIColor qw(:constants);
 
-# Enable debug output
 my $debug = 0;
 if ($debug) {
-    use Data::Dumper;
+  use Data::Dumper;
 }
 
 my $filter = new RlwrapFilter;
@@ -27,40 +26,89 @@ $filter->input_handler(\&input);
 $filter->cloak_and_dagger_verbose($debug);
 $filter->run;
 
-# Updates our list of known commands at first prompt, and displays the prompt
-# otherwise.
 sub prompt {
-    my ($prompt) = @_;
-    #$prompt = '>>> ';
-    return $prompt;
+  my ($prompt) = @_;
+  #$prompt = '>>> ';
+  return $prompt;
 }
 
-# Completes setting names, folder names, and aliases.
 sub complete {
-    my($line, $prefix, @completions) = @_;
-    my ($command) = ($line =~ /^\s*(\S+)/);
-    #push @completions, 'xxx';
-    return @completions;
+  my($line, $prefix, @completions) = @_;
+  my $files;
+  my $file;
+  my $s0;
+  my $lcs;
+  if($line =~ /^(.*)(\.\/.*$)/g && $2)
+  {
+    my $pre = $1;
+    my $pattern = $2;
+    my @files = glob($pattern.'*');
+    $s0 = $pattern;
+    foreach $file (@files)
+    {
+      "$s0\0$file" =~ m/^([^\0]*)(?>[^\0]*)\0\1/s;
+      $s0 = $file;
+      $lcs = $1;
+    }
+    #push @completions, $files[0];
+    #push @completions, substr($lcs,2);
+    push @completions, @files;
+  }
+  elsif($line =~ /^(.*)(\/.*$)/g && $2)
+  {
+    my $pre = $1;
+    my $pattern = $2;
+    my @files = glob($pattern.'*');
+    $s0 = $pattern;
+    foreach $file (@files)
+    {
+      "$s0\0$file" =~ m/^([^\0]*)(?>[^\0]*)\0\1/s;
+      $s0 = $file;
+      $lcs = $1;
+    }
+    #push @completions, $files[0];
+    #push @completions, substr($lcs,1);
+    push @completions, @files;
+  }
+  return @completions;
 }
 
 sub output {
-    my ($out) = @_;
-    return $out;
+  my ($out) = @_;
+  return $out;
 }
 
 sub input {
-    my $cmd;
-    my ($in) = @_;
-    if ($in =~ /^!!.*/) 
-    { 
-      $cmd = substr($in,1);
-      system $cmd;
-      return '';
-    } 
-    else 
-    {
-      return $in;
-    }
+  my ($in) = @_;
+  my $cmd;
+  my $editor = $ENV{EDITOR} || 'vim';
+  if($editor =~ /^vim$/)
+  {
+    $editor = 'vim -O'
+  }
+  if($in =~ /^:!.*/ || $in =~ /^!!.*/) 
+  { 
+    $cmd = substr($in,2);
+    $cmd =~ s/^\s+|\s+$//g;
+    system $cmd;
+    return '';
+  } 
+  elsif($in =~ /^:e.*/)
+  {
+    $cmd = substr($in,2);
+    #system $editor => $cmd;
+    $cmd = "$editor ".substr($in,2);
+    system $cmd;
+    return '';
+  }
+  elsif($in =~ /^:q.*/)
+  {
+    return '';
+  }
+  else 
+  {
+    return $in;
+  }
 }
 
 ## *EOF*

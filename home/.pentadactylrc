@@ -1,0 +1,12 @@
+" .pentadactylrc
+" Mac Radigan
+cmap ,s open
+cmap ,e open
+nmap ,S :tabnew 
+nmap ,b :back<CR>
+nmap ,f :forward<CR>
+nmap ,j :tn<CR>
+nmap ,h :tn<CR>
+nmap ,k :tp<CR>
+nmap ,l :tp<CR>
+" *EOF*

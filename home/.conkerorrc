@@ -1,0 +1,10 @@
+// .conkerorrc
+// Mac Radigan
+//homepage = "http://google.com";
+//homepage = "about:blank";
+homepage = "file:///home/mac/.home.html";
+editor_shell_command = 'gvim';
+view_source_use_external_editor = true;
+define_webjump("g", "http://www.goolge.com/search?q=%s");
+define_webjump("mail", "http://mail.radigan.org");
+// *EOF*

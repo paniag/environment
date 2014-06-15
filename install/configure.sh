@@ -38,4 +38,7 @@ monit start all
 
 service xinetd reload
 
+chkconfig mysqld on
+service mysqld start
+
 ## *EOF*

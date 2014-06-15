@@ -2,6 +2,8 @@
 ## yum-install.sh
 ## Mac Radigan
 
+yum --releasever=6x update -y sl-release
+yum update -y --skip-broken --exclude hdf5-devel
 yum -y install R R-\*
 yum -y install supercollider
 yum -y install blender
@@ -205,5 +207,52 @@ yum -y install expect
 yum -y install monit
 yum -y install finch
 yum -y install mcabber
+yum -y install gimp
+yum -y install gmp-devel
+yum -y install mpc
+yum -y install mpfr-devel
+yum -y install glibc-devel
+yum -y install fluidsynth
+yum -y install fltk
+yum -y install fltk-fluid
+yum -y install cmus
+yum -y install @xfce
+yum -y install i3
+yum -y install conky
+yum -y install asciidoc
+yum -y install xcb-proto
+yum -y install lib-xcb*
+yum -y install xcb-util-devel
+yum -y install yajl-devel
+yum -y install libev-devel
+yum -y install xorg-x11-server-devel
+yum -y install libXext-devel
+yum -y install qtractor
+yum -y install xbacklight
+yum -y install tmux
+yum -y install phpmyadmin
+yum -y install xclip
+yum -y install xfce4-*
+yum -y install mpg123
+yum -y install libcaca
+yum -y install caca-utils
+yum -y install highlight
+yum -y install w3m
+yum -y install mediainfo
+yum -y install terminator
+yum -y install esound
+yum -y install esound-devel
+yum -y install qt5*
+yum -y install bluez
+yum -y install freetds
+yum -y install gsl-devel
+yum -y install plplot
+yum -y install plplot-devel
+yum -y install wxWidgets
+yum -y install wxWidgets-devel
+yum -y install mpi
+yum -y install pslib
+yum -y install pslib-devel
+yum -y install xulrunner
 
 ## *EOF*

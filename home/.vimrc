@@ -1,11 +1,19 @@
 "" .vimrc
 "" Mac Radigan
 
+
+let g:pathogen_disabled = []
+call add(g:pathogen_disabled, 'nerdtree')
+call add(g:pathogen_disabled, 'lusty')
+execute pathogen#infect()
+set clipboard=unnamed
+set go+=a
 setlocal autoread
 filetype plugin on
 set tags+=./tags;./src/tags;/
 "let &makeprg='if [ -f Makefile ]; then make; else make -C ..; fi; '
-let &makeprg='make -C .. '
+"let &makeprg='make -C .. '
+let &makeprg='make -C . '
 set expandtab
 let g:win=10
 let g:lnum=1
@@ -23,6 +31,8 @@ autocmd BufReadPre, FileReadPre Makefile setlocal noexpandtab
 autocmd BufReadPre, FileReadPre *.mk setlocal noexpandtab
 runtime macros/matchit.vim
 let mapleader = ","
+let NERDTreeShowHidden=1
+let NERDTreeHijackNetrw=1
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 set showmode
@@ -39,7 +49,7 @@ set confirm
 set guioptions+=c
 set autochdir
 set shortmess=aTI
-set vb t_vb=".  ## no beep
+set vb t_vb=".
 set visualbell
 set title
 "set backupdir=~/.vim-temp
@@ -66,10 +76,21 @@ set incsearch
 
 "cmap hs sp
 "cmap buf buffers
+nnoremap <leader>K :!rlwrap -a -m -z shell q<CR>
+nnoremap <leader>E :!rlwrap -a -m -z shell elix<CR>
+nnoremap <leader>C :!octave -q<CR>
+nnoremap <leader>A :!apl --silent<CR>
+nnoremap <leader>J :!rlwrap -a -m -z shell jconsole<CR>
+nnoremap <leader>U :!rlwrap -a -m -z shell julia<CR>
+nnoremap <leader>O :!octave -q<CR>
+nnoremap <leader>R :!rlwrap -a -m -z shell R -q<CR>
+nnoremap <leader>G :!rlwrap -a -m -z shell gdl -q<CR>
+nnoremap <leader>ro :!root -l<CR>
+nnoremap <leader>py :!python -q<CR>
+nnoremap <leader>cl :!clojure<CR>
 nnoremap <leader>gm :exe @g<CR>
 "nnoremap <leader>g :!%:p
 "nnoremap <leader>gg :!%:p<CR>
-nnoremap <leader>XX :!../test.sh<CR>
 nnoremap <leader>gc :make clean<CR>
 nnoremap <leader>gg :make <CR>
 "nnoremap <leader>gg :make -C ..<CR>
@@ -95,6 +116,16 @@ nnoremap <leader>ve :new ~/.vimrc<CR>
 nnoremap <leader>es :so ~/.vimrc<CR>
 nnoremap <leader>ss :so ~/.vimrc<CR>:hid<CR>
 nnoremap <leader>ei :cope<CR>
+nnoremap <leader>t1 1gt
+nnoremap <leader>t2 2gt
+nnoremap <leader>t3 3gt
+nnoremap <leader>t4 4gt
+nnoremap <leader>t5 5gt
+nnoremap <leader>t6 6gt
+nnoremap <leader>t7 7gt
+nnoremap <leader>t8 8gt
+nnoremap <leader>t9 9gt
+nnoremap <leader>t0 1gt
 nnoremap <leader>rl :tabn<CR>
 nnoremap <leader>rk :tabn<CR>
 nnoremap <leader>rh :tabN<CR>
@@ -102,7 +133,8 @@ nnoremap <leader>rg :tabN<CR>
 nnoremap <leader>rq :tabc<CR>
 nnoremap <leader>r$ :tabl<CR>
 nnoremap <leader>r0 :tabf<CR>
-nnoremap <leader>ro :tabo<CR>
+"nnoremap <leader>ro :tabo<CR>
+nnoremap <leader>tt :tabnew<CR>
 nnoremap <leader>rt :tabnew<CR>
 nnoremap <leader>ta :ta 
 nnoremap <leader>sts :stj /
@@ -122,40 +154,55 @@ nnoremap <leader>mm :!man
 nnoremap <F1> .j0
 nnoremap <leader>gr :vimgrep 
 nnoremap <leader>GR :!grep 
-nnoremap <leader>wl :winc l<CR>
-nnoremap <leader>wj :winc j<CR>
-nnoremap <leader>wk :winc k<CR>
-nnoremap <leader>wh :winc h<CR>
-nnoremap <leader>wc :hid<CR>
-nnoremap <leader>hi :hid<CR>
-nnoremap <leader>wo :on<CR>
-nnoremap <leader>ll :winc l<CR>
-nnoremap <leader>jj :winc j<CR>
-nnoremap <leader>kk :winc k<CR>
-nnoremap <leader>hh :winc h<CR>
-nnoremap <leader>oo :on<CR>
-nnoremap <leader>ee :call TellScreenR()<CR>
-nnoremap <leader>EE :call TellScreen()<CR>
+"nnoremap <leader>wl :winc l<CR>
+"nnoremap <leader>wj :winc j<CR>
+"nnoremap <leader>wk :winc k<CR>
+"nnoremap <leader>wh :winc h<CR>
+"nnoremap <leader>wc :hid<CR>
+nnoremap <leader>i :hid<CR>
+"nnoremap <leader>wo :on<CR>
+nnoremap <leader>l :winc l<CR>
+nnoremap <leader>j :winc j<CR>
+nnoremap <leader>k :winc k<CR>
+nnoremap <leader>h :winc h<CR>
+nnoremap <leader>o :on<CR>
+"nnoremap <leader>ee :call TellScreenR()<CR>
+"nnoremap <leader>EE :call TellScreen()<CR>
+nnoremap <leader>mx :!chmod 755 %<CR>
 nnoremap <leader>x :!./%<CR>
+nnoremap <leader>ra :!ranger<CR>
+nnoremap <leader>fm :!vifm<CR>
 nnoremap <leader>QQ :call DoNMacro()<CR>
+nnoremap <leader>QB :bufdo! normal! @q<CR>
+nnoremap <leader>QW :windo! normal! @q<CR>
 "nnoremap <leader>xx :!root -l -q -x -b ./%<CR>
-"nnoremap <leader>XX :call ExecVisual()<CR>
+map <leader>e :call ExecVisual()<CR>
 nnoremap <leader>nn <C-W>_<C-W><Bar>
 nnoremap <leader>NN <C-W>_<C-W>=
-nnoremap <leader>V <C-V><CR>
+nnoremap <leader>V <C-V>
 nnoremap <leader><leader>j :cn<CR>
 nnoremap <leader><leader>k :cp<CR>
 nnoremap <leader>. .n<CR>
+nnoremap <leader>no :noh<CR>
+nnoremap <leader><Space> :cn<CR>
 nnoremap ∆ :cn<CR>
 nnoremap  :cn<CR>
 nnoremap ˚ : cp<CR>
 nnoremap  : cp<CR>
 nnoremap <leader>S :e ../src/%<.cpp<CR>
 nnoremap <leader>H :e ../include/%<.hpp<CR>
+nmap <silent> <Leader>W :Project ~/.vimproject<CR>
+nnoremap <leader>w :NERDTreeToggle<CR>
+nnoremap <leader>F :NERDTreeFind<CR>
 nnoremap <leader># :call ToggleLineNumber()<CR>
 nnoremap <leader>$ :call ToggleSyntax()<CR>
+nnoremap <leader>^ :colorscheme 
+nnoremap <leader>^ :colorscheme 
 nnoremap <C-N> :next<Enter>
 nnoremap <C-P> :prev<Enter>
+nnoremap <C-P> :prev<Enter>
+nnoremap <C-i> "*p
+nnoremap <C-c> "*y
 nnoremap <leader>1 :b1<CR>
 nnoremap <leader>2 :b2<CR>
 nnoremap <leader>3 :b3<CR>
@@ -169,6 +216,7 @@ nnoremap <leader>0 :b0<CR>
 imap <leader>c <ESC>
 map <leader>c <ESC>
 nnoremap <leader>f <C-Z>
+vmap / y:execute "/".escape(@",'[]/\.*')<CR>
 set confirm
 
 if exists('+autochdir')

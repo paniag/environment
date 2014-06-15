@@ -3,6 +3,10 @@
 
 opt=/opt
 
+## openmpi
+ln -s /usr/lib64/openmpi/bin/mpicc /usr/bin/mpicc
+ln -s /usr/lib64/openmpi/bin/mpic++ /usr/bin/mpic++
+
 ## scilab
 mkdir scilab
 cd scilab
@@ -250,5 +254,58 @@ easy_install numpy python-dateutil pytz pyparsing six
 
 ## rtaudio
 git clone https://github.com/thestk/rtaudio.git
+
+## mpc
+wget ftp://gcc.gnu.org/pub/gcc/infrastructure/mpc-0.8.1.tar.gz
+tar zxvf mpc-0.8.1.tar.gz
+cd mpc-0.8.1
+./configure --disable-shared --enable-static --prefix=/tmp/gcc --with-gmp=/tmp/gcc --with-mpfr=/tmp/gcc
+make && make check && sudo make install
+
+## gmp
+wget ftp://gcc.gnu.org/pub/gcc/infrastructure/gmp-4.3.2.tar.bz2
+bunzip2 gmp-4.3.2.tar.bz2
+tar xvf gmp-4.3.2.tar
+cd gmp-4.3.2
+./configure --disable-shared --enable-static --prefix=/tmp/gcc
+make && make check && sudo make install
+
+## minixml
+curl -O http://www.msweet.org/files/project3/mxml-2.8.tar.gz
+tar -zxvf mxml-2.8.tar.gz
+(cd mxml-2.8; ./configure; make && sudo make install)
+
+## ZynAddSubFX
+wget "http://downloads.sourceforge.net/project/zynaddsubfx/zynaddsubfx/2.4.3/ZynAddSubFX-2.4.3.tar.bz2?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fzynaddsubfx%2Ffiles%2F%3Fsource%3Dnavbar&ts=1399101561&use_mirror=superb-dca3"
+bunzip2 ZynAddSubFX-2.4.3.tar.bz2
+tar -xvf ZynAddSubFX-2.4.3.tar
+(cd ZynAddSubFX-2.4.3; cmake .; make && sudo make install)
+
+## xcb-cursor
+git clone git://anongit.freedesktop.org/xcb/util-cursor
+(cd util-cursor; git submodule update --init)
+(cd util-cursor; ./autogen.sh; ./configure; make && sudo make install)
+
+## mp3blaster
+wget "http://downloads.sourceforge.net/project/mp3blaster/mp3blaster/mp3blaster-3.2.5/mp3blaster-3.2.5.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fmp3blaster%2Ffiles%2F&ts=1401497331&use_mirror=colocrossing"
+tar -zxvf mp3blaster-3.2.5.tar.gz
+(cd mp3blaster-3.2.5; ./configure; make && sudo make install)
+
+## ranger
+curl -O http://nongnu.org/ranger/ranger-stable.tar.gz
+tar -zxvf ranger-stable.tar.gz
+(cd ranger-1.6.1; make && sudo make install)
+
+## baudline
+curl -O http://www.baudline.com/baudline_1.08_linux_x86_64.tar.gz
+tar -zxvf baudline_1.08_linux_x86_64.tar.gz
+sudo mkdir -p /opt
+sudo rsync -avhr baudline_1.08_linux_x86_64 /opt
+sudo ln -s /opt/baudline_1.08_linux_x86_64 /opt/baudline
+
+## extace
+wget "http://downloads.sourceforge.net/project/extace/eXtace/1.9.9/extace-1.9.9.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fextace%2F%3Fsource%3Ddlp&ts=1401539739&use_mirror=colocrossing"
+tar -zxvf extace-1.9.9.tar.gz
+(cd extace-1.9.9; ./configure; make && sudo make install)
 
 ## *EOF* 

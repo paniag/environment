@@ -1,7 +1,15 @@
 ## i3 config
 ## Mac Radigan
 
-exec --no-startup-id feh --bg-scale /home/mac/dat/themes/wallpaper/default.jpg
+#exec --no-startup-id feh --bg-scale /home/mac/dat/themes/wallpaper/default.jpg
+#exec --no-startup-id feh 
+
+#exec --no-startup-id i3-msg 'workspace 10:conky; exec conky | dzen2 -bg black -fg white -fn -misc-fixed-medium-*-*--12-*-*-*-*-*-*-* -p -w1000 -h 16 -x 920 -y 1064 -ta r &'
+#exec conky | dzen2 -bg black -fg white -fn -misc-fixed-medium-*-*--12-*-*-*-*-*-*-* -p -w1000 -h 16 -x 920 -y 1064 -ta r &
+
+#bar {
+#  status_command conky -c ~/.conky/conkyrc_1
+#}
 
 set $mod Mod4
 
@@ -29,6 +37,16 @@ font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
+
+# applications
+bindsym $mod+c exec xclip -o > ~/.clip
+bindsym $mod+w exec vncviewer 127.0.0.1:0
+bindsym $mod+b exec google-chrome
+bindsym $mod+shift+N exec xulrunner /opt/conkeror/application.ini
+bindsym $mod+n exec /opt/firefox/firefox-bin
+bindsym $mod+t exec xterm -e top
+bindsym $mod+m exec conky
+bindsym $mod+Shift+M exec xterm -e watch qstat
 
 # start a terminal
 bindsym $mod+Return exec /usr/bin/urxvt
@@ -75,10 +93,12 @@ bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
 #bindsym $mod+h split h
-bindsym $mod+s split h
+bindsym $mod+v split h
+bindsym $mod+Shift+S split v
 
 # split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+s split v
+bindsym $mod+Shift+V split h
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
