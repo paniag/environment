@@ -13,6 +13,9 @@
 
 set $mod Mod4
 
+# start dmenu (a program launcher)
+bindsym $mod+d exec /usr/bin/dmenu_run
+
 set $bg  #000000
 set $ac  #cc1100
 set $tx  #ffffff
@@ -40,13 +43,17 @@ floating_modifier $mod
 
 # applications
 bindsym $mod+c exec xclip -o > ~/.clip
-bindsym $mod+w exec vncviewer 127.0.0.1:0
+bindsym $mod+shift+W exec vncviewer 127.0.0.1:0
 bindsym $mod+b exec google-chrome
 bindsym $mod+shift+N exec xulrunner /opt/conkeror/application.ini
-bindsym $mod+n exec /opt/firefox/firefox-bin
+bindsym $mod+o exec /opt/firefox/firefox-bin
 bindsym $mod+t exec xterm -e top
 bindsym $mod+m exec conky
 bindsym $mod+Shift+M exec xterm -e watch qstat
+bindsym $mod+Shift+Z exec xscreensaver-command -lock
+bindsym $mod+z exec i3lock -c 000000
+bindsym $mod+Control+0 exec i3-workspace-dev
+bindsym $mod+Control+9 exec i3-workspace-daw
 
 # start a terminal
 bindsym $mod+Return exec /usr/bin/urxvt
@@ -55,9 +62,6 @@ bindsym $mod+Return exec /usr/bin/urxvt
 
 # kill focused window
 bindsym $mod+Shift+Q kill
-
-# start dmenu (a program launcher)
-bindsym $mod+d exec /usr/bin/dmenu_run
 
 # change focus
 #bindsym $mod+j focus left
@@ -68,6 +72,11 @@ bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
+bindsym $mod+n focus right
+bindsym $mod+Shift+N focus left
+
+bindsym $mod+Tab focus right
+bindsym $mod+Control+Tab focus left
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -104,8 +113,7 @@ bindsym $mod+Shift+V split h
 bindsym $mod+f fullscreen
 
 # change container layout (stacked, tabbed, default)
-#bindsym $mod+s layout stacking
-bindsym $mod+S layout stacking
+bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout default
 
@@ -138,19 +146,30 @@ bindsym $mod+Control+J workspace next
 bindsym $mod+Control+K workspace prev
 
 # move focused container to workspace
-bindsym $mod+Shift+exclam move workspace 1
-bindsym $mod+Shift+at move workspace 2
-bindsym $mod+Shift+numbersign move workspace 3
-bindsym $mod+Shift+dollar move workspace 4
-bindsym $mod+Shift+percent move workspace 5
-bindsym $mod+Shift+asciicircum move workspace 6
-bindsym $mod+Shift+ampersand move workspace 7
-bindsym $mod+Shift+asterisk move workspace 8
-bindsym $mod+Shift+parenleft move workspace 9
-bindsym $mod+Shift+parenright move workspace 10
-# ?? #bindsym $mod+m move workspace next
-# ?? #bindsym $mod+n move workspace prev
-
+bindsym $mod+Shift+1 move workspace 1
+bindsym $mod+Shift+2 move workspace 2
+bindsym $mod+Shift+3 move workspace 3
+bindsym $mod+Shift+4 move workspace 4
+bindsym $mod+Shift+5 move workspace 5
+bindsym $mod+Shift+6 move workspace 6
+bindsym $mod+Shift+7 move workspace 7
+bindsym $mod+Shift+8 move workspace 8
+bindsym $mod+Shift+9 move workspace 9
+bindsym $mod+Shift+0 move workspace 10
+#  # move focused container to workspace
+#  bindsym $mod+Shift+exclam move workspace 1
+#  bindsym $mod+Shift+at move workspace 2
+#  bindsym $mod+Shift+numbersign move workspace 3
+#  bindsym $mod+Shift+dollar move workspace 4
+#  bindsym $mod+Shift+percent move workspace 5
+#  bindsym $mod+Shift+asciicircum move workspace 6
+#  bindsym $mod+Shift+ampersand move workspace 7
+#  bindsym $mod+Shift+asterisk move workspace 8
+#  bindsym $mod+Shift+parenleft move workspace 9
+#  bindsym $mod+Shift+parenright move workspace 10
+#  # ?? #bindsym $mod+m move workspace next
+#  # ?? #bindsym $mod+n move workspace prev
+#  
 # reload the configuration file
 bindsym $mod+Shift+C reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -197,6 +216,14 @@ bindsym Escape mode "default"
 }
 
 bindsym $mod+r mode "resize"
+
+bindsym XF86AudioMute exec amixer set Master toggle
+bindsym XF86AudioLowerVolume exec amixer set Master 10%- unmute
+bindsym XF86AudioRaiseVolume exec amixer set Master 10%+ unmute
+
+# bindsym XF86AudioMute exec amixer set PCM toggle
+# bindsym XF86AudioLowerVolume exec amixer set PCM 10%- unmute
+# bindsym XF86AudioRaiseVolume exec amixer set PCM 10%+ unmute
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)

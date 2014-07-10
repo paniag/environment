@@ -11,8 +11,9 @@ export RLWRAP_HOME=~
 export RLWRAP_EDITOR="vi +%L"
 export RLWRAP_FILTERDIR="~/.rlwrap"
 export CLASSPATH=/opt/libreadline-java:$CLASSPATH
+export PATH=$PATH:/opt/Qt/5.3/gcc_64/bin
 export PATH=$PATH:~/.rlwrap:/usr/local/bin:/opt/octave/bin:/opt/maven/bin:/opt/jython/bin:/opt/ardour/bin:/opt/non/bin:~/bin:/opt/lilypond/bin:/opt/eli
-export PATH=$PATH:/opt/scilab/bin:/opt/j/bin:/opt/jython/bin:/opt/julia/bin:/opt/gdl/bin:/opt/firefox
+export PATH=$PATH:/opt/scilab/bin:/opt/j/bin:/opt/jython/bin:/opt/julia/bin:/opt/gdl/bin:/opt/firefox:/opt/midiedit/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/nvidia:/usr/local/lib:/usr/lib64/root/:/usr/lib64:/opt/java-readline:/usr/lib64:/usr/lib64/boost
 export M2_HOME=/opt/maven
 export M2=$M2_HOME/bin
@@ -41,42 +42,17 @@ setopt completealiases
 #bindkey -M viins '^r' history-incremental-search-backward
 #bindkey -M vicmd '^r' history-incremental-search-backward
 setopt autocd
+#. ~/.prompt_diannao
 #prompt bart
 #prompt clint
+function mn {
+  PROMPT='%F{red}>%F{white} '
+  RPROMPT=''
+}
+mn
+alias mm='. ~/.prompt_diannao'
 #setopt hist_ignore_all_dups
 
-function system-status {
-  export t2=`date +%s`
-  if [ "$((t2-t1))" -gt "10" ]; then
-    d=` df -Pk / | grep dev | awk '{print$5}' `
-    q=` qstat | grep localhost | grep -v 'Job id' | grep -c . `
-    r=` cat /proc/acpi/battery/BAT0/state | awk '$0~/remaining capacity:/{print $3".0"}' `
-    c=` cat /proc/acpi/battery/BAT0/info | awk '$0~/design capacity:/{print $3".0"}' `
-    b=$((100*r/c))
-    p=` ps -ef | grep $(whoami) | grep -c . `
-    export cache="%F{yellow}P:%F{blue}$p %F{yellow}Q:%F{green}$q %F{yellow}D:%F{blue}$d% %F{yellow}B:%F{cyan}$b[1,4]%%"
-    export t1=$t2
-    echo $cache
-  else
-    echo $cache" △ "
-  fi
-}
-autoload -Uz vcs_info
-zstyle ':vcs_info:*' enable git svn
-zstyle ':vcs_info:git*' formats "%{$fg[grey]%}%s %{$reset_color%}%r/%S%{$fg[grey]%} %{$fg[blue]%}%b%{$reset_color%}%m%u%c%{$reset_color%} "
-precmd() { vcs_info }
-setopt prompt_subst
-if tty | grep --quiet pts; then
-#  PROMPT='%F{blue}╭─%F{red}[%F{cyan}%D{%a %y/%m/%d %R %Z}%F{red}]%F{red}[%F{green}%n@%m%F{white}:%F{yellow}%~%F{red}][%F{cyan}${vcs_info_msg_0_}%F{red}]
-#%F{blue}╰─%B%b %F{yellow}电脑 %F{red}[%F{green}%l%F{white}:%F{green}%B%h%b%F{red}]%F{white}\$%b '
-  PROMPT='%F{blue}╭─%F{red}[%F{cyan}%D{%a %y/%m/%d %R %Z}%F{red}]%F{red}[%F{green}%n@%m%F{white}:%F{yellow}%~%F{red}][%F{cyan}☒${vcs_info_msg_0_}%F{red}]
-%F{blue}╰─%B%b %F{yellow}电脑 %F{red}[%F{green}%l%F{white}:%F{green}%B%h%b%F{red}]%F{red}➾»%F{white}%b '
-  RPROMPT='%F{red}[ %F{yellow}✮ %F{yellow}$(system-status) %F{yellow}✮ %F{red}]%F{white}%b'
-else
-  PROMPT='%F{red}[%F{cyan}%D{%a %y/%m/%d %R %Z}%F{red}]%F{red}[%F{green}%n@%m%F{white}:%F{yellow}%~%F{red}][%F{cyan}${vcs_info_msg_0_}%F{red}]
-[%F{green}%l%F{white}:%F{green}%B%h%b%F{red}]%F{white}\$%b '
-  RPROMPT='%F{red}[ %F{yellow}$(system-status) %F{red}]%F{white}%b'
-fi
 bindkey -M viins '/' vi-history-search-backward
 bindkey -M viins '?' history-incremental-pattern-search-backward
 bindkey '#' vi-pound-insert
@@ -95,6 +71,7 @@ alias mx='chmod 755 '
 alias vc='sudo chvt '
 alias vi='vim -O '
 alias vio='vim -o '
+alias gvim='gvim -c ":colorscheme torte"'
 alias ll='ls -l'
 alias la='ls -la'
 alias lsr='ls -rtl'
@@ -111,16 +88,33 @@ alias me='ps -uxf | grep mac'
 alias untar='tar -zxvf'
 alias sx='startx'
 alias rw='rlwrap -a -m -z shell '
+alias dim='xbacklight'
+alias rs='rsync -avhr'
+alias lock='i3lock -c 000000'
+alias dt='date +"%F"'
+alias jo='jobs'
+alias ev='evince'
 #export DISPLAY=`uname -n`:0.0
 
 ## suffix and global
 alias -s c=vim h=vim cpp=vim hpp=vim cxx=vim hxx=vim
-alias -g G='|grep '
-alias -g TO='1>>~/temp/temp.dat 2>>~/temp/temp.dat'
-alias -g TT='~/temp/temp.dat'
-alias -g XI='xclip -i'
-alias -g XO='xclip -o'
-alias -g NULL='1>/dev/null 2>/dev/null'
+alias -g l='|less'
+alias -g m='|more'
+alias -g x='|xargs -I{}'
+alias -g g='|grep'
+alias -g s='|sed'
+alias -g a='|awk'
+alias -g ig='|grep -i'
+alias -g xi='|xclip -i'
+alias -g xo='xclip -o'
+alias -g null='1>/dev/null 2>/dev/null'
+alias -g ta='2>>log.err|tee -a log.out'
+alias -g to='2>log.err|tee log.out'
+alias -g eo='1>log.out 2>log.err'
+alias -g oe='3>&2 1>&2 2>&3 3>&-'
+alias -g j='|tee -a ~/temp/notes.txt'
+alias jcat='cat ~/temp/notes.txt'
+alias jconf='vi ~/temp/notes.txt'
 
 ## environment
 alias econf='vi ~/local/environment/install/yum-install.sh'
@@ -135,6 +129,11 @@ alias wget='wget --user-agent="Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.
 
 ## artistic style
 alias mystyle='astyle -s2 -xG -S --style=allman --recursive "src/*.cpp" "include/*.hpp"'
+
+## communication
+alias mutt='env DISPLAY= mutt'
+alias mu='mutt'
+alias xmpp='mcabber'
 
 ## audio
 ##alias jack='jackd -v -R -P -d '
@@ -153,10 +152,14 @@ alias mpa='mp3blaster -a ~/.playlist'
 alias baudline='/opt/baudline/baudline'
 alias sndpeek='/opt/sndpeek/bin/sndpeek'
 alias mix='alsamixer'
+alias calf='jackcalfhost'
 
 ## root
 alias ro='root -l'
 alias rx='root -l -q -x -b'
+
+## lisp
+alias cl='sbcl'
 
 ## python
 alias python='python3'
@@ -172,11 +175,11 @@ alias closure='java -jar /opt/closure/compiler.jar --compilation_level ADVANCED_
 ## scientific
 #alias octave='/opt/octave/bin/octave -q'
 alias R='rw R -q'
-alias oct='octave'
+alias oct='rw octave -q'
 alias scilab='/opt/scilab/bin/scilab'
 alias sci='scilab -nw'
 alias gp='gnuplot'
-alias j='rw /opt/j/bin/jconsole'
+alias ij='rw /opt/j/bin/jconsole'
 alias jbrk='/opt/j/bin/jbrk'
 alias jython='/opt/jython/bin/jython'
 alias h5='h5dump -H'
@@ -196,6 +199,7 @@ alias findex='find ./ -perm -o+rx -type f '
 ## build
 alias genmake='/opt/genmake/bin/gen_make.sh'
 alias cmake='cmake28'
+alias make='gmake -j'
 
 ## kvm
 alias vstart='/usr/libexec/qemu-kvm -hda -redir tcp:2222::22 -hda'
@@ -303,7 +307,7 @@ if [[ -z $url ]] || [[ -z $ext ]]
 then
   echo "scrape <url> <extension>"
 else
-python - <<EOT
+python2.6 - <<EOT
 from BeautifulSoup import BeautifulSoup
 import urllib2
 import urlparse
@@ -323,6 +327,13 @@ for link in soup.findAll('a'):
       print 'output = "%s"' % (file)
 EOT
 fi
+}
+
+function bat {
+  r=` cat /proc/acpi/battery/BAT0/state | awk '$0~/remaining capacity:/{print $3".0"}' `
+  c=` cat /proc/acpi/battery/BAT0/info | awk '$0~/design capacity:/{print $3".0"}' `
+  b=$((100*r/c))
+  echo "$b[1,4]%"
 }
 
 ## *EOF*

@@ -254,5 +254,56 @@ yum -y install mpi
 yum -y install pslib
 yum -y install pslib-devel
 yum -y install xulrunner
+yum -y install girara
+yum -y install girara-devel
+yum -y install mutt
+yum -y install i3lock
+yum -y install dssi-devel
+yum -y install fluidsynth-dssi
+yum -y install hexter-dssi
+yum -y install audacity
+yum -y install fluidsynth-devel
+yum -y install perl-WWW-Mechanize
+yum -y install xscreensaver
+yum -y install --enablerepo=linuxtech-testing perl-Curses
+yum -y install --enablerepo=linuxtech-testing perl-MIDI-Perl
+yum -y install --enablerepo=linuxtech-testing perl-MIDI-ALSA
+yum -y install anacron
+yum -y install lash-devel
+yum -y install nvi
+yum -y install nodejs
+yum -y install scons
+yum -y install libshout-devel
+yum -y install libmad
+yum -y install libmad-devel
+yum -y install libid3tag-devel
+yum -y install protobuf-devel
+yum -y install protobuf-lite
+yum -y install protobuf-lite-devel
+yum -y install flac-devel
+yum -y install portaudio
+yum -y install portaudio-devel
+yum -y install portmidi-devel
+yum -y install banshee
+yum -y groupinstall "Development Tools"
+yum -y install qt4-devel
+yum -y install libmp4v2-devel 
+yum -y install libsndfile-devel 
+yum -y install libvorbis-devel
+yum -y install portaudio-devel 
+yum -y install libshout-devel
+yum -y install python-devel
+yum -y install portmidi-devel
+yum -y install qt-webkit-devel
+yum -y install taglib-devel
+yum -y install flac-devel
+yum -y install protobuf-devel
+yum -y install vamp-plugin-sdk-devel
+yum -y install libchromaprint-devel
+yum -y install rubberband-devel
+yum -y install libusbx-devel
+yum -y install sbcl
+yum -y install gpg
+yum -y install vino
 
 ## *EOF*

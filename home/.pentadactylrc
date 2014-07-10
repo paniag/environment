@@ -1,12 +1,27 @@
 " .pentadactylrc
 " Mac Radigan
-cmap ,s open
-cmap ,e open
-nmap ,S :tabnew 
+:colorscheme black_ice
+"so ~/.pentadactyl/stylesheets/pentamidnight.css
+nmap { :back<CR>
+nmap } :forward<CR>
+nmap [ :tn<CR>
+nmap ] :tp<CR>
+nmap ,q :qall<CR>
+nmap ,g :open google.com<CR>
+nmap ,m :open mail.radigan.org<CR>
+nmap ,T :open translate.google.com<CR>
+nmap ,c :tabclose<CR>
+nmap ,hi :history<CR>
+nmap ,s :open 
+nmap ,e :open 
+nmap ,t :tabnew 
 nmap ,b :back<CR>
 nmap ,f :forward<CR>
 nmap ,j :tn<CR>
 nmap ,h :tn<CR>
 nmap ,k :tp<CR>
 nmap ,l :tp<CR>
+nmap ,d :so ~/.pentadactyl/stylesheets/pentamidnight.css<CR>
+nmap ,D :so ~/.pentadactyl/stylesheets/userChrome.css<CR>
+nmap ,C :open ~/.home.html<CR>
 " *EOF*

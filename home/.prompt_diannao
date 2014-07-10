@@ -1,0 +1,49 @@
+## .prompt_diannao
+## Mac Radigan
+
+function system-status {
+  export t2=`date +%s`
+  if [ "$((t2-t1))" -gt "10" ]; then
+    d=` df -Pk / | grep dev | awk '{print$5}' `
+    q=` qstat | grep localhost | grep -v 'Job id' | grep -c . `
+    r=` cat /proc/acpi/battery/BAT0/state | awk '$0~/remaining capacity:/{print $3".0"}' `
+    c=` cat /proc/acpi/battery/BAT0/info | awk '$0~/design capacity:/{print $3".0"}' `
+    b=$((100*r/c))
+    p=` ps -ef | grep $(whoami) | grep -c . `
+    export cache="%F{yellow}P:%F{blue}$p %F{yellow}Q:%F{green}$q %F{yellow}D:%F{blue}$d% %F{yellow}B:%F{cyan}$b[1,4]%%"
+    export t1=$t2
+    echo $cache
+  else
+    echo $cache" △ "
+  fi
+}
+
+zstyle ':vcs_info:*' enable git svn
+zstyle ':vcs_info:git*' formats "%{$fg[grey]%}%s %{$reset_color%}%r/%S%{$fg[grey]%} %{$fg[blue]%}%b%{$reset_color%}%m%u%c%{$reset_color%} "
+precmd() { vcs_info }
+setopt prompt_subst
+autoload -Uz vcs_info
+
+if tty | grep --quiet pts; then
+#  PROMPT='%F{blue}╭─%F{red}[%F{cyan}%D{%a %y/%m/%d %R %Z}%F{red}]%F{red}[%F{green}%n@%m%F{white}:%F{yellow}%~%F{red}][%F{cyan}${vcs_info_msg_0_}%F{red}]
+#%F{blue}╰─%B%b %F{yellow}电脑 %F{red}[%F{green}%l%F{white}:%F{green}%B%h%b%F{red}]%F{white}\$%b '
+  PROMPT='%F{blue}╭─%F{red}[%F{cyan}%D{%a %y/%m/%d %R %Z}%F{red}]%F{red}[%F{green}%n@%m%F{white}:%F{yellow}%~%F{red}][%F{cyan}☒${vcs_info_msg_0_}%F{red}]
+%F{blue}╰─%B%b %F{yellow}电脑 %F{red}[%F{green}%l%F{white}:%F{green}%B%h%b%F{red}]%F{red}➾»%F{white}%b '
+  RPROMPT='%F{red}[ %F{yellow}✮ %F{yellow}$(system-status) %F{yellow}✮ %F{red}]%F{white}%b'
+else
+  PROMPT='%F{red}[%F{cyan}%D{%a %y/%m/%d %R %Z}%F{red}]%F{red}[%F{green}%n@%m%F{white}:%F{yellow}%~%F{red}][%F{cyan}${vcs_info_msg_0_}%F{red}]
+[%F{green}%l%F{white}:%F{green}%B%h%b%F{red}]%F{white}\$%b '
+  RPROMPT='%F{red}[ %F{yellow}$(system-status) %F{red}]%F{white}%b'
+fi
+
+function toggle-rprompt {
+  if [ -n "$RPROMPT" ]; then
+    export RPROMPT_CACHED=$RPROMPT
+    unset RPROMPT
+  else
+    export RPROMPT=$RPROMPT_CACHED
+  fi
+}
+alias rp="toggle-rprompt"
+
+## *EOF*

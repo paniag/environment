@@ -31,5 +31,7 @@ pip install appy
 #pip install pyalsa
 easy_install BeautifulSoup
 easy_install blist
+pip install --upgrade distribute
+pip install --upgrade mercurial
 
 ## *EOF*

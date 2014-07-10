@@ -10,13 +10,19 @@ set clipboard=unnamed
 set go+=a
 setlocal autoread
 filetype plugin on
+set omnifunc=syntaxcomplete#Complete
 set tags+=./tags;./src/tags;/
 "let &makeprg='if [ -f Makefile ]; then make; else make -C ..; fi; '
 "let &makeprg='make -C .. '
 let &makeprg='make -C . '
+"color torte
+"color delek
 set expandtab
+set guioptions-=m
+set guioptions-=T
 let g:win=10
 let g:lnum=1
+let g:cline=1
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost l* nested lwindow
 autocmd FileType python set omnifunc=pythoncomplete#Complete
@@ -38,7 +44,6 @@ set pastetoggle=<F2>
 set showmode
 set mouse=a
 syntax on
-"color torte
 set path+=,,
 set path+=.
 set path+=./include
@@ -87,7 +92,8 @@ nnoremap <leader>R :!rlwrap -a -m -z shell R -q<CR>
 nnoremap <leader>G :!rlwrap -a -m -z shell gdl -q<CR>
 nnoremap <leader>ro :!root -l<CR>
 nnoremap <leader>py :!python -q<CR>
-nnoremap <leader>cl :!clojure<CR>
+nnoremap <leader>cj :!clojure<CR>
+nnoremap <leader>cl :!sbcl<CR>
 nnoremap <leader>gm :exe @g<CR>
 "nnoremap <leader>g :!%:p
 "nnoremap <leader>gg :!%:p<CR>
@@ -183,7 +189,7 @@ nnoremap <leader>V <C-V>
 nnoremap <leader><leader>j :cn<CR>
 nnoremap <leader><leader>k :cp<CR>
 nnoremap <leader>. .n<CR>
-nnoremap <leader>no :noh<CR>
+nnoremap <leader>/ :noh<CR>
 nnoremap <leader><Space> :cn<CR>
 nnoremap ∆ :cn<CR>
 nnoremap  :cn<CR>
@@ -197,10 +203,10 @@ nnoremap <leader>F :NERDTreeFind<CR>
 nnoremap <leader># :call ToggleLineNumber()<CR>
 nnoremap <leader>$ :call ToggleSyntax()<CR>
 nnoremap <leader>^ :colorscheme 
-nnoremap <leader>^ :colorscheme 
-nnoremap <C-N> :next<Enter>
-nnoremap <C-P> :prev<Enter>
-nnoremap <C-P> :prev<Enter>
+nnoremap <leader>) :call ToggleCursorLine()<CR>
+"nnoremap <C-N> :next<Enter>
+"nnoremap <C-P> :prev<Enter>
+"nnoremap <C-P> :prev<Enter>
 nnoremap <C-i> "*p
 nnoremap <C-c> "*y
 nnoremap <leader>1 :b1<CR>
@@ -215,8 +221,16 @@ nnoremap <leader>9 :b9<CR>
 nnoremap <leader>0 :b0<CR>
 imap <leader>c <ESC>
 map <leader>c <ESC>
-nnoremap <leader>f <C-Z>
 vmap / y:execute "/".escape(@",'[]/\.*')<CR>
+inoremap <Tab> <C-n>
+noremap ; :
+cmap w!! w !sudo tee %>/dev/null
+nnoremap <leader>f :FufFile **/<CR>
+nnoremap <leader>b :FufBuffer **/<CR>
+nnoremap <leader>T :FufTag<CR>
+nnoremap <leader>F <C-Z>
+inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
+inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
 set confirm
 
 if exists('+autochdir')
@@ -224,6 +238,17 @@ if exists('+autochdir')
 else
   autocmd BufEnter * silent! lcd %:p:h:gs/ /\\ /
 endif
+
+function! ToggleCursorLine()
+  if g:cline == 1
+    let g:cline = 0
+    :set cursorline
+  else
+    let g:cline = 1
+    :set nocursorline
+  endif
+endfunction
+
 
 function! ToggleLineNumber()
   if g:lnum == 1
@@ -280,5 +305,13 @@ function! NMacro(pattern, macro)
   let n = len(getloclist(0))
   exec("normal! ".n."@".a:macro)
 endfunction
+
+function! Browser()
+  let buf = getline(".")
+  let buf = matchstr (buf, "http[^ ]*")
+  exec "!/opt/firefox/firefox-bin ".buf
+" let result = system("!/opt/firefox/firefox-bin ".buf)
+endfunction
+map <leader>w :call Browser()<CR>
 
 "" *EOF*

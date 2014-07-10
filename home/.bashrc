@@ -8,8 +8,8 @@ export RLWRAP_HOME=~
 export RLWRAP_EDITOR="vi +%L"
 export RLWRAP_FILTERDIR="~/.rlwrap"
 export CLASSPATH=/opt/libreadline-java:$CLASSPATH
-export PATH=$PATH:~/.rlwrap:/usr/local/bin:/opt/maven/bin:/opt/jython/bin:/opt/ardour/bin:/usr/local/bin:/opt/non/bin:~/bin:/opt/lilypond/bin:/opt/eli
-export PATH=$PATH:/opt/scilab/bin:/opt/j/bin:/opt/jython/bin:/opt/julia/bin:/opt/gdl/bin:/opt/firefox
+export PATH=$PATH:~/.rlwrap:/usr/local/bin:/opt/maven/bin:/opt/jython/bin:/opt/ardour/bin:/usr/local/bin:/opt/non/bin:~/bin:/opt/lilypond/bin:/opt/eli:/opt/Qt/5.3/gcc_64/bin
+export PATH=$PATH:/opt/scilab/bin:/opt/j/bin:/opt/jython/bin:/opt/julia/bin:/opt/gdl/bin:/opt/firefox:/opt/midiedit/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/nvidia:/opt/java-readline:/usr/lib64:/usr/lib64/boost
 export M2_HOME=/opt/maven
 export M2=$M2_HOME/bin
@@ -31,6 +31,7 @@ alias mx='chmod 755 '
 alias vc='sudo chvt '
 alias vi='vim -O '
 alias vio='vim -o '
+alias gvim='gvim -c ":colorscheme torte"'
 alias ll='ls -l'
 alias la='ls -la'
 alias lsr='ls -rtl'
@@ -48,11 +49,18 @@ alias una='uname -a'
 alias unn='uname -n'
 alias me='ps -uxf | grep mac'
 alias untar='tar -zxvf'
+alias rs='rsync -avhr'
+alias dim='xbacklight'
+alias lock='i3lock -c 000000'
+alias jo='jobs'
+alias ev='evince'
 #export DISPLAY=`uname -n`:0.0
 
 ## environment
 alias econf='vi ~/local/environment/install/'
 alias yumi='sudo yum -y install '
+alias jcat='cat ~/temp/notes.txt'
+alias jconf='vi ~/temp/notes.txt'
 
 ## services
 alias ck='ps -ef | grep -E "(jackd|lmms)"'
@@ -60,6 +68,11 @@ alias mc-tool='memcached-tool 127.0.0.1:11211 '
 
 ## network
 alias wget='wget --user-agent="Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.3) Gecko/2008092416 Firefox/3.0.3" '
+
+## communication
+alias mutt='env DISPLAY= mutt'
+alias mu='mutt'
+alias xmpp='mcabber'
 
 ## audio
 #alias jack='jackd -v -a -R -P -d &'
@@ -81,6 +94,7 @@ alias mpa='mp3blaster -a ~/.playlist'
 alias baudline='/opt/baudline/baudline'
 alias sndpeek='/opt/sndpeek/bin/sndpeek'
 alias mix='alsamixer'
+alias calf='jackcalfhost'
 
 ## xmpp
 alias finch='finch'
@@ -89,6 +103,9 @@ alias xm='mcabber'
 ## root
 alias ro='root -l'
 alias rx='root -l -q -x -b'
+
+## lisp
+alias cl='sbcl'
 
 ## python
 alias python='python3'
@@ -103,12 +120,12 @@ alias closure='java -jar /opt/closure/compiler.jar --compilation_level ADVANCED_
 
 ## scientific
 alias R='rw R -q'
-alias oct='octave -q'
+alias oct='rw octave -q'
 #alias scilab='/opt/scilab/bin/scilab'
 alias scilab='/opt/scilab/bin/scilab -nw'
 alias sci='scilab -nw'
 alias gp='gnuplot'
-alias j='rw /opt/j/bin/jconsole'
+alias ij='rw /opt/j/bin/jconsole'
 alias jbrk='/opt/j/bin/jbrk'
 alias jython='/opt/jython/bin/jython'
 alias h5='h5dump -H'
