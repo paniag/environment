@@ -52,4 +52,9 @@ if(!require("knitr")) {
   library("knitr")
 }
 
+if(!require("RODBC")) {
+  install.packages("RODBC", repos="http://cran.rstudio.com/") 
+  library("RODBC")
+}
+
 ## *EOF*

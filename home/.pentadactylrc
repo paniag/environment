@@ -2,6 +2,8 @@
 " Mac Radigan
 :colorscheme black_ice
 "so ~/.pentadactyl/stylesheets/pentamidnight.css
+set go-=mB
+set go+=T
 nmap { :back<CR>
 nmap } :forward<CR>
 nmap [ :tn<CR>
@@ -24,4 +26,18 @@ nmap ,l :tp<CR>
 nmap ,d :so ~/.pentadactyl/stylesheets/pentamidnight.css<CR>
 nmap ,D :so ~/.pentadactyl/stylesheets/userChrome.css<CR>
 nmap ,C :open ~/.home.html<CR>
+set incfind
+set hlfind
+set findcase=smart
+set scrollsteps=0
+set scrolltime=1
+map -b j 8j
+map -b k 8k
+map -b h 8h
+map -b l 8l
+map -b zi ZI
+map -b zo ZO
+set hintkeys=asdflkj
+hi -a Hint font-size: 9pt !important;
+set strictfocus=google.com:laissez-faire,'chrome:*':laissez-faire,*:despotic
 " *EOF*

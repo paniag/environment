@@ -4,34 +4,36 @@
 
 easy_install -U distribute
 easy_install pip
-pip install --upgrade numpy
+pip3 install --upgrade numpy
 easy_install pyopengl
 easy_install mako
 easy_install pyopencl
 easy_install GDAL
-pip install numexpr
-pip install cython
-pip install tables
-pip install geopy
-pip install pandas
+pip3 install numexpr
+pip3 install cython
+pip3 install tables
+pip3 install geopy
+pip3 install pandas
 #easy_install pykml
-pip install pyshp
-pip install SQLAlchemy
-pip install Django==1.6.1
-pip install matplotlib 
-pip install scipy 
-pip install sympy 
-pip install nose
-pip install -U ipython
-pip install pyzmq
-pip install pyhull
-pip install PIL
-pip install appy
+pip3 install pyshp
+pip3 install SQLAlchemy
+pip3 install Django==1.6.1
+pip3 install matplotlib 
+pip3 install scipy 
+pip3 install sympy 
+pip3 install nose
+pip3 install -U ipython
+pip3 install pyzmq
+pip3 install pyhull
+pip3 install PIL
+pip3 install appy
 #easy_install pyalsa
-#pip install pyalsa
+#pip3 install pyalsa
 easy_install BeautifulSoup
 easy_install blist
-pip install --upgrade distribute
-pip install --upgrade mercurial
+pip3 install --upgrade distribute
+pip3 install --upgrade mercurial
+pip3 install mido
+pip3 --allow-external pyodbc --allow-unverified pyodbc pyodbc
 
 ## *EOF*

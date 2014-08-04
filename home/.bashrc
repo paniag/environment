@@ -1,28 +1,41 @@
 ## .bashrc
 ## Mac Radigan
 
-export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64
+if [ -f ~/.`uname -n`.alias ]; 
+then
+ . ~/.`uname -n`.alias
+fi
+alias aconf="vi ~/.`uname -n`.alias"
+
+#export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64
+export XMODIFIERS="@im=SCIM"
+export GTK_IM_MODULE="scim"
+export XIM_PROGRAM="scim -d"
+export QT_IM_MODULE="scim"
+export JAVA_HOME=/opt/jdk/jre
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 export VST_PATH=~/dat/music/lmms/vst
 export RLWRAP_HOME=~
 export RLWRAP_EDITOR="vi +%L"
 export RLWRAP_FILTERDIR="~/.rlwrap"
 export CLASSPATH=/opt/libreadline-java:$CLASSPATH
-export PATH=$PATH:~/.rlwrap:/usr/local/bin:/opt/maven/bin:/opt/jython/bin:/opt/ardour/bin:/usr/local/bin:/opt/non/bin:~/bin:/opt/lilypond/bin:/opt/eli:/opt/Qt/5.3/gcc_64/bin
-export PATH=$PATH:/opt/scilab/bin:/opt/j/bin:/opt/jython/bin:/opt/julia/bin:/opt/gdl/bin:/opt/firefox:/opt/midiedit/bin
+export PATH=$PATH:~/bin:~/.rlwrap:/usr/local/bin:/opt/maven/bin:/opt/jython/bin:/opt/ardour/bin:/usr/local/bin:/opt/non/bin:~/bin:/opt/lilypond/bin:/opt/eli:/opt/Qt/5.3/gcc_64/bin
+export PATH=$PATH:/opt/scilab/bin:/opt/j/bin:/opt/jython/bin:/opt/julia/bin:/opt/gdl/bin:/opt/firefox:/opt/midiedit/bin:/opt/gradle/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/nvidia:/opt/java-readline:/usr/lib64:/usr/lib64/boost
-export M2_HOME=/opt/maven
-export M2=$M2_HOME/bin
+export M3_HOME=/opt/maven
+export M3=$M3_HOME/bin
 export EDITOR=vim
 export PAGER=vim
 export DIRSTACKSIZE=8
 export HISTSIZE=1000
 export HISTFILESIZE=0
+export GPG_TTY=`tty`
 
 ## basic
 set -o vi
 alias cls='clear'
 alias reload='. ~/.zshrc'
+alias re='. ~/.zshrc'
 alias conf='vi ~/.zshrc'
 alias vconf='vi ~/.vimrc'
 alias iconf='vi ~/.i3/config'
@@ -53,6 +66,7 @@ alias rs='rsync -avhr'
 alias dim='xbacklight'
 alias lock='i3lock -c 000000'
 alias jo='jobs'
+alias evince='evince $* 1>/dev/null 2>/dev/null'
 alias ev='evince'
 #export DISPLAY=`uname -n`:0.0
 
@@ -73,6 +87,15 @@ alias wget='wget --user-agent="Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.
 alias mutt='env DISPLAY= mutt'
 alias mu='mutt'
 alias xmpp='mcabber'
+
+## graphics
+alias qiv='qiv -R'
+alias xv='qiv -R'
+alias gimp='gimp -s 2>/dev/null 1>/dev/null &'
+alias ink='inkscape 2>/dev/null 1>/dev/null &'
+
+## text
+alias fmpp='/opt/fmpp/bin/fmpp'
 
 ## audio
 #alias jack='jackd -v -a -R -P -d &'
@@ -101,15 +124,20 @@ alias finch='finch'
 alias xm='mcabber'
 
 ## root
-alias ro='root -l'
-alias rx='root -l -q -x -b'
+alias ro='rw root -l'
+alias rx='rw root -l -q -x -b'
 
 ## lisp
-alias cl='sbcl'
+alias cl='rw sbcl'
 
 ## python
-alias python='python3'
-alias py='ipython --pylab --profile sh'
+#alias python='python3'
+alias python='python2.6'
+alias pip='pip3'
+alias py='ipython3 --pylab --profile sh --no-confirm-exit --no-banner --quick --nosep'
+
+## java
+alias java='/opt/jdk/jre/bin/java'
 
 ## groovy
 alias groovy='/opt/groovy/bin/groovy'
@@ -118,8 +146,13 @@ alias gy='rw groovy'
 ## javascript
 alias closure='java -jar /opt/closure/compiler.jar --compilation_level ADVANCED_OPTIMIZATIONS --js '
 
+## language
+#alias im-server='ibus --xim'
+alias im-setup='scim-setup'
+alias im-server='scim -d 1>/dev/null 2>/dev/null &'
+
 ## scientific
-alias R='rw R -q'
+alias R='rw R -q --no-save'
 alias oct='rw octave -q'
 #alias scilab='/opt/scilab/bin/scilab'
 alias scilab='/opt/scilab/bin/scilab -nw'

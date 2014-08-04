@@ -1,9 +1,8 @@
 "" .vimrc
 "" Mac Radigan
 
-
 let g:pathogen_disabled = []
-call add(g:pathogen_disabled, 'nerdtree')
+"call add(g:pathogen_disabled, 'nerdtree')
 call add(g:pathogen_disabled, 'lusty')
 execute pathogen#infect()
 set clipboard=unnamed
@@ -17,9 +16,16 @@ set tags+=./tags;./src/tags;/
 let &makeprg='make -C . '
 "color torte
 "color delek
-set expandtab
-set guioptions-=m
-set guioptions-=T
+set fdm=manual
+set foldlevel=10000
+"set expandtab
+"set cul
+set go-=m
+set go-=T
+set list
+set ve=all
+let g:lst=1
+let g:fld=0
 let g:win=10
 let g:lnum=1
 let g:cline=1
@@ -76,24 +82,26 @@ set bs=2
 set ls=2
 set smartindent
 set nu
-set nolist
 set incsearch
+set confirm
 
 "cmap hs sp
 "cmap buf buffers
-nnoremap <leader>K :!rlwrap -a -m -z shell q<CR>
-nnoremap <leader>E :!rlwrap -a -m -z shell elix<CR>
-nnoremap <leader>C :!octave -q<CR>
-nnoremap <leader>A :!apl --silent<CR>
-nnoremap <leader>J :!rlwrap -a -m -z shell jconsole<CR>
-nnoremap <leader>U :!rlwrap -a -m -z shell julia<CR>
-nnoremap <leader>O :!octave -q<CR>
-nnoremap <leader>R :!rlwrap -a -m -z shell R -q<CR>
-nnoremap <leader>G :!rlwrap -a -m -z shell gdl -q<CR>
-nnoremap <leader>ro :!root -l<CR>
-nnoremap <leader>py :!python -q<CR>
-nnoremap <leader>cj :!clojure<CR>
-nnoremap <leader>cl :!sbcl<CR>
+nnoremap ;rc :call Calculate()<CR>
+nnoremap <silent> ;rb :!rlwrap -a -m -z shell bc -q<CR>
+nnoremap <silent> ;rd :!rlwrap -a -m -z shell dc<CR>
+nnoremap <silent> ;rq :!rlwrap -a -m -z shell q<CR>
+nnoremap <silent> ;re :!rlwrap -a -m -z shell elix<CR>
+nnoremap <silent> ;rm :!octave -q<CR>
+nnoremap <silent> ;ra :!apl --silent<CR>
+nnoremap <silent> ;rj :!rlwrap -a -m -z shell jconsole<CR>
+nnoremap <silent> ;ru :!rlwrap -a -m -z shell julia<CR>
+nnoremap <silent> ;rr :!rlwrap -a -m -z shell R -q<CR>
+nnoremap <silent> ;rg :!rlwrap -a -m -z shell gdl -q<CR>
+nnoremap <silent> ;ro :!root -l<CR>
+nnoremap <silent> ;rp :!python -q<CR>
+nnoremap <silent> ;rl :!clojure<CR>
+nnoremap <silent> ;rs :!sbcl<CR>
 nnoremap <leader>gm :exe @g<CR>
 "nnoremap <leader>g :!%:p
 "nnoremap <leader>gg :!%:p<CR>
@@ -102,26 +110,18 @@ nnoremap <leader>gg :make <CR>
 "nnoremap <leader>gg :make -C ..<CR>
 nnoremap <leader>rr :make test<CR>
 nnoremap <leader>ss :call MakeSession()<CR>
-nnoremap <leader>cc :qall!<CR>
 nnoremap j :cn<CR>
 nnoremap k :cp<CR>
 "nnoremap <leader>cc :hid<CR>
 nnoremap <leader>zz :w!<CR>:qall<CR>
-nnoremap <leader>cd :cd %:h<CR>
+"nnoremap <leader>cd :cd %:h<CR>
 nnoremap <leader>nn :nonu!<CR>
 nnoremap <leader>lpu :!enscript -b"HEADER" -h -G -L65 -r -fCourier7 -2 %<CR>
-nnoremap <leader>se :Sex<CR>
-nnoremap <leader>sp :Sex<CR>
-nnoremap <leader>sv :Sex!<CR>
-nnoremap <leader>sp :sp<CR>
-nnoremap <leader>vv :vs<CR>
-nnoremap <leader>vs :vs<CR>
-nnoremap <leader>ev :new ~/.vimrc<CR>
-nnoremap <leader>vc :new ~/.vimrc<CR>
-nnoremap <leader>ve :new ~/.vimrc<CR>
-nnoremap <leader>es :so ~/.vimrc<CR>
-nnoremap <leader>ss :so ~/.vimrc<CR>:hid<CR>
-nnoremap <leader>ei :cope<CR>
+"nnoremap <leader>ei :cope<CR>
+nnoremap <leader>e :e .<CR>
+nnoremap <leader>E :Sex!<CR>
+nnoremap ;e :e 
+nnoremap ;E :Sex<CR>
 nnoremap <leader>t1 1gt
 nnoremap <leader>t2 2gt
 nnoremap <leader>t3 3gt
@@ -132,65 +132,64 @@ nnoremap <leader>t7 7gt
 nnoremap <leader>t8 8gt
 nnoremap <leader>t9 9gt
 nnoremap <leader>t0 1gt
-nnoremap <leader>rl :tabn<CR>
-nnoremap <leader>rk :tabn<CR>
-nnoremap <leader>rh :tabN<CR>
-nnoremap <leader>rg :tabN<CR>
-nnoremap <leader>rq :tabc<CR>
-nnoremap <leader>r$ :tabl<CR>
-nnoremap <leader>r0 :tabf<CR>
+nnoremap ;l :tabn<CR>
+nnoremap ;k :tabn<CR>
+nnoremap ;h :tabN<CR>
+nnoremap ;g :tabN<CR>
+nnoremap ;q :tabc<CR>
+nnoremap ;$ :tabl<CR>
+nnoremap ;0 :tabf<CR>
 "nnoremap <leader>ro :tabo<CR>
-nnoremap <leader>tt :tabnew<CR>
-nnoremap <leader>rt :tabnew<CR>
+nnoremap ;t :tabnew<CR>
 nnoremap <leader>ta :ta 
 nnoremap <leader>sts :stj /
 nnoremap <leader>ts :tj /
-nnoremap <leader>tk :tagN<CR>
-nnoremap <leader>th :tagN<CR>
-nnoremap <leader>tj :tagn<CR>
-nnoremap <leader>tl :tagn<CR>
-nnoremap <leader>tq :tagc<CR>
-nnoremap <leader>t$ :tagl<CR>
-nnoremap <leader>t0 :tagf<CR>
-nnoremap <leader>to :tago<CR>
+nnoremap ;K :tagN<CR>
+nnoremap ;H :tagN<CR>
+nnoremap ;J :tagn<CR>
+nnoremap ;L :tagn<CR>
+nnoremap ;q :tagc<CR>
+nnoremap ;$ :tagl<CR>
+nnoremap ;0 :tagf<CR>
+nnoremap ;O :tago<CR>
+nnoremap ;q :tabc<CR>
 "nnoremap <leader>tu :!ctags --langmap=c:+.cu --exclude=".pc" --recurse<CR><CR>
 nnoremap <leader>tu :!ctags -f tags *.[ch]*<CR><CR>
-nnoremap <leader>sh :shell<CR>
-nnoremap <leader>mm :!man 
+nnoremap ;s :shell<CR>
 nnoremap <F1> .j0
+nnoremap <leader>v :vs<CR>
+nnoremap <leader>s :sp<CR>
 nnoremap <leader>gr :vimgrep 
 nnoremap <leader>GR :!grep 
-"nnoremap <leader>wl :winc l<CR>
-"nnoremap <leader>wj :winc j<CR>
-"nnoremap <leader>wk :winc k<CR>
-"nnoremap <leader>wh :winc h<CR>
-"nnoremap <leader>wc :hid<CR>
 nnoremap <leader>i :hid<CR>
-"nnoremap <leader>wo :on<CR>
 nnoremap <leader>l :winc l<CR>
 nnoremap <leader>j :winc j<CR>
 nnoremap <leader>k :winc k<CR>
 nnoremap <leader>h :winc h<CR>
 nnoremap <leader>o :on<CR>
-"nnoremap <leader>ee :call TellScreenR()<CR>
-"nnoremap <leader>EE :call TellScreen()<CR>
-nnoremap <leader>mx :!chmod 755 %<CR>
+nnoremap ;X :!chmod 755 %<CR>
 nnoremap <leader>x :!./%<CR>
 nnoremap <leader>ra :!ranger<CR>
 nnoremap <leader>fm :!vifm<CR>
 nnoremap <leader>QQ :call DoNMacro()<CR>
 nnoremap <leader>QB :bufdo! normal! @q<CR>
 nnoremap <leader>QW :windo! normal! @q<CR>
-"nnoremap <leader>xx :!root -l -q -x -b ./%<CR>
-map <leader>e :call ExecVisual()<CR>
+"map <leader>e :call ExecVisual()<CR>
 nnoremap <leader>nn <C-W>_<C-W><Bar>
 nnoremap <leader>NN <C-W>_<C-W>=
 nnoremap <leader>V <C-V>
+nnoremap ;v <C-V>
+nnoremap ;V 0{j<C-V>}k
+nnoremap <Space> }
+nnoremap <S-Space> {
+nnoremap <C-Space> {
+nnoremap <Tab> }
+nnoremap <S-Tab> {
 nnoremap <leader><leader>j :cn<CR>
 nnoremap <leader><leader>k :cp<CR>
 nnoremap <leader>. .n<CR>
 nnoremap <leader>/ :noh<CR>
-nnoremap <leader><Space> :cn<CR>
+"nnoremap <leader><Space> :cn<CR>
 nnoremap ∆ :cn<CR>
 nnoremap  :cn<CR>
 nnoremap ˚ : cp<CR>
@@ -198,10 +197,12 @@ nnoremap  : cp<CR>
 nnoremap <leader>S :e ../src/%<.cpp<CR>
 nnoremap <leader>H :e ../include/%<.hpp<CR>
 nmap <silent> <Leader>W :Project ~/.vimproject<CR>
-nnoremap <leader>w :NERDTreeToggle<CR>
+nnoremap <leader>y :NERDTreeToggle<CR>
 nnoremap <leader>F :NERDTreeFind<CR>
 nnoremap <leader># :call ToggleLineNumber()<CR>
-nnoremap <leader>$ :call ToggleSyntax()<CR>
+nnoremap <leader>$ :call ToggleList()<CR>
+nnoremap <leader>% :call ToggleSyntax()<CR>
+nnoremap <leader>m :call ToggleSyntax()<CR> :call ToggleLineNumber()<CR> :call ToggleList()<CR>
 nnoremap <leader>^ :colorscheme 
 nnoremap <leader>) :call ToggleCursorLine()<CR>
 "nnoremap <C-N> :next<Enter>
@@ -209,6 +210,7 @@ nnoremap <leader>) :call ToggleCursorLine()<CR>
 "nnoremap <C-P> :prev<Enter>
 nnoremap <C-i> "*p
 nnoremap <C-c> "*y
+nnoremap <leader>b :ls<CR>
 nnoremap <leader>1 :b1<CR>
 nnoremap <leader>2 :b2<CR>
 nnoremap <leader>3 :b3<CR>
@@ -219,19 +221,34 @@ nnoremap <leader>7 :b7<CR>
 nnoremap <leader>8 :b8<CR>
 nnoremap <leader>9 :b9<CR>
 nnoremap <leader>0 :b0<CR>
+nnoremap <leader>z1 :set foldlevel=1<CR>
+nnoremap <leader>z2 :set foldlevel=2<CR>
+nnoremap <leader>z3 :set foldlevel=3<CR>
+nnoremap <leader>z4 :set foldlevel=4<CR>
+nnoremap <leader>z5 :set foldlevel=5<CR>
+nnoremap <leader>z6 :set foldlevel=6<CR>
+nnoremap <leader>z7 :set foldlevel=7<CR>
+nnoremap <leader>z8 :set foldlevel=8<CR>
+nnoremap <leader>z9 :set foldlevel=9<CR>
+nnoremap <leader>z0 :set foldlevel=0<CR>
 imap <leader>c <ESC>
 map <leader>c <ESC>
 vmap / y:execute "/".escape(@",'[]/\.*')<CR>
-inoremap <Tab> <C-n>
+"inoremap <Tab> <C-n>
 noremap ; :
+noremap ;w :w<CR>
+noremap ;o zA
+noremap ;m :call ToggleFold()<CR>
+noremap <leader>zf {zf}
+noremap ;a :qall<CR>
 cmap w!! w !sudo tee %>/dev/null
-nnoremap <leader>f :FufFile **/<CR>
-nnoremap <leader>b :FufBuffer **/<CR>
+nnoremap <leader>F :FufFile **/<CR>
+nnoremap <leader>B :FufBuffer **/<CR>
+nnoremap <leader>b :BufExplorer<CR>
 nnoremap <leader>T :FufTag<CR>
-nnoremap <leader>F <C-Z>
+nnoremap <leader>f <C-Z>
 inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
 inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
-set confirm
 
 if exists('+autochdir')
  "set autochdir
@@ -249,6 +266,15 @@ function! ToggleCursorLine()
   endif
 endfunction
 
+function! ToggleFold()
+  if g:fld == 1
+    let g:fld = 0
+    normal!zM
+  else
+    let g:fld = 1
+    normal!zR
+  endif
+endfunction
 
 function! ToggleLineNumber()
   if g:lnum == 1
@@ -265,6 +291,16 @@ function! ToggleSyntax()
     syntax off
   else
     syntax on
+  endif
+endfunction
+
+function! ToggleList()
+  if g:lst == 1
+    let g:lst = 0
+    :set list
+  else
+    let g:lst = 1
+    :set nolist
   endif
 endfunction
 
@@ -306,6 +342,15 @@ function! NMacro(pattern, macro)
   exec("normal! ".n."@".a:macro)
 endfunction
 
+function! Calculate()
+  let expr = ""
+  while expr != "q"
+    let expr = input("")
+    "exec("normal! :echo ".expr)
+    exec "echo ".expr
+  endwhile
+endfunction
+
 function! Browser()
   let buf = getline(".")
   let buf = matchstr (buf, "http[^ ]*")
@@ -313,5 +358,7 @@ function! Browser()
 " let result = system("!/opt/firefox/firefox-bin ".buf)
 endfunction
 map <leader>w :call Browser()<CR>
+
+hi Folded ctermfg=yellow ctermbg=black guifg=yellow guibg=black
 
 "" *EOF*

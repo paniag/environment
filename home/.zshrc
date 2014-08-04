@@ -1,22 +1,33 @@
 ## .zshrc
 ## Mac Radigan
 
+if [ -f ~/.`uname -n`.alias ]; 
+then
+ . ~/.`uname -n`.alias
+fi
+alias aconf="vi ~/.`uname -n`.alias"
+
 export KiB=$((1024))
 export MiB=$((1024 ** 2))
 export GiB=$((1024 ** 3))
-export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64
+export XMODIFIERS="@im=SCIM"
+export GTK_IM_MODULE="scim"
+export XIM_PROGRAM="scim -d"
+export QT_IM_MODULE="scim"
+#export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64
+export JAVA_HOME=/opt/jdk/jre
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 export VST_PATH=~/dat/music/lmms/vst
 export RLWRAP_HOME=~
 export RLWRAP_EDITOR="vi +%L"
 export RLWRAP_FILTERDIR="~/.rlwrap"
 export CLASSPATH=/opt/libreadline-java:$CLASSPATH
-export PATH=$PATH:/opt/Qt/5.3/gcc_64/bin
+export PATH=$PATH:~/bin:/opt/Qt/5.3/gcc_64/bin
 export PATH=$PATH:~/.rlwrap:/usr/local/bin:/opt/octave/bin:/opt/maven/bin:/opt/jython/bin:/opt/ardour/bin:/opt/non/bin:~/bin:/opt/lilypond/bin:/opt/eli
-export PATH=$PATH:/opt/scilab/bin:/opt/j/bin:/opt/jython/bin:/opt/julia/bin:/opt/gdl/bin:/opt/firefox:/opt/midiedit/bin
+export PATH=$PATH:/opt/scilab/bin:/opt/j/bin:/opt/jython/bin:/opt/julia/bin:/opt/gdl/bin:/opt/firefox:/opt/midiedit/bin:/opt/gradle/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/nvidia:/usr/local/lib:/usr/lib64/root/:/usr/lib64:/opt/java-readline:/usr/lib64:/usr/lib64/boost
-export M2_HOME=/opt/maven
-export M2=$M2_HOME/bin
+export M3_HOME=/opt/maven
+export M3=$M3_HOME/bin
 export TEXINPUTS=~/library/texmf/:
 export EDITOR=vim
 export PAGER=less
@@ -24,6 +35,7 @@ export GNUTERM=x11
 export DIRSTACKSIZE=8
 export HISTSIZE=1000
 export HISTFILESIZE=0
+export GPG_TTY=`tty`
 #export PYTHONPATH=.:/usr/lib64/python2.6/site-packages/numpy:/usr/lib64/python2.6/site-packages/numpy/core:/usr/lib64/python2.6/site-packages/numpy/lib
 #export PYTHONPATH=.:~/library/python:/usr/lib64/python2.6/site-packages:/usr/lib64/python2.6/site-packages/numpy/core:/usr/lib64/python2.6/site-packages/numpy/lib
 setopt autopushd pushdminus pushdsilent pushdtohome
@@ -57,11 +69,13 @@ bindkey -M viins '/' vi-history-search-backward
 bindkey -M viins '?' history-incremental-pattern-search-backward
 bindkey '#' vi-pound-insert
 bindkey '0' vi-digit-or-beginning-of-line
+export KEYTIMEOUT=1
 
 ## basic
 set -o vi
 alias cls='clear'
 alias reload='. ~/.zshrc'
+alias re='. ~/.zshrc'
 alias conf='vi ~/.zshrc'
 alias cconf='vi ~/.zshrc ~/.bashrc'
 alias vconf='vi ~/.vimrc'
@@ -90,14 +104,19 @@ alias sx='startx'
 alias rw='rlwrap -a -m -z shell '
 alias dim='xbacklight'
 alias rs='rsync -avhr'
+alias utar='tar -zxvf'
+alias ztar='tar -zcvf'
 alias lock='i3lock -c 000000'
 alias dt='date +"%F"'
 alias jo='jobs'
+alias evince='evince $* 1>/dev/null 2>/dev/null'
 alias ev='evince'
 #export DISPLAY=`uname -n`:0.0
 
 ## suffix and global
 alias -s c=vim h=vim cpp=vim hpp=vim cxx=vim hxx=vim
+alias -g h1='|head -n 1'
+alias -g t1='|tail -n 1'
 alias -g l='|less'
 alias -g m='|more'
 alias -g x='|xargs -I{}'
@@ -113,8 +132,10 @@ alias -g to='2>log.err|tee log.out'
 alias -g eo='1>log.out 2>log.err'
 alias -g oe='3>&2 1>&2 2>&3 3>&-'
 alias -g j='|tee -a ~/temp/notes.txt'
+alias -g jn='echo "" |tee -a ~/temp/notes.txt'
 alias jcat='cat ~/temp/notes.txt'
 alias jconf='vi ~/temp/notes.txt'
+alias note='~/temp/notes.txt'
 
 ## environment
 alias econf='vi ~/local/environment/install/yum-install.sh'
@@ -134,6 +155,15 @@ alias mystyle='astyle -s2 -xG -S --style=allman --recursive "src/*.cpp" "include
 alias mutt='env DISPLAY= mutt'
 alias mu='mutt'
 alias xmpp='mcabber'
+
+## graphics
+alias qiv='qiv -R'
+alias xv='qiv -R'
+alias gimp='gimp -s 2>/dev/null 1>/dev/null &'
+alias ink='inkscape 2>/dev/null 1>/dev/null &'
+
+## text
+alias fmpp='/opt/fmpp/bin/fmpp'
 
 ## audio
 ##alias jack='jackd -v -R -P -d '
@@ -155,15 +185,20 @@ alias mix='alsamixer'
 alias calf='jackcalfhost'
 
 ## root
-alias ro='root -l'
-alias rx='root -l -q -x -b'
+alias ro='rw root -l'
+alias rx='rw root -l -q -x -b'
 
 ## lisp
-alias cl='sbcl'
+alias cl='rw sbcl'
 
 ## python
-alias python='python3'
-alias py='ipython --pylab --profile sh'
+#alias python='python3'
+alias python='python2.6'
+alias pip='pip3'
+alias py='ipython3 --pylab --profile sh --no-confirm-exit --no-banner --quick --nosep'
+
+## java
+alias java='/opt/jdk/jre/bin/java'
 
 ## groovy
 alias groovy='/opt/groovy/bin/groovy'
@@ -172,9 +207,14 @@ alias gy='rw groovy'
 ## javascript
 alias closure='java -jar /opt/closure/compiler.jar --compilation_level ADVANCED_OPTIMIZATIONS --js '
 
+## language
+#alias im-server='ibus --xim'
+alias im-setup='scim-setup'
+alias im-server='scim -d 1>/dev/null 2>/dev/null &'
+
 ## scientific
 #alias octave='/opt/octave/bin/octave -q'
-alias R='rw R -q'
+alias R='rw R -q --no-save'
 alias oct='rw octave -q'
 alias scilab='/opt/scilab/bin/scilab'
 alias sci='scilab -nw'
@@ -335,5 +375,8 @@ function bat {
   b=$((100*r/c))
   echo "$b[1,4]%"
 }
+
+function path { echo ${${1}:a} }
+function cdd { cd ${PWD:t} $1 }
 
 ## *EOF*

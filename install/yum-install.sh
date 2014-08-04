@@ -305,5 +305,15 @@ yum -y install libusbx-devel
 yum -y install sbcl
 yum -y install gpg
 yum -y install vino
+yum -y install ibus*
+yum -y install html2text
+yum -y install ecryptfs-utils
+yum -y install qiv
+yum -y install freemaker
+yum -y install boost.devel.i686
+yum -y install libodbc
+yum -y install libodbc-devel
+yum -y install unixODBC
+yum -y install unixODBC-devel
 
 ## *EOF*

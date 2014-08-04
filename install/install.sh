@@ -308,4 +308,15 @@ wget "http://downloads.sourceforge.net/project/extace/eXtace/1.9.9/extace-1.9.9.
 tar -zxvf extace-1.9.9.tar.gz
 (cd extace-1.9.9; ./configure; make && sudo make install)
 
+## freemarker
+wget "http://downloads.sourceforge.net/project/freemarker/freemarker/2.2.8/freemarker-2.2.8.tar.gz?r=http%3A%2F%2Ffreemarker.org%2Ffreemarkerdownload.html&ts=1406457603&use_mirror=iweb"
+wget "http://downloads.sourceforge.net/project/fmpp/fmpp/0.9.14/fmpp_0.9.14.tar.gz?r=http%3A%2F%2Ffmpp.sourceforge.net%2F&ts=1406457764&use_mirror=colocrossing"
+tar -zxvf freemarker-2.2.8.tar.gz
+tar -zxvf fmpp_0.9.14.tar.gz
+
+## clewn
+wget "http://downloads.sourceforge.net/project/clewn/clewn/clewn-1.15/clewn-1.15.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fclewn%2Ffiles%2Fclewn%2Fclewn-1.15%2F&ts=1406884855&use_mirror=tcpdiag"
+tar -zxvf clewn-1.15.tar.gz
+(cd clewn-1.15; ./configure && make && sudo make install)
+
 ## *EOF* 
