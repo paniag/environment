@@ -57,4 +57,9 @@ if(!require("RODBC")) {
   library("RODBC")
 }
 
+if(!require("plyr")) {
+  install.packages("plyr", repos="http://cran.rstudio.com/") 
+  library("plyr")
+}
+
 ## *EOF*

@@ -315,5 +315,26 @@ yum -y install libodbc
 yum -y install libodbc-devel
 yum -y install unixODBC
 yum -y install unixODBC-devel
+yum -y install kernel*
+yum -y install selinux-policy*
+yum -y install --setopt=protected_multilib=false *openldap*
+yum -y install phpldapadmin
+yum -y install npm
+yum -y install guile
+yum -y install guile-devel
+yum -y install tetex
+yum -y install tetex-fonts
+yum -y install tetex-dvips
+yum -y install tetex-latex
+yum -y install ghostscript
+yum -y install cowsay
+yum -y install cowthink
+yum -y install espeak
+yum -y install --enablerepo=linuxtech-testing aoss
+yum -y install multitail
+yum -y install lftp
+yum -y install vlc --skip-broken
+yum -y install latex2html
+yum -y install figlet
 
 ## *EOF*

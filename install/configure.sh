@@ -41,4 +41,7 @@ service xinetd reload
 chkconfig mysqld on
 service mysqld start
 
+chkconfig slapd on
+service slapd start
+
 ## *EOF*

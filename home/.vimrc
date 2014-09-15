@@ -6,11 +6,21 @@ let g:pathogen_disabled = []
 call add(g:pathogen_disabled, 'lusty')
 execute pathogen#infect()
 set clipboard=unnamed
-set go+=a
+set go+=aAc
+set go-=mT
 setlocal autoread
 filetype plugin on
 set omnifunc=syntaxcomplete#Complete
 set tags+=./tags;./src/tags;/
+set cscopeprg=gtags-cscope
+set cst
+set csto=0
+set nocsverb
+if filereadable("GTAGS")
+  cs add GTAGS
+elseif $CSCOPE_DB != ""
+  cs add $CSCOPE_DB
+endif
 "let &makeprg='if [ -f Makefile ]; then make; else make -C ..; fi; '
 "let &makeprg='make -C .. '
 let &makeprg='make -C . '
@@ -20,15 +30,10 @@ set fdm=manual
 set foldlevel=10000
 "set expandtab
 "set cul
-set go-=m
-set go-=T
 set list
 set ve=all
-let g:lst=1
 let g:fld=0
 let g:win=10
-let g:lnum=1
-let g:cline=1
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost l* nested lwindow
 autocmd FileType python set omnifunc=pythoncomplete#Complete
@@ -54,10 +59,10 @@ set path+=,,
 set path+=.
 set path+=./include
 set nu
-set scrolloff=3
+set so=3
+set siso=3
 set confirm
 "set viminfo='20,<50,s10,h,%
-set guioptions+=c
 set autochdir
 set shortmess=aTI
 set vb t_vb=".
@@ -103,21 +108,16 @@ nnoremap <silent> ;rp :!python -q<CR>
 nnoremap <silent> ;rl :!clojure<CR>
 nnoremap <silent> ;rs :!sbcl<CR>
 nnoremap <leader>gm :exe @g<CR>
-"nnoremap <leader>g :!%:p
-"nnoremap <leader>gg :!%:p<CR>
-nnoremap <leader>gc :make clean<CR>
-nnoremap <leader>gg :make <CR>
-"nnoremap <leader>gg :make -C ..<CR>
-nnoremap <leader>rr :make test<CR>
-nnoremap <leader>ss :call MakeSession()<CR>
+nnoremap ;gc :make clean<CR>
+nnoremap <leader>g :make <CR>
 nnoremap j :cn<CR>
 nnoremap k :cp<CR>
-"nnoremap <leader>cc :hid<CR>
 nnoremap <leader>zz :w!<CR>:qall<CR>
-"nnoremap <leader>cd :cd %:h<CR>
+imap ;; 
+nnoremap <leader>cd :cd %:h<CR>
 nnoremap <leader>nn :nonu!<CR>
 nnoremap <leader>lpu :!enscript -b"HEADER" -h -G -L65 -r -fCourier7 -2 %<CR>
-"nnoremap <leader>ei :cope<CR>
+nnoremap ;i :cd %:h<CR>:e .<CR>
 nnoremap <leader>e :e .<CR>
 nnoremap <leader>E :Sex!<CR>
 nnoremap ;e :e 
@@ -156,6 +156,9 @@ nnoremap ;q :tabc<CR>
 "nnoremap <leader>tu :!ctags --langmap=c:+.cu --exclude=".pc" --recurse<CR><CR>
 nnoremap <leader>tu :!ctags -f tags *.[ch]*<CR><CR>
 nnoremap ;s :shell<CR>
+nnoremap ;p "+p
+nmap <leader>d 
+nmap <leader>D 
 nnoremap <F1> .j0
 nnoremap <leader>v :vs<CR>
 nnoremap <leader>s :sp<CR>
@@ -169,6 +172,7 @@ nnoremap <leader>h :winc h<CR>
 nnoremap <leader>o :on<CR>
 nnoremap ;X :!chmod 755 %<CR>
 nnoremap <leader>x :!./%<CR>
+nnoremap ;x :!./%<CR>
 nnoremap <leader>ra :!ranger<CR>
 nnoremap <leader>fm :!vifm<CR>
 nnoremap <leader>QQ :call DoNMacro()<CR>
@@ -196,15 +200,16 @@ nnoremap ˚ : cp<CR>
 nnoremap  : cp<CR>
 nnoremap <leader>S :e ../src/%<.cpp<CR>
 nnoremap <leader>H :e ../include/%<.hpp<CR>
-nmap <silent> <Leader>W :Project ~/.vimproject<CR>
+nmap <silent> ;<Space> <plug>ToggleProject
+imap <silent> <leader>, <Esc>
 nnoremap <leader>y :NERDTreeToggle<CR>
 nnoremap <leader>F :NERDTreeFind<CR>
-nnoremap <leader># :call ToggleLineNumber()<CR>
-nnoremap <leader>$ :call ToggleList()<CR>
+nnoremap <leader># :set invnu<CR>
+nnoremap <leader>$ :set invlist<CR>
 nnoremap <leader>% :call ToggleSyntax()<CR>
-nnoremap <leader>m :call ToggleSyntax()<CR> :call ToggleLineNumber()<CR> :call ToggleList()<CR>
+nnoremap <leader>m :call ToggleSyntax()<CR> :set invlist<CR> :set invnu<CR>
 nnoremap <leader>^ :colorscheme 
-nnoremap <leader>) :call ToggleCursorLine()<CR>
+nnoremap <leader>) :set invcul<CR>
 "nnoremap <C-N> :next<Enter>
 "nnoremap <C-P> :prev<Enter>
 "nnoremap <C-P> :prev<Enter>
@@ -231,8 +236,7 @@ nnoremap <leader>z7 :set foldlevel=7<CR>
 nnoremap <leader>z8 :set foldlevel=8<CR>
 nnoremap <leader>z9 :set foldlevel=9<CR>
 nnoremap <leader>z0 :set foldlevel=0<CR>
-imap <leader>c <ESC>
-map <leader>c <ESC>
+map <leader>, <ESC>
 vmap / y:execute "/".escape(@",'[]/\.*')<CR>
 "inoremap <Tab> <C-n>
 noremap ; :
@@ -249,22 +253,60 @@ nnoremap <leader>T :FufTag<CR>
 nnoremap <leader>f <C-Z>
 inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
 inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
+nmap ;ss :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap ;sg :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap ;sc :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap ;st :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap ;se :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap ;sf :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap ;si :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap ;sd :cs find d <C-R>=expand("<cword>")<CR><CR>
+nmap ;sss :scs find s <C-R>=expand("<cword>")<CR><CR>
+nmap ;ssg :scs find g <C-R>=expand("<cword>")<CR><CR>
+nmap ;ssc :scs find c <C-R>=expand("<cword>")<CR><CR>
+nmap ;sst :scs find t <C-R>=expand("<cword>")<CR><CR>
+nmap ;sse :scs find e <C-R>=expand("<cword>")<CR><CR>
+nmap ;ssf :scs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap ;ssi :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap ;ssd :scs find d <C-R>=expand("<cword>")<CR><CR>
+nmap ;svs :vert scs find s <C-R>=expand("<cword>")<CR><CR>
+nmap ;svg :vert scs find g <C-R>=expand("<cword>")<CR><CR>
+nmap ;svc :vert scs find c <C-R>=expand("<cword>")<CR><CR>
+nmap ;svt :vert scs find t <C-R>=expand("<cword>")<CR><CR>
+nmap ;sve :vert scs find e <C-R>=expand("<cword>")<CR><CR>
+nmap ;svf :vert scs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap ;svi :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap ;svd :vert scs find d <C-R>=expand("<cword>")<CR><CR>
+nmap <leader>sd :cs find d 
+nmap <leader>ss :cs find s 
+nmap <leader>sg :cs find g 
+nmap <leader>sc :cs find c 
+nmap <leader>st :cs find t 
+nmap <leader>se :cs find e 
+nmap <leader>sf :cs find f 
+nmap <leader>si :cs find i 
+nmap <leader>ssd :scs find d 
+nmap <leader>sss :scs find s 
+nmap <leader>ssg :scs find g 
+nmap <leader>ssc :scs find c 
+nmap <leader>sst :scs find t 
+nmap <leader>sse :scs find e 
+nmap <leader>ssf :scs find f 
+nmap <leader>ssi :scs find i 
+nmap <leader>svd find d 
+nmap <leader>svs find s 
+nmap <leader>svg find g 
+nmap <leader>svc find c 
+nmap <leader>svt find t 
+nmap <leader>sve find e 
+nmap <leader>svf find f 
+nmap <leader>svi find i 
 
 if exists('+autochdir')
  "set autochdir
 else
   autocmd BufEnter * silent! lcd %:p:h:gs/ /\\ /
 endif
-
-function! ToggleCursorLine()
-  if g:cline == 1
-    let g:cline = 0
-    :set cursorline
-  else
-    let g:cline = 1
-    :set nocursorline
-  endif
-endfunction
 
 function! ToggleFold()
   if g:fld == 1
@@ -276,31 +318,11 @@ function! ToggleFold()
   endif
 endfunction
 
-function! ToggleLineNumber()
-  if g:lnum == 1
-    let g:lnum = 0
-    :set nonu
-  else
-    let g:lnum = 1
-    :set nu
-  endif
-endfunction
-
 function! ToggleSyntax()
   if exists("g:syntax_on")
     syntax off
   else
     syntax on
-  endif
-endfunction
-
-function! ToggleList()
-  if g:lst == 1
-    let g:lst = 0
-    :set list
-  else
-    let g:lst = 1
-    :set nolist
   endif
 endfunction
 

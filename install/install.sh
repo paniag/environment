@@ -319,4 +319,9 @@ wget "http://downloads.sourceforge.net/project/clewn/clewn/clewn-1.15/clewn-1.15
 tar -zxvf clewn-1.15.tar.gz
 (cd clewn-1.15; ./configure && make && sudo make install)
 
+## gtags
+curl -O http://tamacom.com/global/global-6.3.2.tar.gz
+tar -zxvf global-6.3.2.tar.gz
+(cd global-6.3.2; ./configure && make && sudo make install)
+
 ## *EOF* 

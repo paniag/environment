@@ -44,11 +44,13 @@ alias mx='chmod 755 '
 alias vc='sudo chvt '
 alias vi='vim -O '
 alias vio='vim -o '
+alias vip='vim -c ":Project vimprojects"'
 alias gvim='gvim -c ":colorscheme torte"'
 alias ll='ls -l'
 alias la='ls -la'
 alias lsr='ls -rtl'
-alias sc='screen'
+alias ss='screen'
+alias ssr='screen -R'
 alias sl='screen -list'
 alias sx='startx'
 alias rw='rlwrap -a -m -z shell '
@@ -65,9 +67,11 @@ alias untar='tar -zxvf'
 alias rs='rsync -avhr'
 alias dim='xbacklight'
 alias lock='i3lock -c 000000'
+alias bb='blanker'
 alias jo='jobs'
 alias evince='evince $* 1>/dev/null 2>/dev/null'
 alias ev='evince'
+alias igrep='grep -i'
 #export DISPLAY=`uname -n`:0.0
 
 ## environment
@@ -79,6 +83,9 @@ alias jconf='vi ~/temp/notes.txt'
 ## services
 alias ck='ps -ef | grep -E "(jackd|lmms)"'
 alias mc-tool='memcached-tool 127.0.0.1:11211 '
+
+## logging
+alias mt='multitail'
 
 ## network
 alias wget='wget --user-agent="Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.3) Gecko/2008092416 Firefox/3.0.3" '
@@ -96,6 +103,10 @@ alias ink='inkscape 2>/dev/null 1>/dev/null &'
 
 ## text
 alias fmpp='/opt/fmpp/bin/fmpp'
+
+## encryption
+alias decfs='ecryptfs-mount-private'
+alias encfs='ecryptfs-umount-private'
 
 ## audio
 #alias jack='jackd -v -a -R -P -d &'
@@ -128,7 +139,10 @@ alias ro='rw root -l'
 alias rx='rw root -l -q -x -b'
 
 ## lisp
-alias cl='rw sbcl'
+alias racket='rw racket'
+alias guile='rw guile'
+alias sbcl='rw sbcl --noinform'
+alias ecl='rw ecl'
 
 ## python
 #alias python='python3'
@@ -169,7 +183,10 @@ alias gdl='/opt/gdl/bin/gdl -q'
 alias pro='gdl'
 
 ## locate
+alias f='find -L ./'
+alias fn='find -L ./ -name'
 alias findex='find ./ -perm -o+rx -type f '
+alias lo='locate'
 
 ## database connections
 alias ms='mssql'
@@ -218,9 +235,10 @@ alias gh-master='git checkout master'
 ## archive
 alias alien='/usr/local/bin/alien'
 alias isomount='mount -o loop -t iso9660 '
+alias dtrx='dtrx -v'
 
-## transfer
-alias wget-files='wget -r -nH --cut-dirs=9999 '
+## networks
+alias dl='wget -r -e robots=off -nH --no-check-certificate --convert-links --page-requisites --no-clobber --no-parent --user-agent="Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.3) Gecko/2008092416 Firefox/3.0.3" '
 
 function web {
   chrome $* 1>/dev/null 2>/dev/null &
@@ -307,5 +325,8 @@ for link in soup.findAll('a'):
 EOT
 fi
 }
+
+function say { espeak --stdout -f $1 | aplay }
+function fbreader { FBReader $* 2>/dev/null 1>/dev/null & }
 
 ## *EOF*
