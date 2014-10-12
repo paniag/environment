@@ -86,14 +86,14 @@ sub input {
   {
     $editor = 'vim -O'
   }
-  if($in =~ /^:!.*/ || $in =~ /^!!.*/) 
+  if($in =~ /^[;:][!1].*/ || $in =~ /^!!.*/) 
   { 
     $cmd = substr($in,2);
     $cmd =~ s/^\s+|\s+$//g;
     system $cmd;
     return '';
   } 
-  elsif($in =~ /^:e.*/)
+  elsif($in =~ /^[;:]e.*/)
   {
     $cmd = substr($in,2);
     #system $editor => $cmd;
@@ -101,7 +101,7 @@ sub input {
     system $cmd;
     return '';
   }
-  elsif($in =~ /^:q.*/)
+  elsif($in =~ /^[;:]q.*/)
   {
     return '';
   }

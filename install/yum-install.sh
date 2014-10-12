@@ -336,5 +336,9 @@ yum -y install lftp
 yum -y install vlc --skip-broken
 yum -y install latex2html
 yum -y install figlet
+yum -y install dos2unix
+yum -y install unix2dos
+yum -y install tmux
+yum -y install byobu
 
 ## *EOF*

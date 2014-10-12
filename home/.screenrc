@@ -11,14 +11,26 @@ vbell off
 #escape `e
 escape ``
 #escape ^Jj
+# bind '_' monitor silence
+# bind 'M' monitor activity
+# bind 'H' log session
+# bind 'z' suspend
+# bind '*' list
+# bind ']' paste
+# bind '=' delete exchange buffer
+# bind '>' write exchange buffer
+# bind '>' read exchange buffer
+# bind ESC copy mode
 bind 'q' quit
-bind 'c' kill
+bind 'i' kill
 bind 'h' prev
 bind 'k' prev
 bind 'j' next
 bind 'h' next
 bind 'l' next
 bind 't' title
+bind 'L' lockscreen
+bind 'x' kill
 hardstatus alwayslastline
 hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f %t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %Y-%m-%d %{W}%c %{g}'
 screen -t " " 4 zsh
@@ -36,5 +48,6 @@ select 1
 
 idle 120
 blankerprg blanker
+nethack on
 
 ## *EOF*

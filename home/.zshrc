@@ -39,10 +39,9 @@ export GPG_TTY=`tty`
 #export PYTHONPATH=.:/usr/lib64/python2.6/site-packages/numpy:/usr/lib64/python2.6/site-packages/numpy/core:/usr/lib64/python2.6/site-packages/numpy/lib
 #export PYTHONPATH=.:~/library/python:/usr/lib64/python2.6/site-packages:/usr/lib64/python2.6/site-packages/numpy/core:/usr/lib64/python2.6/site-packages/numpy/lib
 setopt autopushd pushdminus pushdsilent pushdtohome
-autoload -U promptinit
-promptinit
-autoload -U compinit
-compinit
+autoload -U promptinit && promptinit
+autoload -U compinit && compinit
+autoload -U colors && colors
 autoload zmv
 #setopt nolistambiguous
 zstyle ':completion:*' menu select
@@ -59,7 +58,7 @@ setopt autocd
 #prompt clint
 function mn {
   #PROMPT='%F{red}>%F{white} '
-  PROMPT='%F{red}><%F{white} '
+  PROMPT=' %F{red}><%F{white} '
   RPROMPT=''
 }
 mn
@@ -82,6 +81,7 @@ alias cconf='vi ~/.zshrc ~/.bashrc'
 alias vconf='vi ~/.vimrc'
 alias iconf='vi ~/.i3/config'
 alias sconf='vi ~/.screenrc'
+alias tconf='vi ~/.tmux.conf'
 alias mx='chmod 755 '
 alias vc='sudo chvt '
 alias vi='vim -O '
@@ -91,6 +91,9 @@ alias gvim='gvim -c ":colorscheme torte"'
 alias ll='ls -l'
 alias la='ls -la'
 alias lsr='ls -rtl'
+alias tx='tmux attach -d'
+alias tx-kill='tmux kill-sessions'
+alias tl='tmux list-windows'
 alias ss='screen'
 alias ssr='screen -R'
 alias sl='screen -list'
@@ -104,7 +107,7 @@ alias unn='uname -n'
 alias me='ps -uxf | grep mac'
 alias untar='tar -zxvf'
 alias sx='startx'
-alias rw='rlwrap -a -m -z shell '
+alias rw='rlwrap -S "W>< " -c -a -m -z shell '
 alias dim='xbacklight'
 alias rs='rsync -avhr'
 alias utar='tar -zxvf'
@@ -120,6 +123,7 @@ alias igrep='grep -i'
 
 ## suffix and global
 alias -s c=vim h=vim cpp=vim hpp=vim cxx=vim hxx=vim
+alias -g mac='mac@radigan.org'
 alias -g h1='|head -n 1'
 alias -g t1='|tail -n 1'
 alias -g l='|less'
@@ -127,7 +131,7 @@ alias -g m='|more'
 alias -g x='|xargs -I{}'
 alias -g g='|grep'
 alias -g s='|sed'
-alias -g a='|awk'
+alias -g A='|awk'
 alias -g ig='|grep -i'
 alias -g xi='|xclip -i'
 alias -g xo='xclip -o'
@@ -162,7 +166,9 @@ alias mystyle='astyle -s2 -xG -S --style=allman --recursive "src/*.cpp" "include
 ## communication
 alias mutt='env DISPLAY= mutt'
 alias mu='mutt'
-alias xmpp='mcabber'
+alias mcabber='mcabber'
+alias finch='finch'
+alias xm='finch'
 
 ## graphics
 alias qiv='qiv -R'
@@ -296,6 +302,7 @@ alias pst=" sh -c 'xsel | xvkbd -xsendevent -file - 2>/dev/null' "
 ## scm
 alias git='/opt/git/bin/git'
 alias gci='git commit'
+alias gca='git commit -a'
 alias gpu='git push'
 alias ga='git add'
 alias gist='git log --oneline --decorate'
@@ -399,5 +406,15 @@ function say { espeak --stdout -f $1 | aplay }
 function path { echo ${${1}:a} }
 function cdd { cd ${PWD:t} $1 }
 function fbreader { FBReader $* 2>/dev/null 1>/dev/null & }
+
+## encrypted email
+# echo "message" | ma "subject" recipient
+function ma { mutt -s $1 $2 }
+# fma "subject" file recipient
+function fma { echo "" | mutt -s $1 -a $2 -- $3 }
+# echo "message" | ema "subject" recipient
+function ema { gpg -ea -r $2 -o - | mutt -s $1 $2 }
+# fema "subject" file recipient
+function fema { gpg -ea -r $3 -o - $2 | mutt -s $1 $3 }
 
 ## *EOF*
