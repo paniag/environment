@@ -41,6 +41,7 @@ alias vconf='vi ~/.vimrc'
 alias iconf='vi ~/.i3/config'
 alias sconf='vi ~/.screenrc'
 alias tconf='vi ~/.tmux.conf'
+alias gconf='vi ~/.gdbinit'
 alias mx='chmod 755 '
 alias vc='sudo chvt '
 alias vi='vim -O '
@@ -76,6 +77,17 @@ alias jo='jobs'
 alias evince='evince $* 1>/dev/null 2>/dev/null'
 alias ev='evince'
 alias igrep='grep -i'
+alias lns='ln -fs'
+alias rd=rmdir
+alias sd=sudo
+#alias gdb='rw gdb -q'
+alias gg='rw gdb -q'
+alias pk=pkill
+alias off='sudo shutdown -h now'
+alias on='sudo shutdown -h now'
+alias ifa='ifconfig -a'
+alias xe='emacs -nw'
+function gxe { emacs $* 1>/dev/null 2>/dev/null & }
 #export DISPLAY=`uname -n`:0.0
 
 ## environment
@@ -134,7 +146,7 @@ alias mpa='mp3blaster -a ~/.playlist'
 alias baudline='/opt/baudline/baudline'
 alias sndpeek='/opt/sndpeek/bin/sndpeek'
 alias mix='alsamixer'
-alias calf='jackcalfhost'
+alias calf='calfjackhost&'
 
 ## xmpp
 alias finch='finch'
@@ -228,6 +240,10 @@ alias fm='vifm'
 
 ## keyboard
 alias pst=" sh -c 'xsel | xvkbd -xsendevent -file - 2>/dev/null' "
+
+## developer
+alias ddd='ddd 1>/dev/null 2>/dev/null &'
+alias cle='clewn -va'
 
 ## scm
 alias git='/opt/git/bin/git'
@@ -334,5 +350,25 @@ fi
 
 function say { espeak --stdout -f $1 | aplay }
 function fbreader { FBReader $* 2>/dev/null 1>/dev/null & }
+
+## encrypted email
+# echo "message" | ma "subject" recipient
+function ma { mutt -s $1 $2 }
+# fma "subject" file recipient
+function fma { echo "" | mutt -s $1 -a $2 -- $3 }
+# echo "message" | ema "subject" recipient
+function ema { gpg -ea -r $2 -o - | mutt -s $1 $2 }
+# fema "subject" file recipient
+function fema { gpg -ea -r $3 -o - $2 | mutt -s $1 $3 }
+
+## encrypted filesystem
+# enc directory
+function enc { 
+  find $1 -print0 | tar -cv --null -T - | gpg -a -c -o $1.tar.gpg
+}
+# dec file
+function dec { 
+  cat $1 | gpg -d | tar -xv
+}
 
 ## *EOF*

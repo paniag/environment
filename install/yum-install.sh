@@ -340,5 +340,8 @@ yum -y install dos2unix
 yum -y install unix2dos
 yum -y install tmux
 yum -y install byobu
+yum -y install pv
+yum -y install aspell
+yum -y install aspell-en
 
 ## *EOF*

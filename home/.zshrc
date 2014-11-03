@@ -82,6 +82,7 @@ alias vconf='vi ~/.vimrc'
 alias iconf='vi ~/.i3/config'
 alias sconf='vi ~/.screenrc'
 alias tconf='vi ~/.tmux.conf'
+alias gconf='vi ~/.gdbinit'
 alias mx='chmod 755 '
 alias vc='sudo chvt '
 alias vi='vim -O '
@@ -119,11 +120,23 @@ alias jo='jobs'
 alias evince='evince $* 1>/dev/null 2>/dev/null'
 alias ev='evince'
 alias igrep='grep -i'
+alias lns='ln -fs'
+alias rd=rmdir
+alias sd=sudo
+#alias gdb='rw gdb -q'
+alias gg='rw gdb -q'
+alias pk=pkill
+alias off='sudo shutdown -h now'
+alias on='sudo shutdown -h now'
+alias ifa='ifconfig -a'
+alias xe='emacs -nw'
+function gxe { emacs $* 1>/dev/null 2>/dev/null & }
 #export DISPLAY=`uname -n`:0.0
 
 ## suffix and global
 alias -s c=vim h=vim cpp=vim hpp=vim cxx=vim hxx=vim
 alias -g mac='mac@radigan.org'
+alias -g p='|pv'
 alias -g h1='|head -n 1'
 alias -g t1='|tail -n 1'
 alias -g l='|less'
@@ -132,7 +145,8 @@ alias -g x='|xargs -I{}'
 alias -g g='|grep'
 alias -g s='|sed'
 alias -g A='|awk'
-alias -g ig='|grep -i'
+alias -g ge='|grep -E'
+alias -g gi='|grep -i'
 alias -g xi='|xclip -i'
 alias -g xo='xclip -o'
 alias -g null='1>/dev/null 2>/dev/null'
@@ -200,7 +214,7 @@ alias mpa='mp3blaster -a ~/.playlist'
 alias baudline='/opt/baudline/baudline'
 alias sndpeek='/opt/sndpeek/bin/sndpeek'
 alias mix='alsamixer'
-alias calf='jackcalfhost'
+alias calf='calfjackhost&'
 
 ## root
 alias ro='rw root -l'
@@ -298,6 +312,10 @@ alias fm='vifm'
 
 ## keyboard
 alias pst=" sh -c 'xsel | xvkbd -xsendevent -file - 2>/dev/null' "
+
+## developer
+alias ddd='ddd 1>/dev/null 2>/dev/null &'
+alias cle='clewn -va'
 
 ## scm
 alias git='/opt/git/bin/git'
@@ -416,5 +434,25 @@ function fma { echo "" | mutt -s $1 -a $2 -- $3 }
 function ema { gpg -ea -r $2 -o - | mutt -s $1 $2 }
 # fema "subject" file recipient
 function fema { gpg -ea -r $3 -o - $2 | mutt -s $1 $3 }
+
+## encrypted filesystem
+# enc directory
+function enc { 
+  if [[ -z "$PASSPHRASE" ]]; then
+    find $1 -print0 | tar -cv --null -T - | gpg -a -c -o $1.tar.gpg
+  else
+    echo "find $1 -print0 | tar -cv --null -T - | gpg --passphrase $PASSPHRASE -a -c -o $1.tar.gpg"
+    find $1 -print0 | tar -cv --null -T - | gpg --batch --passphrase $PASSPHRASE -a -c -o $1.tar.gpg
+  fi
+}
+# dec file
+function dec { 
+  if [[ -z "$PASSPHRASE" ]]; then
+    cat $1 | gpg -d | tar -xv
+  else
+    echo "cat $1 | gpg --passphrase $PASSPHRASE -d | tar -xv"
+    cat $1 | gpg --batch --passphrase $PASSPHRASE -d | tar -xv
+  fi
+}
 
 ## *EOF*

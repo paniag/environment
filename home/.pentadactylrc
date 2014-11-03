@@ -20,9 +20,9 @@ nmap ,t :tabnew
 nmap ,b :back<CR>
 nmap ,f :forward<CR>
 nmap ,j :tn<CR>
-nmap ,h :tn<CR>
+nmap ,h :tp<CR>
 nmap ,k :tp<CR>
-nmap ,l :tp<CR>
+nmap ,l :tn<CR>
 nmap ,d :so ~/.pentadactyl/stylesheets/pentamidnight.css<CR>
 nmap ,D :so ~/.pentadactyl/stylesheets/userChrome.css<CR>
 nmap ,C :open ~/.home.html<CR>
