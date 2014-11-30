@@ -24,11 +24,16 @@ $filter->completion_handler(\&complete);
 $filter->output_handler(\&output);
 $filter->input_handler(\&input);
 $filter->cloak_and_dagger_verbose($debug);
+$filter->add_to_completion_list(("quit", "exit"));
 $filter->run;
 
 sub prompt {
   my ($prompt) = @_;
-  #$prompt = '>>> ';
+  if($prompt) {
+    $prompt = uc($prompt);
+  } else {
+    $prompt = 'x>< ';
+  }
   return $prompt;
 }
 
@@ -93,15 +98,28 @@ sub input {
     system $cmd;
     return '';
   } 
+  elsif($in =~ /^[;:]s.*/)
+  {
+    $cmd = substr($in,2);
+    $cmd = "zsh ".substr($in,2);
+    system $cmd;
+    return '';
+  }
+  elsif($in =~ /^[;:]r.*/)
+  {
+    $cmd = substr($in,2);
+    $cmd = "ranger ".substr($in,2);
+    system $cmd;
+    return '';
+  }
   elsif($in =~ /^[;:]e.*/)
   {
     $cmd = substr($in,2);
-    #system $editor => $cmd;
     $cmd = "$editor ".substr($in,2);
     system $cmd;
     return '';
   }
-  elsif($in =~ /^[;:]q.*/)
+  elsif($in =~ /^[;:][aq].*/)
   {
     return '';
   }

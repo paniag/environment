@@ -18,8 +18,8 @@ export QT_IM_MODULE="scim"
 export JAVA_HOME=/opt/jdk/jre
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 export VST_PATH=~/dat/music/lmms/vst
-export RLWRAP_HOME=~
-export RLWRAP_EDITOR="vi +%L"
+export RLWRAP_HOME=~/.rlwrap
+export RLWRAP_EDITOR="vim +%L"
 export RLWRAP_FILTERDIR="~/.rlwrap"
 export CLASSPATH=/opt/libreadline-java:$CLASSPATH
 export PATH=$PATH:~/bin:/opt/Qt/5.3/gcc_64/bin
@@ -83,6 +83,7 @@ alias iconf='vi ~/.i3/config'
 alias sconf='vi ~/.screenrc'
 alias tconf='vi ~/.tmux.conf'
 alias gconf='vi ~/.gdbinit'
+alias pconf='vi ~/.pentadactylrc'
 alias mx='chmod 755 '
 alias vc='sudo chvt '
 alias vi='vim -O '
@@ -98,7 +99,7 @@ alias tl='tmux list-windows'
 alias ss='screen'
 alias ssr='screen -R'
 alias sl='screen -list'
-alias dh='dirs -v'
+alias dh='df -h'
 alias xa='xargs -I{}'
 alias lesser='/usr/share/vim/vim72/macros/less.sh'
 alias less='/usr/bin/less'
@@ -108,7 +109,8 @@ alias unn='uname -n'
 alias me='ps -uxf | grep mac'
 alias untar='tar -zxvf'
 alias sx='startx'
-alias rw='rlwrap -S "W>< " -c -a -m -z shell '
+#alias rw='rlwrap -pyellow -S "w>< " -c -a -m -z shell '
+alias rw='rlwrap -pyellow -c -a -m -z shell '
 alias dim='xbacklight'
 alias rs='rsync -avhr'
 alias utar='tar -zxvf'
@@ -130,6 +132,12 @@ alias off='sudo shutdown -h now'
 alias on='sudo shutdown -h now'
 alias ifa='ifconfig -a'
 alias xe='emacs -nw'
+alias md5='openssl md5'
+alias dush='du -sh'
+alias halt='sudo shutdown -h now'
+alias mk='gmake'
+alias mkc='gmake clean'
+alias mkr='gmake clean; gmake'
 function gxe { emacs $* 1>/dev/null 2>/dev/null & }
 #export DISPLAY=`uname -n`:0.0
 
@@ -251,6 +259,7 @@ alias im-server='scim -d 1>/dev/null 2>/dev/null &'
 #alias octave='/opt/octave/bin/octave -q'
 alias R='rw R -q --no-save'
 alias oct='rw octave -q'
+alias ml='rw octave -q'
 alias scilab='/opt/scilab/bin/scilab'
 alias sci='scilab -nw'
 alias gp='gnuplot'
@@ -331,6 +340,16 @@ alias gh-master='git checkout master'
 alias alien='/usr/local/bin/alien'
 alias isomount='mount -o loop -t iso9660 '
 alias dtrx='dtrx -v'
+
+## binary
+function xx { vi <(xxd $1) }
+function xio { vi <(xxd $1) <(xxd $2) }
+function xd { vi -d <(xxd $1) <(xxd $2) }
+
+function tb {
+  f=$(basename $1)
+  tar -zcvf $f-`date +%F`-a.tar.gz $f
+}
 
 function unrpm {
   f=$1
@@ -426,6 +445,8 @@ function cdd { cd ${PWD:t} $1 }
 function fbreader { FBReader $* 2>/dev/null 1>/dev/null & }
 
 ## encrypted email
+# xma "subject" recipient (from X11 clipboard)
+function ma { xclip -o | mutt -s $1 $2 }
 # echo "message" | ma "subject" recipient
 function ma { mutt -s $1 $2 }
 # fma "subject" file recipient

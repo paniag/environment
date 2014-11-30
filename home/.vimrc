@@ -21,9 +21,8 @@ if filereadable("GTAGS")
 elseif $CSCOPE_DB != ""
   cs add $CSCOPE_DB
 endif
-"let &makeprg='if [ -f Makefile ]; then make; else make -C ..; fi; '
-"let &makeprg='make -C .. '
-let &makeprg='make -C . '
+set mp=(gmake\ -C..\ $*)
+"set mp=(gmake\ -C\ ..\ $*)
 "color torte
 "color delek
 set fdm=manual
@@ -59,6 +58,7 @@ set path+=,,
 set path+=.
 set path+=./include
 set nu
+set sw=2
 set so=3
 set siso=3
 set confirm
@@ -81,7 +81,6 @@ set hlsearch
 set nocp
 set ruler
 set showmode
-set shiftwidth=1
 set modeline
 set bs=2
 set ls=2
@@ -301,6 +300,8 @@ nmap <leader>svt find t
 nmap <leader>sve find e 
 nmap <leader>svf find f 
 nmap <leader>svi find i 
+nmap <C-j> :cn<CR>
+nmap <C-k> :cp<CR>
 
 if exists('+autochdir')
  "set autochdir

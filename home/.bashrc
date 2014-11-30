@@ -15,8 +15,8 @@ export QT_IM_MODULE="scim"
 export JAVA_HOME=/opt/jdk/jre
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 export VST_PATH=~/dat/music/lmms/vst
-export RLWRAP_HOME=~
-export RLWRAP_EDITOR="vi +%L"
+export RLWRAP_HOME=~/.rlwrap
+export RLWRAP_EDITOR="vim +%L"
 export RLWRAP_FILTERDIR="~/.rlwrap"
 export CLASSPATH=/opt/libreadline-java:$CLASSPATH
 export PATH=$PATH:~/bin:~/.rlwrap:/usr/local/bin:/opt/maven/bin:/opt/jython/bin:/opt/ardour/bin:/usr/local/bin:/opt/non/bin:~/bin:/opt/lilypond/bin:/opt/eli:/opt/Qt/5.3/gcc_64/bin
@@ -42,6 +42,7 @@ alias iconf='vi ~/.i3/config'
 alias sconf='vi ~/.screenrc'
 alias tconf='vi ~/.tmux.conf'
 alias gconf='vi ~/.gdbinit'
+alias pconf='vi ~/.pentadactylrc'
 alias mx='chmod 755 '
 alias vc='sudo chvt '
 alias vi='vim -O '
@@ -58,9 +59,10 @@ alias ss='screen'
 alias ssr='screen -R'
 alias sl='screen -list'
 alias sx='startx'
-alias rw='rlwrap -a -m -z shell '
+#alias rw='rlwrap -pyellow -S "w>< " -c -a -m -z shell '
+alias rw='rlwrap -pyellow -c -a -m -z shell '
 alias rs='rsync -avhr '
-alias dh='dirs -v'
+alias dh='df -h'
 alias xa='xargs -I{}'
 alias lesser='/usr/share/vim/vim72/macros/less.sh'
 alias less='/usr/bin/less'
@@ -87,6 +89,12 @@ alias off='sudo shutdown -h now'
 alias on='sudo shutdown -h now'
 alias ifa='ifconfig -a'
 alias xe='emacs -nw'
+alias md5='openssl md5'
+alias dush='du -sh'
+alias halt='sudo shutdown -h now'
+alias mk='gmake'
+alias mkc='gmake clean'
+alias mkr='gmake clean; gmake'
 function gxe { emacs $* 1>/dev/null 2>/dev/null & }
 #export DISPLAY=`uname -n`:0.0
 
@@ -186,6 +194,7 @@ alias im-server='scim -d 1>/dev/null 2>/dev/null &'
 ## scientific
 alias R='rw R -q --no-save'
 alias oct='rw octave -q'
+alias ml='rw octave -q'
 #alias scilab='/opt/scilab/bin/scilab'
 alias scilab='/opt/scilab/bin/scilab -nw'
 alias sci='scilab -nw'
@@ -269,6 +278,11 @@ function web {
 function kill-screen {
   session=$1
   screen -X -S $session quit
+}
+
+function tb {
+  f=`basename $1`
+  tar -zcvf $f-`date +%F`-a.tar.gz $f
 }
 
 function unrpm {
