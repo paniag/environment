@@ -86,6 +86,7 @@ sub output {
 sub input {
   my ($in) = @_;
   my $cmd;
+  my $spec;
   my $editor = $ENV{EDITOR} || 'vim';
   if($editor =~ /^vim$/)
   {
@@ -98,10 +99,28 @@ sub input {
     system $cmd;
     return '';
   } 
+  elsif($in =~ /^[;:]ls[ ]?.*/)
+  { 
+    $cmd = "ls";
+    if(length($in)>3)
+    {
+      $spec = substr($in,3);
+      $spec =~ s/^\s+|\s+$//g;
+      $cmd = $cmd." ".$spec;
+    }
+    system $cmd;
+    return '';
+  } 
   elsif($in =~ /^[;:]s.*/)
   {
     $cmd = substr($in,2);
     $cmd = "zsh ".substr($in,2);
+    system $cmd;
+    return '';
+  }
+  elsif($in =~ /^[;:]c.*/)
+  {
+    $cmd = "clear";
     system $cmd;
     return '';
   }

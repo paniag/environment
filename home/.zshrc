@@ -15,6 +15,7 @@ export GTK_IM_MODULE="scim"
 export XIM_PROGRAM="scim -d"
 export QT_IM_MODULE="scim"
 #export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64
+export GUILE_LOAD_PATH=/usr/share/guile/1.8
 export JAVA_HOME=/opt/jdk/jre
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 export VST_PATH=~/dat/music/lmms/vst
@@ -109,8 +110,7 @@ alias unn='uname -n'
 alias me='ps -uxf | grep mac'
 alias untar='tar -zxvf'
 alias sx='startx'
-#alias rw='rlwrap -pyellow -S "w>< " -c -a -m -z shell '
-alias rw='rlwrap -pyellow -c -a -m -z shell '
+alias rw='rlwrap -pyellow -S ":>< " -c -a -m -z shell '
 alias dim='xbacklight'
 alias rs='rsync -avhr'
 alias utar='tar -zxvf'
@@ -138,6 +138,10 @@ alias halt='sudo shutdown -h now'
 alias mk='gmake'
 alias mkc='gmake clean'
 alias mkr='gmake clean; gmake'
+alias gu='guile'
+alias k9='kill -9'
+alias pp='ps -ef'
+alias px='ps -xf'
 function gxe { emacs $* 1>/dev/null 2>/dev/null & }
 #export DISPLAY=`uname -n`:0.0
 
@@ -229,10 +233,14 @@ alias ro='rw root -l'
 alias rx='rw root -l -q -x -b'
 
 ## lisp
-alias racket='rw racket'
-alias guile='rw guile'
 alias sbcl='rw sbcl --noinform'
+alias guile='rw guile'
+alias racket='rw racket'
 alias ecl='rw ecl'
+
+## perl
+alias pl='perl'
+alias pln='perl -lne'
 
 ## python
 #alias python='python3'
@@ -258,7 +266,7 @@ alias im-server='scim -d 1>/dev/null 2>/dev/null &'
 ## scientific
 #alias octave='/opt/octave/bin/octave -q'
 alias R='rw R -q --no-save'
-alias oct='rw octave -q'
+alias oc='rw octave -q'
 alias ml='rw octave -q'
 alias scilab='/opt/scilab/bin/scilab'
 alias sci='scilab -nw'
@@ -268,6 +276,8 @@ alias jbrk='/opt/j/bin/jbrk'
 alias jython='/opt/jython/bin/jython'
 alias h5='h5dump -H'
 alias kx='rw q'
+alias kona='rw k'
+alias k='rw k'
 alias eli='rw elix'
 alias julia='/opt/julia/bin/julia'
 alias gdl='/opt/gdl/bin/gdl -q'

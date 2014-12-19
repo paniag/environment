@@ -18,6 +18,7 @@ export VST_PATH=~/dat/music/lmms/vst
 export RLWRAP_HOME=~/.rlwrap
 export RLWRAP_EDITOR="vim +%L"
 export RLWRAP_FILTERDIR="~/.rlwrap"
+export GUILE_LOAD_PATH=/usr/share/guile/1.8
 export CLASSPATH=/opt/libreadline-java:$CLASSPATH
 export PATH=$PATH:~/bin:~/.rlwrap:/usr/local/bin:/opt/maven/bin:/opt/jython/bin:/opt/ardour/bin:/usr/local/bin:/opt/non/bin:~/bin:/opt/lilypond/bin:/opt/eli:/opt/Qt/5.3/gcc_64/bin
 export PATH=$PATH:/opt/scilab/bin:/opt/j/bin:/opt/jython/bin:/opt/julia/bin:/opt/gdl/bin:/opt/firefox:/opt/midiedit/bin:/opt/gradle/bin
@@ -59,8 +60,7 @@ alias ss='screen'
 alias ssr='screen -R'
 alias sl='screen -list'
 alias sx='startx'
-#alias rw='rlwrap -pyellow -S "w>< " -c -a -m -z shell '
-alias rw='rlwrap -pyellow -c -a -m -z shell '
+alias rw='rlwrap -pyellow -S ":>< " -c -a -m -z shell '
 alias rs='rsync -avhr '
 alias dh='df -h'
 alias xa='xargs -I{}'
@@ -95,6 +95,10 @@ alias halt='sudo shutdown -h now'
 alias mk='gmake'
 alias mkc='gmake clean'
 alias mkr='gmake clean; gmake'
+alias gu='guile'
+alias k9='kill -9'
+alias pe='ps -ef'
+alias px='ps -xf'
 function gxe { emacs $* 1>/dev/null 2>/dev/null & }
 #export DISPLAY=`uname -n`:0.0
 
@@ -193,7 +197,7 @@ alias im-server='scim -d 1>/dev/null 2>/dev/null &'
 
 ## scientific
 alias R='rw R -q --no-save'
-alias oct='rw octave -q'
+alias oc='rw octave -q'
 alias ml='rw octave -q'
 #alias scilab='/opt/scilab/bin/scilab'
 alias scilab='/opt/scilab/bin/scilab -nw'
@@ -204,6 +208,8 @@ alias jbrk='/opt/j/bin/jbrk'
 alias jython='/opt/jython/bin/jython'
 alias h5='h5dump -H'
 alias kx='rw q'
+alias kona='rw k'
+alias k='rw k'
 alias eli='rw elix'
 alias julia='/opt/julia/bin/julia'
 alias gdl='/opt/gdl/bin/gdl -q'

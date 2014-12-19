@@ -343,5 +343,10 @@ yum -y install byobu
 yum -y install pv
 yum -y install aspell
 yum -y install aspell-en
+yum -y install rar
+yum -y install iverilog
+yum -y install ghdl
+yum -y install gtkwave
+yum -y install openvpn
 
 ## *EOF*
