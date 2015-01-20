@@ -1,0 +1,117 @@
+# HG changeset patch
+# User Kevin McCarthy <kevin@8t8.us>
+# Date 1381115428 -28800
+#      Mon Oct 07 11:10:28 2013 +0800
+# Branch HEAD
+# Node ID d93866548bd04b2b1f295c0fa0c5cef903759e4d
+# Parent  24bb691dcde7b75d8dec067a8bb4d208575ad730
+Add configurable gpg signature name. (closes #3478)
+
+Some mail clients display "noname" for the gpg signature
+attachment.  This patch sets the mime name and description
+and creates two configuration options:
+pgp_mime_signature_filename and pgp_mime_signature_description
+to allow the user to customize if needed.
+
+The patch is based on
+http://dev.mutt.org/trac/attachment/ticket/3478/patch-1.5.21-r1.vk.pgp_verbose_mime
+with the addition of applying to the gpgme signing codepath too.
+
+diff --git a/crypt-gpgme.c b/crypt-gpgme.c
+--- a/crypt-gpgme.c
++++ b/crypt-gpgme.c
+@@ -905,16 +905,18 @@
+       t->d_filename = safe_strdup ("smime.p7s");
+     }
+   else
+     {
+       t->subtype = safe_strdup ("pgp-signature");
+       t->use_disp = 0;
+       t->disposition = DISPNONE;
+       t->encoding = ENC7BIT;
++      mutt_set_parameter ("name", PgpMimeSignatureFilename, &t->parameter);
++      t->description = safe_strdup (PgpMimeSignatureDescription);
+     }
+   t->filename = sigfile;
+   t->unlink = 1; /* ok to remove this file after sending. */
+ 
+   return a;
+ }
+ 
+ 
+diff --git a/globals.h b/globals.h
+--- a/globals.h
++++ b/globals.h
+@@ -223,16 +223,18 @@
+ WHERE ALIAS *Aliases INITVAL (0);
+ WHERE LIST *UserHeader INITVAL (0);
+ 
+ /*-- formerly in pgp.h --*/
+ WHERE REGEXP PgpGoodSign;
+ WHERE char *PgpSignAs;
+ WHERE short PgpTimeout;
+ WHERE char *PgpEntryFormat;
++WHERE char *PgpMimeSignatureFilename;
++WHERE char *PgpMimeSignatureDescription;
+ WHERE char *PgpClearSignCommand;
+ WHERE char *PgpDecodeCommand;
+ WHERE char *PgpVerifyCommand;
+ WHERE char *PgpDecryptCommand;
+ WHERE char *PgpSignCommand;
+ WHERE char *PgpEncryptSignCommand;
+ WHERE char *PgpEncryptOnlyCommand;
+ WHERE char *PgpImportCommand;
+diff --git a/init.h b/init.h
+--- a/init.h
++++ b/init.h
+@@ -1892,16 +1892,28 @@
+   ** .pp
+   ** Also see the $$pgp_mime_auto variable.
+   ** .pp
+   ** Also note that using the old-style PGP message format is \fBstrongly\fP
+   ** \fBdeprecated\fP.
+   ** (PGP only)
+   **
+   */
++  { "pgp_mime_signature_filename", DT_STR, R_NONE, UL &PgpMimeSignatureFilename, UL "signature.asc"},
++  /*
++  ** .pp
++  ** This option sets the filename used for signature parts in PGP/MIME
++  ** signed messages.
++  */
++  { "pgp_mime_signature_description", DT_STR, R_NONE, UL &PgpMimeSignatureDescription, UL "Digital signature"},
++  /*
++  ** .pp
++  ** This option sets the Content-Description used for signature parts in
++  ** PGP/MIME signed messages.
++  */
+   { "pgp_retainable_sigs", DT_BOOL, R_NONE, OPTPGPRETAINABLESIG, 0 },
+   /*
+   ** .pp
+   ** If \fIset\fP, signed and encrypted messages will consist of nested
+   ** \fCmultipart/signed\fP and \fCmultipart/encrypted\fP body parts.
+   ** .pp
+   ** This is useful for applications like encrypted and signed mailing
+   ** lists, where the outer layer (\fCmultipart/encrypted\fP) can be easily
+diff --git a/pgp.c b/pgp.c
+--- a/pgp.c
++++ b/pgp.c
+@@ -1122,16 +1122,18 @@
+   t = t->parts->next;
+   t->type = TYPEAPPLICATION;
+   t->subtype = safe_strdup ("pgp-signature");
+   t->filename = safe_strdup (sigfile);
+   t->use_disp = 0;
+   t->disposition = DISPNONE;
+   t->encoding = ENC7BIT;
+   t->unlink = 1; /* ok to remove this file after sending. */
++  mutt_set_parameter ("name", PgpMimeSignatureFilename, &t->parameter);
++  t->description = safe_strdup (PgpMimeSignatureDescription);
+ 
+   return (a);
+ }
+ 
+ static short is_numerical_keyid (const char *s)
+ {
+   /* or should we require the "0x"? */
+   if (strncmp (s, "0x", 2) == 0)
