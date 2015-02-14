@@ -4,6 +4,8 @@
 layout src
 set logging on
 
+directory ./src
+
 define rr
 ref
 end

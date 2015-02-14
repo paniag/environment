@@ -62,4 +62,17 @@ if(!require("plyr")) {
   library("plyr")
 }
 
+if(!require("xlsx")) {
+  install.packages("xlsx", repos="http://cran.rstudio.com/") 
+  library("xlsx")
+}
+
+if(!require("mpfr")) {
+  install.packages("mpfr", repos="http://cran.rstudio.com/") 
+  library("mpfr")
+}
+
+source("http://bioconductor.org/biocLite.R")
+biocLite("rhdf5")
+
 ## *EOF*

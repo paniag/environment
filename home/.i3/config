@@ -47,15 +47,19 @@ font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+# avstudio
+bindsym $mod+y [class="figure"] focus
+bindsym $mod+Shift+Y [class="[1]"] focus
+
 # applications
 bindsym $mod+p exec xsel -o
 bindsym $mod+i workspace 1
 bindsym $mod+c exec xclip -o > ~/.clip
 bindsym $mod+g exec gvim
-bindsym $mod+shift+W exec vncviewer 127.0.0.1:0
+bindsym $mod+Shift+W exec vncviewer 127.0.0.1:0
 bindsym $mod+Shift+b exec google-chrome
 bindsym $mod+b [class="Chrome"] focus
-bindsym $mod+shift+N exec xulrunner /opt/conkeror/application.ini
+bindsym $mod+Shift+N exec xulrunner /opt/conkeror/application.ini
 bindsym $mod+Shift+o exec /opt/firefox/firefox-bin
 bindsym $mod+o [class="Firefox"] focus
 bindsym $mod+Shift+T exec xterm -e top

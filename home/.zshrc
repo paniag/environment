@@ -7,6 +7,40 @@ then
 fi
 alias aconf="vi ~/.`uname -n`.alias"
 
+pathmunge () {
+  case ":${PATH}:" in
+    *:"$1":*)
+        ;;
+    *)
+      if [ "$2" = "after" ] ; then
+        PATH=$PATH:$1
+      else
+        PATH=$1:$PATH
+      fi
+  esac
+}
+
+pathmunge ~/bin
+pathmunge /opt/Qt/5.3/gcc_64/bin
+pathmunge ~/.rlwrap
+pathmunge /usr/local/bin
+pathmunge /opt/octave/bin
+pathmunge /opt/maven/bin
+pathmunge /opt/jython/bin
+pathmunge /opt/ardour/bin
+pathmunge /opt/non/bin
+pathmunge ~/bin
+pathmunge /opt/lilypond/bin
+pathmunge /opt/eli
+pathmunge /opt/scilab/bin
+pathmunge /opt/j/bin
+pathmunge /opt/jython/bin
+pathmunge /opt/julia/bin
+pathmunge /opt/gdl/bin
+pathmunge /opt/firefox
+pathmunge /opt/midiedit/bin
+pathmunge /opt/gradle/bin
+
 export KiB=$((1024))
 export MiB=$((1024 ** 2))
 export GiB=$((1024 ** 3))
@@ -16,6 +50,8 @@ export XIM_PROGRAM="scim -d"
 export QT_IM_MODULE="scim"
 #export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64
 export GUILE_LOAD_PATH=/usr/share/guile/1.8
+export GUILE_IMPLEMENTATION_PATH=/usr/share/guile/1.8
+export SCHEME_LIBRARY_PATH=/usr/share/guile/1.8
 export JAVA_HOME=/opt/jdk/jre
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 export VST_PATH=~/dat/music/lmms/vst
@@ -23,9 +59,6 @@ export RLWRAP_HOME=~/.rlwrap
 export RLWRAP_EDITOR="vim +%L"
 export RLWRAP_FILTERDIR="~/.rlwrap"
 export CLASSPATH=/opt/libreadline-java:$CLASSPATH
-export PATH=$PATH:~/bin:/opt/Qt/5.3/gcc_64/bin
-export PATH=$PATH:~/.rlwrap:/usr/local/bin:/opt/octave/bin:/opt/maven/bin:/opt/jython/bin:/opt/ardour/bin:/opt/non/bin:~/bin:/opt/lilypond/bin:/opt/eli
-export PATH=$PATH:/opt/scilab/bin:/opt/j/bin:/opt/jython/bin:/opt/julia/bin:/opt/gdl/bin:/opt/firefox:/opt/midiedit/bin:/opt/gradle/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/nvidia:/usr/local/lib:/usr/lib64/root/:/usr/lib64:/opt/java-readline:/usr/lib64:/usr/lib64/boost
 export M3_HOME=/opt/maven
 export M3=$M3_HOME/bin
@@ -70,7 +103,25 @@ bindkey -M viins '/' vi-history-search-backward
 bindkey -M viins '?' history-incremental-pattern-search-backward
 bindkey '#' vi-pound-insert
 bindkey '0' vi-digit-or-beginning-of-line
-export KEYTIMEOUT=1
+bindkey "^[[A" history-beginning-search-backward
+#bindkey "^[[B" history-beginning-search-forward
+#bindkey ^r  history-incremental-search-backward
+#bindkey -M viins '^r' history-incremental-search-backward
+#bindkey -M viins '^r' vi-history-search-backward
+bindkey '^[[Z' reverse-menu-complete
+bindkey -M viins '^r' history-incremental-pattern-search-backward
+#bindkey -M vicmd 'jk' '\e'
+bindkey -M viins '^k' vi-kill-line
+#bindkey -M viins 'kj' vi-kill-line
+#bindkey -M vicmd kh vi-pound-insert
+bindkey -M vicmd 'jh' vi-pound-insert
+bindkey -M viins 'jl' clear-screen
+bindkey -M viins 'jn' push-line
+bindkey -M viins 'ji' history-incremental-pattern-search-backward
+bindkey -M viins 'jo' vi-digit-or-beginning-of-line
+#export KEYTIMEOUT=1
+export KEYTIMEOUT=40
+
 
 ## basic
 set -o vi
@@ -125,11 +176,11 @@ alias igrep='grep -i'
 alias lns='ln -fs'
 alias rd=rmdir
 alias sd=sudo
-#alias gdb='rw gdb -q'
-alias gg='rw gdb -q'
+alias db='rw gdb -q'
+alias tn='rw telnet'
 alias pk=pkill
 alias off='sudo shutdown -h now'
-alias on='sudo shutdown -h now'
+alias on='sudo shutdown -r now'
 alias ifa='ifconfig -a'
 alias xe='emacs -nw'
 alias md5='openssl md5'
@@ -139,16 +190,26 @@ alias mk='gmake'
 alias mkc='gmake clean'
 alias mkr='gmake clean; gmake'
 alias gu='guile'
+alias cs='rw csi -q'
 alias k9='kill -9'
 alias pp='ps -ef'
 alias px='ps -xf'
 function gxe { emacs $* 1>/dev/null 2>/dev/null & }
 #export DISPLAY=`uname -n`:0.0
 
+## notes
+alias -g j='|tee -a ~/.scratch'
+alias -g jn='echo "" |tee -a ~/.scratch'
+alias jot='vi ~/.scratch'
+alias got='gvim ~/.scratch'
+alias jcat='cat ~/.scratch'
+alias jconf='vi ~/.scratch'
+alias note='~/.scratch'
+
 ## suffix and global
 alias -s c=vim h=vim cpp=vim hpp=vim cxx=vim hxx=vim
 alias -g mac='mac@radigan.org'
-alias -g p='|pv'
+alias -g pv='|pv'
 alias -g h1='|head -n 1'
 alias -g t1='|tail -n 1'
 alias -g l='|less'
@@ -159,18 +220,14 @@ alias -g s='|sed'
 alias -g A='|awk'
 alias -g ge='|grep -E'
 alias -g gi='|grep -i'
-alias -g xi='|xclip -i'
-alias -g xo='xclip -o'
+alias -g gv='|grep -v'
+alias -g xi='|xclip -selection clipboard -i'
+alias -g xo='xclip -selection clipboard -o'
 alias -g null='1>/dev/null 2>/dev/null'
 alias -g ta='2>>log.err|tee -a log.out'
 alias -g to='2>log.err|tee log.out'
 alias -g eo='1>log.out 2>log.err'
 alias -g oe='3>&2 1>&2 2>&3 3>&-'
-alias -g j='|tee -a ~/temp/notes.txt'
-alias -g jn='echo "" |tee -a ~/temp/notes.txt'
-alias jcat='cat ~/temp/notes.txt'
-alias jconf='vi ~/temp/notes.txt'
-alias note='~/temp/notes.txt'
 
 ## environment
 alias econf='vi ~/local/environment/install/yum-install.sh'
@@ -237,10 +294,12 @@ alias sbcl='rw sbcl --noinform'
 alias guile='rw guile'
 alias racket='rw racket'
 alias ecl='rw ecl'
+alias closure='java -jar /opt/closure/compiler.jar --compilation_level ADVANCED_OPTIMIZATIONS --js '
 
 ## perl
 alias pl='perl'
 alias pln='perl -lne'
+alias pli='rw perl -d -e 1'
 
 ## python
 #alias python='python3'
@@ -254,9 +313,6 @@ alias java='/opt/jdk/jre/bin/java'
 ## groovy
 alias groovy='/opt/groovy/bin/groovy'
 alias gy='rw groovy'
-
-## javascript
-alias closure='java -jar /opt/closure/compiler.jar --compilation_level ADVANCED_OPTIMIZATIONS --js '
 
 ## language
 #alias im-server='ibus --xim'
@@ -276,7 +332,7 @@ alias jbrk='/opt/j/bin/jbrk'
 alias jython='/opt/jython/bin/jython'
 alias h5='h5dump -H'
 alias kx='rw q'
-alias kona='rw k'
+alias kona='k'
 alias k='rw k'
 alias eli='rw elix'
 alias julia='/opt/julia/bin/julia'
@@ -359,6 +415,7 @@ function xd { vi -d <(xxd $1) <(xxd $2) }
 function tb {
   f=$(basename $1)
   tar -zcvf $f-`date +%F`-a.tar.gz $f
+  openssl md5 $f-`date +%F`-a.tar.gz > $f-`date +%F`-a.tar.gz.md5
 }
 
 function unrpm {
@@ -453,6 +510,23 @@ function say { espeak --stdout -f $1 | aplay }
 function path { echo ${${1}:a} }
 function cdd { cd ${PWD:t} $1 }
 function fbreader { FBReader $* 2>/dev/null 1>/dev/null & }
+function d {
+  if [[ ${1} == [~/]* ]]; then
+    f=$(echo ${1}* | awk '{print$1}')
+    cd ${f}*
+  else
+    f=$(echo *${1}* | awk '{print$1}')
+    cd *${f}*
+  fi
+  pwd
+  ls
+}
+function u { cd -1 }
+function tmpl { cp $1 $2; vi $2 }
+
+function gg {
+  rw gdb -q -x debug.gdb --args $*
+}
 
 ## encrypted email
 # xma "subject" recipient (from X11 clipboard)

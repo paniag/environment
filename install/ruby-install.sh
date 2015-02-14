@@ -12,5 +12,6 @@ gem install nokogiri
 gem install gollum
 gem install bundler
 gem install rails
+gem install sinatra
 
 ## *EOF*

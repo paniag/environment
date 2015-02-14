@@ -92,7 +92,7 @@ sub input {
   {
     $editor = 'vim -O'
   }
-  if($in =~ /^[;:][!1].*/ || $in =~ /^!!.*/) 
+  if($in =~ /^[;:][!1:].*/ || $in =~ /^!!.*/) 
   { 
     $cmd = substr($in,2);
     $cmd =~ s/^\s+|\s+$//g;
@@ -125,6 +125,18 @@ sub input {
     return '';
   }
   elsif($in =~ /^[;:]r.*/)
+  {
+    $spec = substr($in,2);
+    $cmd = `cat $spec`;
+    return $cmd;
+  }
+  elsif($in =~ /^[;:]R.*/)
+  {
+    $spec = substr($in,2);
+    $cmd = `cat $spec | tr '\n' ' '`;
+    return $cmd;
+  }
+  elsif($in =~ /^[;:]E.*/)
   {
     $cmd = substr($in,2);
     $cmd = "ranger ".substr($in,2);

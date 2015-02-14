@@ -271,7 +271,8 @@ nn <leader>6 :b6<CR>
 nn <leader>7 :b7<CR>
 nn <leader>8 :b8<CR>
 nn <leader>9 :b9<CR>
-nn <leader>0 :b0<CR>
+nn <leader>0 '0
+nn <leader>a :b#<CR>
 
 "" fold
 nn <leader>z1 :set foldlevel=1<CR>

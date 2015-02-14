@@ -7,6 +7,27 @@ then
 fi
 alias aconf="vi ~/.`uname -n`.alias"
 
+pathmunge ~/bin
+pathmunge /opt/Qt/5.3/gcc_64/bin
+pathmunge ~/.rlwrap
+pathmunge /usr/local/bin
+pathmunge /opt/octave/bin
+pathmunge /opt/maven/bin
+pathmunge /opt/jython/bin
+pathmunge /opt/ardour/bin
+pathmunge /opt/non/bin
+pathmunge ~/bin
+pathmunge /opt/lilypond/bin
+pathmunge /opt/eli
+pathmunge /opt/scilab/bin
+pathmunge /opt/j/bin
+pathmunge /opt/jython/bin
+pathmunge /opt/julia/bin
+pathmunge /opt/gdl/bin
+pathmunge /opt/firefox
+pathmunge /opt/midiedit/bin
+pathmunge /opt/gradle/bin
+
 #export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64
 export XMODIFIERS="@im=SCIM"
 export GTK_IM_MODULE="scim"
@@ -19,9 +40,10 @@ export RLWRAP_HOME=~/.rlwrap
 export RLWRAP_EDITOR="vim +%L"
 export RLWRAP_FILTERDIR="~/.rlwrap"
 export GUILE_LOAD_PATH=/usr/share/guile/1.8
+export GUILE_IMPLEMENTATION_PATH=/usr/share/guile/1.8
+export SCHEME_LIBRARY_PATH=/usr/share/guile/1.8
 export CLASSPATH=/opt/libreadline-java:$CLASSPATH
-export PATH=$PATH:~/bin:~/.rlwrap:/usr/local/bin:/opt/maven/bin:/opt/jython/bin:/opt/ardour/bin:/usr/local/bin:/opt/non/bin:~/bin:/opt/lilypond/bin:/opt/eli:/opt/Qt/5.3/gcc_64/bin
-export PATH=$PATH:/opt/scilab/bin:/opt/j/bin:/opt/jython/bin:/opt/julia/bin:/opt/gdl/bin:/opt/firefox:/opt/midiedit/bin:/opt/gradle/bin
+
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/nvidia:/opt/java-readline:/usr/lib64:/usr/lib64/boost
 export M3_HOME=/opt/maven
 export M3=$M3_HOME/bin
@@ -84,9 +106,10 @@ alias rd=rmdir
 alias sd=sudo
 #alias gdb='rw gdb -q'
 alias gg='rw gdb -q'
+alias tn='rw telnet'
 alias pk=pkill
 alias off='sudo shutdown -h now'
-alias on='sudo shutdown -h now'
+alias on='sudo shutdown -r now'
 alias ifa='ifconfig -a'
 alias xe='emacs -nw'
 alias md5='openssl md5'
@@ -96,17 +119,23 @@ alias mk='gmake'
 alias mkc='gmake clean'
 alias mkr='gmake clean; gmake'
 alias gu='guile'
+alias cs='rw csi -q'
 alias k9='kill -9'
 alias pe='ps -ef'
 alias px='ps -xf'
 function gxe { emacs $* 1>/dev/null 2>/dev/null & }
 #export DISPLAY=`uname -n`:0.0
 
+## notes
+alias jot='vi ~/.scratch'
+alias got='gvim ~/.scratch'
+alias jcat='cat ~/.scratch'
+alias jconf='vi ~/.scratch'
+alias note='~/.scratch'
+
 ## environment
 alias econf='vi ~/local/environment/install/'
 alias yumi='sudo yum -y install '
-alias jcat='cat ~/temp/notes.txt'
-alias jconf='vi ~/temp/notes.txt'
 
 ## services
 alias ck='ps -ef | grep -E "(jackd|lmms)"'
@@ -173,6 +202,12 @@ alias racket='rw racket'
 alias guile='rw guile'
 alias sbcl='rw sbcl --noinform'
 alias ecl='rw ecl'
+alias closure='java -jar /opt/closure/compiler.jar --compilation_level ADVANCED_OPTIMIZATIONS --js '
+
+## perl
+alias pl='perl'
+alias pln='perl -lne'
+alias pli='rw perl -d -e 1'
 
 ## python
 #alias python='python3'
@@ -186,9 +221,6 @@ alias java='/opt/jdk/jre/bin/java'
 ## groovy
 alias groovy='/opt/groovy/bin/groovy'
 alias gy='rw groovy'
-
-## javascript
-alias closure='java -jar /opt/closure/compiler.jar --compilation_level ADVANCED_OPTIMIZATIONS --js '
 
 ## language
 #alias im-server='ibus --xim'
@@ -208,7 +240,7 @@ alias jbrk='/opt/j/bin/jbrk'
 alias jython='/opt/jython/bin/jython'
 alias h5='h5dump -H'
 alias kx='rw q'
-alias kona='rw k'
+alias kona='k'
 alias k='rw k'
 alias eli='rw elix'
 alias julia='/opt/julia/bin/julia'
@@ -370,6 +402,19 @@ fi
 
 function say { espeak --stdout -f $1 | aplay }
 function fbreader { FBReader $* 2>/dev/null 1>/dev/null & }
+function d {
+  if [[ ${1} == [~/]* ]]; then
+    f=$(echo ${1}* | awk '{print$1}')
+    cd ${f}*
+  else
+    f=$(echo *${1}* | awk '{print$1}')
+    cd *${f}*
+  fi
+  pwd
+  ls
+}
+function u { cd -1 }
+function tmpl { cp $1 $2; vi $2 }
 
 ## encrypted email
 # echo "message" | ma "subject" recipient

@@ -9,17 +9,17 @@ edit mode sync
 edit home .
 # plot
 #grid minor;
-set(0,'DefaultFigureColor',0.05*[1 1 1]);
-set(0,'DefaultAxesColor',0.00*[1 1 1]);
-set(0,'DefaultAxesXcolor',0.00*[1 1 1]);
-set(0,'DefaultAxesYcolor',0.00*[1 1 1]);
-set(0,'DefaultAxesZcolor',0.00*[1 1 1]);
-set(0,'DefaultAxesVisible','on');
-set(0,'DefaultTextColor',1.00*[1 1 1]);
-set(0,'DefaultTextFontSize',14);
-set(0,'DefaultTextFontWeight','bold');
-set(0,'DefaultAxesFontSize',14);
-set(0,'DefaultAxesFontWeight','bold');
-#edit editor 'vim > /dev/tty 2>&1 < /dev/tty %s'
+# set(0,'DefaultFigureColor',0.05*[1 1 1]);
+# set(0,'DefaultAxesColor',0.00*[1 1 1]);
+# set(0,'DefaultAxesXcolor',0.00*[1 1 1]);
+# set(0,'DefaultAxesYcolor',0.00*[1 1 1]);
+# set(0,'DefaultAxesZcolor',0.00*[1 1 1]);
+# set(0,'DefaultAxesVisible','on');
+# set(0,'DefaultTextColor',1.00*[1 1 1]);
+# set(0,'DefaultTextFontSize',14);
+# set(0,'DefaultTextFontWeight','bold');
+# set(0,'DefaultAxesFontSize',14);
+# set(0,'DefaultAxesFontWeight','bold');
+###edit editor 'vim > /dev/tty 2>&1 < /dev/tty %s'
 #
 ## *EOF*

@@ -348,5 +348,20 @@ yum -y install iverilog
 yum -y install ghdl
 yum -y install gtkwave
 yum -y install openvpn
+yum -y install glibc
+yum -y install python-devel
+yum -y install xcb-util-wm
+yum -y install ffmpeg-devel
+yum -y install libmodplug
+yum -y install gstreamer-plugins-bad
+yum -y install chicken
+yum -y install gts
+yum -y install gts-devel
+yum -y install perl-PDL
+yum -y install perl-PDL-Graphics-PLplot
+yum -y install plplot-perl
+yum -y install perlbrew
+yum -y install rtmidi
+yum -y install rtmidi-devel
 
 ## *EOF*
