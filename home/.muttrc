@@ -8,8 +8,8 @@ bind index g group-reply
 #source "gpg2 -dq ~/.password.gpg |"
 source "cat ~/.password |"
 source ~/.muttalias
-source /usr/share/doc/mutt-1.5.20/pgp2.rc
-source /usr/share/doc/mutt-1.5.20/gpg.rc
+source ~/.mutt_config/pgp2.rc
+source ~/.mutt_config/gpg.rc
 
 set header_cache = "~/.cache/mutt"
 set imap_check_subscribed

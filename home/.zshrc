@@ -299,6 +299,7 @@ alias guile='rw guile'
 alias racket='rw racket'
 alias ecl='rw ecl'
 alias ec='ecl'
+alias cl='rw clisp'
 alias closure='java -jar /opt/closure/compiler.jar --compilation_level ADVANCED_OPTIMIZATIONS --js '
 
 ## perl

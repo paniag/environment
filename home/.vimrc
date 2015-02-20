@@ -3,13 +3,13 @@
 
 "" pathogen
 let g:pathogen_disabled = []
-"call add(g:pathogen_disabled, 'nerdtree')
-call add(g:pathogen_disabled, 'lusty')
-execute pathogen#infect()
+silent! call add(g:pathogen_disabled, 'nerdtree')
+silent! call add(g:pathogen_disabled, 'lusty')
+silent! execute pathogen#infect()
 
 "" conque term
-let g:ConqueTerm_InsertOnEnter = 0
-let g:ConqueTerm_EscKey = '<Esc><Esc>'
+"let g:ConqueTerm_InsertOnEnter = 0
+"let g:ConqueTerm_EscKey = '<Esc><Esc>'
 
 "" matching
 runtime macros/matchit.vim
