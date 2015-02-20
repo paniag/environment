@@ -115,9 +115,12 @@ alias xe='emacs -nw'
 alias md5='openssl md5'
 alias dush='du -sh'
 alias halt='sudo shutdown -h now'
-alias mk='gmake'
-alias mkc='gmake clean'
-alias mkr='gmake clean; gmake'
+alias are='autoreconf --install'
+alias cn='./configure'
+alias mk='make'
+alias mkc='make clean'
+alias mkdc='make distclean'
+alias mkr='make clean; make'
 alias gu='guile'
 alias cs='rw csi -q'
 alias k9='kill -9'
@@ -202,6 +205,7 @@ alias racket='rw racket'
 alias guile='rw guile'
 alias sbcl='rw sbcl --noinform'
 alias ecl='rw ecl'
+alias ec='ecl'
 alias closure='java -jar /opt/closure/compiler.jar --compilation_level ADVANCED_OPTIMIZATIONS --js '
 
 ## perl
@@ -402,6 +406,8 @@ fi
 
 function say { espeak --stdout -f $1 | aplay }
 function fbreader { FBReader $* 2>/dev/null 1>/dev/null & }
+
+## filesystem navigation
 function d {
   if [[ ${1} == [~/]* ]]; then
     f=$(echo ${1}* | awk '{print$1}')

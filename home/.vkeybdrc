@@ -1,5 +1,6 @@
 ## .vkeybdrc
 ## Mac Radigan
+
 global disp keymap
 set disp(keyvel) 1
 set disp(ctrl) 1
@@ -19,4 +20,5 @@ set keymap {
   {q 10}
   {s 11}
 }
+
 ## *EOF*

@@ -1,0 +1,57 @@
+## .muttrc
+## Mac Radigan
+
+# key bindings
+bind index R group-reply
+bind index g group-reply
+
+#source "gpg2 -dq ~/.password.gpg |"
+source "cat ~/.password |"
+source ~/.muttalias
+source /usr/share/doc/mutt-1.5.20/pgp2.rc
+source /usr/share/doc/mutt-1.5.20/gpg.rc
+
+set header_cache = "~/.cache/mutt"
+set imap_check_subscribed
+set imap_keepalive = 300
+unset imap_passive
+set mail_check = 60
+set mbox_type=Maildir
+
+set pgp_use_gpg_agent = yes
+set pgp_sign_as = D4193C82
+set pgp_timeout = 3600
+set crypt_autosign = yes
+set crypt_replyencrypt = yes
+set pgp_mime_signature_filename="signature.asc"
+set pgp_mime_signature_description="digital signature"
+
+unset recall
+unset arrow_cursor
+unset askcc
+unset askbcc
+unset beep
+unset beep_new
+unset menu_scroll
+set autoedit
+set uncollapse_jump
+set edit_headers
+set fast_reply
+set followup_to
+set confirmappend
+set narrow_tree
+set pager_stop
+
+set crypt_verify_sig=yes
+
+source "~/.mutt/mac_at_radigan_org"
+folder-hook $folder 'source ~/.mutt/mac_at_radigan_org'
+
+color status    black white
+color indicator black white
+color search    black white
+color markers   black white
+
+color index red default ~P
+
+## *EOF*

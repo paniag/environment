@@ -1,0 +1,8 @@
+## .gnuplotrc
+## Mac Radigan
+
+gnuplot*exportselection: off
+gnuplot*fastrotate: on
+gnuplot*ctrlq: off
+
+## *EOF*

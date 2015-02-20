@@ -186,9 +186,12 @@ alias xe='emacs -nw'
 alias md5='openssl md5'
 alias dush='du -sh'
 alias halt='sudo shutdown -h now'
-alias mk='gmake'
-alias mkc='gmake clean'
-alias mkr='gmake clean; gmake'
+alias are='autoreconf --install'
+alias cn='./configure'
+alias mk='make'
+alias mkc='make clean'
+alias mkdc='make distclean'
+alias mkr='make clean; make'
 alias gu='guile'
 alias cs='rw csi -q'
 alias k9='kill -9'
@@ -228,6 +231,7 @@ alias -g ta='2>>log.err|tee -a log.out'
 alias -g to='2>log.err|tee log.out'
 alias -g eo='1>log.out 2>log.err'
 alias -g oe='3>&2 1>&2 2>&3 3>&-'
+alias -g and='&&'
 
 ## environment
 alias econf='vi ~/local/environment/install/yum-install.sh'
@@ -294,6 +298,7 @@ alias sbcl='rw sbcl --noinform'
 alias guile='rw guile'
 alias racket='rw racket'
 alias ecl='rw ecl'
+alias ec='ecl'
 alias closure='java -jar /opt/closure/compiler.jar --compilation_level ADVANCED_OPTIMIZATIONS --js '
 
 ## perl
@@ -510,6 +515,8 @@ function say { espeak --stdout -f $1 | aplay }
 function path { echo ${${1}:a} }
 function cdd { cd ${PWD:t} $1 }
 function fbreader { FBReader $* 2>/dev/null 1>/dev/null & }
+
+## filesystem navigation
 function d {
   if [[ ${1} == [~/]* ]]; then
     f=$(echo ${1}* | awk '{print$1}')
