@@ -1,12 +1,6 @@
 ## .zshrc
 ## Mac Radigan
 
-if [ -f ~/.`uname -n`.alias ]; 
-then
- . ~/.`uname -n`.alias
-fi
-alias aconf="vi ~/.`uname -n`.alias"
-
 pathmunge () {
   case ":${PATH}:" in
     *:"$1":*)
@@ -567,5 +561,11 @@ function dec {
     cat $1 | gpg --batch --passphrase $PASSPHRASE -d | tar -xv
   fi
 }
+
+if [ -f ~/.`uname -n`.alias ]; 
+then
+ . ~/.`uname -n`.alias
+fi
+alias aconf="vi ~/.`uname -n`.alias"
 
 ## *EOF*

@@ -1,12 +1,6 @@
 ## .bashrc
 ## Mac Radigan
 
-if [ -f ~/.`uname -n`.alias ]; 
-then
- . ~/.`uname -n`.alias
-fi
-alias aconf="vi ~/.`uname -n`.alias"
-
 pathmunge ~/bin
 pathmunge /opt/Qt/5.3/gcc_64/bin
 pathmunge ~/.rlwrap
@@ -442,5 +436,11 @@ function enc {
 function dec { 
   cat $1 | gpg -d | tar -xv
 }
+
+if [ -f ~/.`uname -n`.alias ]; 
+then
+ . ~/.`uname -n`.alias
+fi
+alias aconf="vi ~/.`uname -n`.alias"
 
 ## *EOF*
