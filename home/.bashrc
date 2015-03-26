@@ -62,7 +62,10 @@ alias gconf='vi ~/.gdbinit'
 alias pconf='vi ~/.pentadactylrc'
 alias mx='chmod 755 '
 alias vc='sudo chvt '
+alias e='vim -- *(D.oa[1])'
 alias vi='vim -O '
+alias v='vi +":bl"'
+alias se='sudoedit'
 alias vio='vim -o '
 alias vip='vim -c ":Project vimprojects"'
 alias gvim='gvim -c ":colorscheme torte"'
@@ -78,6 +81,7 @@ alias sl='screen -list'
 alias sx='startx'
 alias rw='rlwrap -pyellow -S ":>< " -c -a -m -z shell '
 alias rs='rsync -avhr '
+alias rss='rsync --max-size=0.5G -avhr'
 alias dh='df -h'
 alias xa='xargs -I{}'
 alias lesser='/usr/share/vim/vim72/macros/less.sh'
@@ -87,7 +91,6 @@ alias una='uname -a'
 alias unn='uname -n'
 alias me='ps -uxf | grep mac'
 alias untar='tar -zxvf'
-alias rs='rsync -avhr'
 alias dim='xbacklight'
 alias lock='i3lock -c 000000'
 alias bb='blanker'
@@ -115,11 +118,13 @@ alias mk='make'
 alias mkc='make clean'
 alias mkdc='make distclean'
 alias mkr='make clean; make'
+alias mki='sudo make install'
 alias gu='guile'
 alias cs='rw csi -q'
 alias k9='kill -9'
 alias pe='ps -ef'
 alias px='ps -xf'
+alias f='fg'
 function gxe { emacs $* 1>/dev/null 2>/dev/null & }
 #export DISPLAY=`uname -n`:0.0
 
@@ -194,13 +199,22 @@ alias xm='mcabber'
 alias ro='rw root -l'
 alias rx='rw root -l -q -x -b'
 
+## tcl
+alias tcl='rw tclsh'
+alias tc='rw tclsh'
+
 ## lisp
 alias racket='rw racket'
+alias rkt='rw racket'
 alias guile='rw guile'
 alias sbcl='rw sbcl --noinform'
+alias sb='sbcl'
+alias sbx='sbcl -load'
 alias ecl='rw ecl'
 alias ec='ecl'
+alias ecx='ecl -load'
 alias cl='rw clisp'
+alias clx='clisp -load'
 alias closure='java -jar /opt/closure/compiler.jar --compilation_level ADVANCED_OPTIMIZATIONS --js '
 
 ## perl
@@ -247,7 +261,8 @@ alias gdl='/opt/gdl/bin/gdl -q'
 alias pro='gdl'
 
 ## locate
-alias f='find -L ./'
+alias ff='find -L'
+alias f.='find -L ./'
 alias fn='find -L ./ -name'
 alias findex='find ./ -perm -o+rx -type f '
 alias lo='locate'
@@ -304,6 +319,7 @@ alias gh-master='git checkout master'
 alias alien='/usr/local/bin/alien'
 alias isomount='mount -o loop -t iso9660 '
 alias dtrx='dtrx -v'
+alias dx='dtrx -v'
 
 ## networks
 alias dl='wget -r -e robots=off -nH --no-check-certificate --convert-links --page-requisites --no-clobber --no-parent --user-agent="Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.3) Gecko/2008092416 Firefox/3.0.3" '
@@ -442,5 +458,9 @@ then
  . ~/.`uname -n`.alias
 fi
 alias aconf="vi ~/.`uname -n`.alias"
+
+if [ -f ~/.Xmodmap ]; then
+  xmodmap ~/.Xmodmap
+fi
 
 ## *EOF*

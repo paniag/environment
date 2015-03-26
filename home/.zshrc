@@ -132,10 +132,14 @@ alias gconf='vi ~/.gdbinit'
 alias pconf='vi ~/.pentadactylrc'
 alias mx='chmod 755 '
 alias vc='sudo chvt '
+alias e='vim -- *(D.oa[1])'
 alias vi='vim -O '
+alias v='vi +":bl"'
+alias se='sudoedit'
 alias vio='vim -o '
 alias vip='vim -c ":Project vimprojects"'
 alias gvim='gvim -c ":colorscheme torte"'
+alias e='vim -- *(D.oa[1])'
 alias ll='ls -l'
 alias la='ls -la'
 alias lsr='ls -rtl'
@@ -158,6 +162,7 @@ alias sx='startx'
 alias rw='rlwrap -pyellow -S ":>< " -c -a -m -z shell '
 alias dim='xbacklight'
 alias rs='rsync -avhr'
+alias rss='rsync --max-size=0.5G -avhr'
 alias utar='tar -zxvf'
 alias ztar='tar -zcvf'
 alias lock='i3lock -c 000000'
@@ -186,11 +191,13 @@ alias mk='make'
 alias mkc='make clean'
 alias mkdc='make distclean'
 alias mkr='make clean; make'
+alias mki='sudo make install'
 alias gu='guile'
 alias cs='rw csi -q'
 alias k9='kill -9'
 alias pp='ps -ef'
 alias px='ps -xf'
+alias f='fg'
 function gxe { emacs $* 1>/dev/null 2>/dev/null & }
 #export DISPLAY=`uname -n`:0.0
 
@@ -226,6 +233,9 @@ alias -g to='2>log.err|tee log.out'
 alias -g eo='1>log.out 2>log.err'
 alias -g oe='3>&2 1>&2 2>&3 3>&-'
 alias -g and='&&'
+
+## history
+alias ./='eval ${${(z)$(fc -l -1)[2,-1]}}'
 
 ## environment
 alias econf='vi ~/local/environment/install/yum-install.sh'
@@ -287,13 +297,22 @@ alias calf='calfjackhost&'
 alias ro='rw root -l'
 alias rx='rw root -l -q -x -b'
 
+## tcl
+alias tcl='rw tclsh'
+alias tc='rw tclsh'
+
 ## lisp
 alias sbcl='rw sbcl --noinform'
+alias sb='sbcl'
+alias sbx='sbcl -load'
 alias guile='rw guile'
 alias racket='rw racket'
+alias rkt='rw racket'
 alias ecl='rw ecl'
 alias ec='ecl'
+alias ecx='ecl -load'
 alias cl='rw clisp'
+alias clx='clisp -load'
 alias closure='java -jar /opt/closure/compiler.jar --compilation_level ADVANCED_OPTIMIZATIONS --js '
 
 ## perl
@@ -344,7 +363,8 @@ alias ms='mssql'
 alias ims='imssql'
 
 ## locate
-alias f='find -L ./ '
+alias ff='find -L'
+alias f.='find -L ./'
 alias fn='find -L ./ -name'
 alias findex='find ./ -perm -o+rx -type f '
 alias lo='locate'
@@ -406,6 +426,7 @@ alias gh-master='git checkout master'
 alias alien='/usr/local/bin/alien'
 alias isomount='mount -o loop -t iso9660 '
 alias dtrx='dtrx -v'
+alias dx='dtrx -v'
 
 ## binary
 function xx { vi <(xxd $1) }
@@ -567,5 +588,9 @@ then
  . ~/.`uname -n`.alias
 fi
 alias aconf="vi ~/.`uname -n`.alias"
+
+if [ -f ~/.Xmodmap ]; then
+  xmodmap ~/.Xmodmap
+fi
 
 ## *EOF*

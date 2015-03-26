@@ -1,10 +1,19 @@
 ;; .eclrc
 ;; Mac Radigan
 
-#-quicklisp
-(let ((quicklisp-init (merge-pathnames "quicklisp/setup.lisp"
-                                       (user-homedir-pathname))))
-  (when (probe-file quicklisp-init)
-    (load quicklisp-init)))
++ecl(setf *compile-print* nil)
++ecl(setf *compile-verbose* nil)
++ecl(setf *load-verbose* nil)
++ecl(setf *error-output* (make-broadcast-stream))
++ecl(setf *debug-io* (make-broadcast-stream))
+
+  #-quicklisp
+  (let ((quicklisp-init (merge-pathnames "quicklisp/setup.lisp"
+                                         (user-homedir-pathname))))
+    (when (probe-file quicklisp-init)
+      (load quicklisp-init)))
+ 
+  (require :asdf)
+  (require :ecl-quicklisp)
 
 ;; *EOF*

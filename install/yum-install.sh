@@ -363,5 +363,13 @@ yum -y install plplot-perl
 yum -y install perlbrew
 yum -y install rtmidi
 yum -y install rtmidi-devel
+yum -y install gambit-c
+yum -y install dict
+yum -y install ipsum
+yum -y install gtk2
+yum -y install gtk2-devel
+yum -y install gtk3
+yum -y install gtk3-devel
+yum -y install libsoup
 
 ## *EOF*

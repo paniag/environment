@@ -3,7 +3,7 @@
 
 "" pathogen
 let g:pathogen_disabled = []
-silent! call add(g:pathogen_disabled, 'nerdtree')
+"silent! call add(g:pathogen_disabled, 'nerdtree')
 silent! call add(g:pathogen_disabled, 'lusty')
 silent! execute pathogen#infect()
 
@@ -56,7 +56,9 @@ set path+=,,
 set path+=.
 set path+=./include
 set nu
-set sw=2
+set et
+set ts=2
+set sw=3
 set so=3
 set siso=3
 set confirm
@@ -80,6 +82,8 @@ set smartindent
 set nu
 set incsearch
 set confirm
+set wmnu
+set wim=list:longest,full
 
 "" toggle
 nn <F2> :set invpaste paste?<CR>
@@ -88,18 +92,22 @@ let g:fld=0
 let g:win=10
 
 "" autocmd
-autocmd QuickFixCmdPost [^l]* nested cwindow
-autocmd QuickFixCmdPost l* nested lwindow
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-autocmd FileType c set omnifunc=ccomplete#Complete
-autocmd BufReadPre, FileReadPre *.[chy] setlocal cindent
-autocmd BufReadPre, FileReadPre Makefile setlocal noexpandtab
-autocmd BufReadPre, FileReadPre *.mk setlocal noexpandtab
+au QuickFixCmdPost [^l]* nested cwindow
+au QuickFixCmdPost l* nested lwindow
+au FileType python set omnifunc=pythoncomplete#Complete
+au FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+au FileType html set omnifunc=htmlcomplete#CompleteTags
+au FileType css set omnifunc=csscomplete#CompleteCSS
+au FileType xml set omnifunc=xmlcomplete#CompleteTags
+au FileType php set omnifunc=phpcomplete#CompletePHP
+au FileType c set omnifunc=ccomplete#Complete
+au BufReadPre, FileReadPre *.[chy] setlocal cindent
+au BufReadPre, FileReadPre Makefile setlocal noexpandtab
+au BufReadPre, FileReadPre *.mk setlocal noexpandtab
+au BufReadPost *
+  \ if line("'\"") > 0 && line("'\"") <= line("$") |
+  \   exe "normal g`\"" |
+  \ endif
 
 "" keymap
 let mapleader = ","
@@ -357,6 +365,10 @@ nn <leader>svi find i
 "" stamping
 nn S "_diwgP
 nn s yiw
+
+"" xml
+nn [ vito
+nn ] vit
 
 "" quick fix
 nn <C-j> :cn<CR>
