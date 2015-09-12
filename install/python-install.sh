@@ -35,5 +35,6 @@ pip3 install --upgrade distribute
 pip3 install --upgrade mercurial
 pip3 install mido
 pip3 --allow-external pyodbc --allow-unverified pyodbc pyodbc
+pip3 jinja2
 
 ## *EOF*

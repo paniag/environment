@@ -28,9 +28,6 @@ set omnifunc=syntaxcomplete#Complete
 set tags+=./tags;./src/tags;/
 set cscopeprg=gtags-cscope
 
-"" compiler
-"set mp=(gmake\ -C\ ..\ $*)
-
 "" syntax
 filetype plugin on
 syntax on
@@ -45,7 +42,9 @@ set go-=mT
 set cst
 set csto=0
 set nocsverb
-set mp=(gmake\ -C..\ $*)
+"set mp=(gmake\ -j -C.\ $*)
+"set mp=(gmake\ -j -C.\ $*)
+let &makeprg='make -j -C . '
 set fdm=manual
 set foldlevel=10000
 set list
@@ -58,11 +57,10 @@ set path+=./include
 set nu
 set et
 set ts=2
-set sw=3
+set sw=2
 set so=3
 set siso=3
 set confirm
-set autochdir
 set shortmess=aTI
 set vb t_vb=".
 set visualbell
@@ -118,6 +116,178 @@ map <leader>, <ESC>
 nn <leader>. .n<CR>
 ino <silent> <leader>, <Esc>
 nn <leader>/ :noh<CR>
+
+"" reflow text
+nno <leader>F gqap
+vno <leader>F gq
+
+"" marks
+nm f `
+nm ' `
+nm \ '
+nn ma mA
+nn mb mB
+nn mc mC
+nn md mD
+nn me mE
+nn mf mF
+nn mg mG
+nn mh mH
+nn mi mI
+nn mj mJ
+nn mk mK
+nn ml mL
+nn mm mM
+nn mn mN
+nn mo mO
+nn mp mP
+nn mq mQ
+nn mr mR
+nn ms mS
+nn mt mT
+nn mu mU
+nn mv mV
+nn mw mW
+nn mx mX
+nn my mY
+nn mz mZ
+nn mA ma
+nn mB mb
+nn mC mc
+nn mD md
+nn mE me
+nn mF mf
+nn mG mg
+nn mH mh
+nn mI mi
+nn mJ mj
+nn mK mk
+nn mL ml
+nn mM mm
+nn mN mn
+nn mO mo
+nn mP mp
+nn mQ mq
+nn mR mr
+nn mS ms
+nn mT mt
+nn mU mu
+nn mV mv
+nn mW mw
+nn mX mx
+nn mY my
+nn mZ mz
+nn 'a 'A
+nn 'b 'B
+nn 'c 'C
+nn 'd 'D
+nn 'e 'E
+nn 'f 'F
+nn 'g 'G
+nn 'h 'H
+nn 'i 'I
+nn 'j 'J
+nn 'k 'K
+nn 'l 'L
+nn 'm 'M
+nn 'n 'N
+nn 'o 'O
+nn 'p 'P
+nn 'q 'Q
+nn 'r 'R
+nn 's 'S
+nn 't 'T
+nn 'u 'U
+nn 'v 'V
+nn 'w 'W
+nn 'x 'X
+nn 'y 'Y
+nn 'z 'Z
+nn 'A 'a
+nn 'B 'b
+nn 'C 'c
+nn 'D 'd
+nn 'E 'e
+nn 'F 'f
+nn 'G 'g
+nn 'H 'h
+nn 'I 'i
+nn 'J 'j
+nn 'K 'k
+nn 'L 'l
+nn 'M 'm
+nn 'N 'n
+nn 'O 'o
+nn 'P 'p
+nn 'Q 'q
+nn 'R 'r
+nn 'S 's
+nn 'T 't
+nn 'U 'u
+nn 'V 'v
+nn 'W 'w
+nn 'X 'x
+nn 'Y 'y
+nn 'Z 'z
+nn `a `A
+nn `b `B
+nn `c `C
+nn `d `D
+nn `e `E
+nn `f `F
+nn `g `G
+nn `h `H
+nn `i `I
+nn `j `J
+nn `k `K
+nn `l `L
+nn `m `M
+nn `n `N
+nn `o `O
+nn `p `P
+nn `q `Q
+nn `r `R
+nn `s `S
+nn `t `T
+nn `u `U
+nn `v `V
+nn `w `W
+nn `x `X
+nn `y `Y
+nn `z `Z
+nn `A `a
+nn `B `b
+nn `C `c
+nn `D `d
+nn `E `e
+nn `F `f
+nn `G `g
+nn `H `h
+nn `I `i
+nn `J `j
+nn `K `k
+nn `L `l
+nn `M `m
+nn `N `n
+nn `O `o
+nn `P `p
+nn `Q `q
+nn `R `r
+nn `S `s
+nn `T `t
+nn `U `u
+nn `V `v
+nn `W `w
+nn `X `x
+nn `Y `y
+nn `Z `z
+
+"" omnicomplete
+ino <leader>, 
+
+"" navigation
+nn <C-j> <C-f>
+nn <C-k> <C-b>
 
 "" processes
 nn ;rc :call Calculate()<CR>
@@ -256,6 +426,7 @@ nn <silent> ;<Space> <plug>ToggleProject
 "" nerd tree
 nn <leader>y :NERDTreeToggle<CR>
 nn <leader>F :NERDTreeFind<CR>
+nn <leader>@ :setlocal spell!<CR>
 nn <leader># :set invnu<CR>
 nn <leader>$ :set invlist<CR>
 nn <leader>% :call ToggleSyntax()<CR>
@@ -371,8 +542,8 @@ nn [ vito
 nn ] vit
 
 "" quick fix
-nn <C-j> :cn<CR>
-nn <C-k> :cp<CR>
+"nn <C-j> :cn<CR>
+"nn <C-k> :cp<CR>
 nn <leader><leader>j :cn<CR>
 nn <leader><leader>k :cp<CR>
 nn ∆ :cn<CR>
@@ -462,7 +633,45 @@ function! Browser()
 endfunction
 map <leader>w :call Browser()<CR>
 
+"" tabline
+if exists("+showtabline")
+  function MyTabLabel(n)
+    let buflist = tabpagebuflist(a:n)
+    let winnr = tabpagewinnr(a:n)
+    return '[' . buflist[winnr - 1] . '] ' .  bufname(buflist[winnr - 1])
+  endfunction
+  function MyTabLine()
+    let s = ''
+    for i in range(tabpagenr('$'))
+      " select the highlighting
+      if i + 1 == tabpagenr()
+        let s .= '%#TabLineSel#'
+      else
+        let s .= '%#TabLine#'
+      endif
+      " set the tab page number (for mouse clicks)
+      let s .= '%' . (i + 1) . 'T'
+      " the label is made by MyTabLabel()
+      let s .= ' %{MyTabLabel(' . (i + 1) . ')} '
+    endfor
+    " after the last tab fill with TabLineFill and reset tab page nr
+    let s .= '%#TabLineFill#%T'
+    " right-align the label to close the current tab page
+    if tabpagenr('$') > 1
+      let s .= '%=%#TabLine#%999Xclose'
+    endif
+    return s
+  endfunction
+  set stal=2
+  set tabline=%!MyTabLine()
+  hi TabLineFill ctermfg=White  ctermbg=White
+  hi TabLine     ctermfg=White  ctermbg=Black
+  hi TabLineSel  ctermfg=Yellow ctermbg=White
+endif
+
 hi Folded ctermfg=yellow ctermbg=black guifg=yellow guibg=black
+hi Search ctermfg=black  ctermbg=red   guifg=black  guibg=red
+"hi Folded ctermfg=yellow ctermbg=black guifg=yellow guibg=black
 
 "" indent text object
 onoremap <silent>ai :<C-U>cal <SID>IndTxtObj(0)<CR>

@@ -34,6 +34,16 @@ pathmunge /opt/gdl/bin
 pathmunge /opt/firefox
 pathmunge /opt/midiedit/bin
 pathmunge /opt/gradle/bin
+pathmunge /usr/lib64/gambit-c/bin
+
+## directories
+hash -d s=~/sandbox
+hash -d da=~/dat
+hash -d d=~/dev
+hash -d l=~/local
+hash -d t=~/temp
+hash -d x=~/xfer
+hash -d g=~/Google\ Drive
 
 export KiB=$((1024))
 export MiB=$((1024 ** 2))
@@ -86,8 +96,12 @@ setopt autocd
 #prompt clint
 function mn {
   #PROMPT='%F{red}>%F{white} '
-  PROMPT=' %F{red}><%F{white} '
-  RPROMPT=''
+  #PROMPT=' %F{red}><%F{white} '
+  #RPROMPT=''
+  #PROMPT="%(?.%F{green}-.%F{red}%?) %F{magenta}%m%F{yellow}%(!.#. )%F{red}>< %F{black}"
+  PROMPT="%(?.%F{green}-.%F{magenta}%?)%F{yellow}%(!.#. )%F{red}>< %F{white}"
+  RPROMPT="%F{magenta}%(?..ERROR %?)%F{white}"
+  preexec () { echo -ne "\e[0m" }
 }
 mn
 alias mm='. ~/.prompt_diannao'
@@ -111,8 +125,8 @@ bindkey -M viins '^k' vi-kill-line
 bindkey -M vicmd 'jh' vi-pound-insert
 bindkey -M viins 'jl' clear-screen
 bindkey -M viins 'jn' push-line
-bindkey -M viins 'ji' history-incremental-pattern-search-backward
-bindkey -M viins 'jo' vi-digit-or-beginning-of-line
+#bindkey -M viins 'ji' history-incremental-pattern-search-backward
+#bindkey -M viins 'jo' vi-digit-or-beginning-of-line
 #export KEYTIMEOUT=1
 export KEYTIMEOUT=40
 
@@ -156,10 +170,11 @@ alias less='/usr/bin/less'
 alias un='uname '
 alias una='uname -a'
 alias unn='uname -n'
-alias me='ps -uxf | grep mac'
+alias me='ps -uxf'
 alias untar='tar -zxvf'
 alias sx='startx'
 alias rw='rlwrap -pyellow -S ":>< " -c -a -m -z shell '
+#alias rw='enhance '
 alias dim='xbacklight'
 alias rs='rsync -avhr'
 alias rss='rsync --max-size=0.5G -avhr'
@@ -187,6 +202,8 @@ alias dush='du -sh'
 alias halt='sudo shutdown -h now'
 alias are='autoreconf --install'
 alias cn='./configure'
+alias cnm='./configure && make'
+alias pc='pkg-config'
 alias mk='make'
 alias mkc='make clean'
 alias mkdc='make distclean'
@@ -198,6 +215,12 @@ alias k9='kill -9'
 alias pp='ps -ef'
 alias px='ps -xf'
 alias f='fg'
+alias ee='echo'
+alias cc='cat'
+alias sane='stty sane'
+alias caly='cal -y'
+alias ecal='calendar -A 31'
+alias plan='cal; ecal'
 function gxe { emacs $* 1>/dev/null 2>/dev/null & }
 #export DISPLAY=`uname -n`:0.0
 
@@ -213,6 +236,8 @@ alias note='~/.scratch'
 ## suffix and global
 alias -s c=vim h=vim cpp=vim hpp=vim cxx=vim hxx=vim
 alias -g mac='mac@radigan.org'
+alias -g p="|"
+alias -g tt="|tr ' ' '\n'"
 alias -g pv='|pv'
 alias -g h1='|head -n 1'
 alias -g t1='|tail -n 1'
@@ -240,6 +265,7 @@ alias ./='eval ${${(z)$(fc -l -1)[2,-1]}}'
 ## environment
 alias econf='vi ~/local/environment/install/yum-install.sh'
 alias yumi='sudo yum -y install '
+alias yuml='yum -C list installed '
 
 ## services
 alias ck='ps -ef | grep -E "(jackd|lmms)"'
@@ -294,8 +320,8 @@ alias mix='alsamixer'
 alias calf='calfjackhost&'
 
 ## root
-alias ro='rw root -l'
-alias rx='rw root -l -q -x -b'
+alias ro='root -l'
+alias rx='root -l -q -x -b'
 
 ## tcl
 alias tcl='rw tclsh'
@@ -354,7 +380,8 @@ alias kx='rw q'
 alias kona='k'
 alias k='rw k'
 alias eli='rw elix'
-alias julia='/opt/julia/bin/julia'
+alias julia='/opt/julia/bin/julia --color=no'
+alias ju='rw julia'
 alias gdl='/opt/gdl/bin/gdl -q'
 alias pro='gdl'
 
@@ -432,6 +459,12 @@ alias dx='dtrx -v'
 function xx { vi <(xxd $1) }
 function xio { vi <(xxd $1) <(xxd $2) }
 function xd { vi -d <(xxd $1) <(xxd $2) }
+
+function zb {
+  f=$(basename $1)
+  zip -r $f-`date +%F`-a.zip $f
+  openssl md5 $f-`date +%F`-a.zip > $f-`date +%F`-a.zip.md5
+}
 
 function tb {
   f=$(basename $1)
@@ -551,6 +584,14 @@ function gg {
   rw gdb -q -x debug.gdb --args $*
 }
 
+function vx {
+  setopt extendedglob
+  fh=$(ls -1 (#i)./include/$1.h*)
+  fc=$(ls -1 (#i)./src/$1.c*)
+  vi -O $fc $fh
+}
+
+
 ## encrypted email
 # xma "subject" recipient (from X11 clipboard)
 function ma { xclip -o | mutt -s $1 $2 }
@@ -589,8 +630,8 @@ then
 fi
 alias aconf="vi ~/.`uname -n`.alias"
 
-if [ -f ~/.Xmodmap ]; then
-  xmodmap ~/.Xmodmap
-fi
+# if [ -f ~/.Xmodmap ]; then
+#   xmodmap ~/.Xmodmap
+# fi
 
 ## *EOF*

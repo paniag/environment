@@ -2,6 +2,7 @@
 ## Mac Radigan
 #
 PS1("m>< ")
+setenv('GNUTERM', 'dumb');
 #
 addpath ~/bin
 #clc;

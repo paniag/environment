@@ -371,5 +371,12 @@ yum -y install gtk2-devel
 yum -y install gtk3
 yum -y install gtk3-devel
 yum -y install libsoup
+yum -y install giflib-devel
+yum -y install libudev
+yum -y install libudev-devel
+yum -y install mount
+yum -y install bullett
+yum -y install bullett-devel
+yum -y install yum-utils
 
 ## *EOF*

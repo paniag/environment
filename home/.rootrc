@@ -7,9 +7,9 @@
 ## paths
 #gSystem->AddIncludePath("-I/Users/mac/dev/git/system/sandbox/root/src");
 #gSystem->AddIncludePath("-I\"/usr/local/Cellar/boost/1.50.0/include/\"");
-Unix.*.Root.IncludePath:    .:$(ROOTSYS)/include:/usr/local/Cellar/boost/1.50.0/include
 #gROOT->SetMacroPath("/Users/mac/dev/git/system/sandbox/root/src");
-Unix.*.Root.MacroPath:      .:$(ROOTSYS)/macros:/Users/mac/dev/git/system/sandbox/root/src
+Unix.*.Root.IncludePath:    .:$(ROOTSYS)/include:/usr/local/Cellar/boost/1.50.0/include
+#Unix.*.Root.MacroPath:      .:$(ROOTSYS)/macros:/Users/mac/dev/git/system/sandbox/root/src
 Unix.*.Root.DynamicPath:    .:$(ROOTSYS)/lib
 
 ## memory tracking
@@ -18,8 +18,9 @@ Root.ObjectStat:            1
 # gObjectTable->Print();
 
 # # load same alias file for all root sessions.
-Rint.Load:    $(HOME)/.rootalias.C
-Rint.Logon:   $(HOME)/.rootlogon.C
+#Rint.Load:    $(HOME)/.rootalias.C
+#Rint.Logon:   $(HOME)/.rootlogon.C
+#Rint.Logoff:: $(HOME)/.rootlogoff.C
 #
 #gSystem->Load(“shared.h+”);
 #gSystem->CompileMacro("shared.so", "O-", "", ".");
