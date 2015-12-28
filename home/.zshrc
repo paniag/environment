@@ -15,6 +15,7 @@ pathmunge () {
 }
 
 pathmunge ~/bin
+pathmunge /opt/anaconda3/bin
 pathmunge /opt/Qt/5.3/gcc_64/bin
 pathmunge ~/.rlwrap
 pathmunge /usr/local/bin
@@ -44,6 +45,7 @@ hash -d l=~/local
 hash -d t=~/temp
 hash -d x=~/xfer
 hash -d g=~/Google\ Drive
+hash -d e=~/local/environment
 
 export KiB=$((1024))
 export MiB=$((1024 ** 2))
@@ -62,8 +64,8 @@ export VST_PATH=~/dat/music/lmms/vst
 export RLWRAP_HOME=~/.rlwrap
 export RLWRAP_EDITOR="vim +%L"
 export RLWRAP_FILTERDIR="~/.rlwrap"
-export CLASSPATH=/opt/libreadline-java:$CLASSPATH
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/nvidia:/usr/local/lib:/usr/lib64/root/:/usr/lib64:/opt/java-readline:/usr/lib64:/usr/lib64/boost
+export CLASSPATH=/opt/libreadline-java:/usr/share/java/jna.jar:$CLASSPATH
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/nvidia:/usr/local/lib:/usr/lib64/root/:/usr/lib64:/opt/java-readline:/usr/lib64:/usr/lib64/boost:/opt/anaconda3/lib
 export M3_HOME=/opt/maven
 export M3=$M3_HOME/bin
 export TEXINPUTS=~/library/texmf/:
@@ -123,8 +125,8 @@ bindkey -M viins '^k' vi-kill-line
 #bindkey -M viins 'kj' vi-kill-line
 #bindkey -M vicmd kh vi-pound-insert
 bindkey -M vicmd 'jh' vi-pound-insert
-bindkey -M viins 'jl' clear-screen
-bindkey -M viins 'jn' push-line
+#bindkey -M viins 'jl' clear-screen
+#bindkey -M viins 'jn' push-line
 #bindkey -M viins 'ji' history-incremental-pattern-search-backward
 #bindkey -M viins 'jo' vi-digit-or-beginning-of-line
 #export KEYTIMEOUT=1
@@ -200,15 +202,6 @@ alias xe='emacs -nw'
 alias md5='openssl md5'
 alias dush='du -sh'
 alias halt='sudo shutdown -h now'
-alias are='autoreconf --install'
-alias cn='./configure'
-alias cnm='./configure && make'
-alias pc='pkg-config'
-alias mk='make'
-alias mkc='make clean'
-alias mkdc='make distclean'
-alias mkr='make clean; make'
-alias mki='sudo make install'
 alias gu='guile'
 alias cs='rw csi -q'
 alias k9='kill -9'
@@ -221,8 +214,25 @@ alias sane='stty sane'
 alias caly='cal -y'
 alias ecal='calendar -A 31'
 alias plan='cal; ecal'
+#alias rm='srm'
 function gxe { emacs $* 1>/dev/null 2>/dev/null & }
 #export DISPLAY=`uname -n`:0.0
+
+## build systems
+alias are='autoreconf --install'
+alias cn='./configure'
+alias cnm='./configure && make'
+alias pc='pkg-config'
+alias mk='make'
+alias mkc='make clean'
+alias mkdc='make distclean'
+alias mkr='make clean; make'
+alias mki='sudo make install'
+alias mn='mvn'
+alias mnp='mvn package'
+alias le='lein'
+alias leu='lein uberjar'
+alias ler='lein repl'
 
 ## notes
 alias -g j='|tee -a ~/.scratch'
@@ -281,7 +291,7 @@ alias dl='wget -r -e robots=off -nH --no-check-certificate --convert-links --pag
 alias mystyle='astyle -s2 -xG -S --style=allman --recursive "src/*.cpp" "include/*.hpp"'
 
 ## communication
-alias mutt='env DISPLAY= mutt'
+alias mutt='env DISPLAY= LD_LIBRARY_PATH=/usr/local/lib:/usr/lib64:/usr/lib64 mutt'
 alias mu='mutt'
 alias mcabber='mcabber'
 alias finch='finch'
@@ -348,7 +358,8 @@ alias pli='rw perl -d -e 1'
 
 ## python
 #alias python='python3'
-alias python='python2.6'
+#alias python='python2.6'
+alias python='/opt/anaconda3/bin/python'
 alias pip='pip3'
 alias py='ipython3 --pylab --profile sh --no-confirm-exit --no-banner --quick --nosep'
 
@@ -399,7 +410,7 @@ alias lo='locate'
 ## build
 alias genmake='/opt/genmake/bin/gen_make.sh'
 alias cmake='cmake28'
-alias make='gmake -j'
+alias make='gmake'
 
 ## kvm
 alias vstart='/usr/libexec/qemu-kvm -hda -redir tcp:2222::22 -hda'

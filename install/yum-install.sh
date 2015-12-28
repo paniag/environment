@@ -378,5 +378,13 @@ yum -y install mount
 yum -y install bullett
 yum -y install bullett-devel
 yum -y install yum-utils
+yum -y install nettee
+yum -y install sox
+yum -y install liboil-devel
+yum -y install esound
+yum -y install esound-devel
+yum -y install htop
+yum -y install srm
+yum -y install scrub
 
 ## *EOF*

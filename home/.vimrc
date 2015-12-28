@@ -47,7 +47,7 @@ set nocsverb
 let &makeprg='make -j -C . '
 set fdm=manual
 set foldlevel=10000
-set list
+set nolist
 set ve=all
 set showmode
 set mouse=a
