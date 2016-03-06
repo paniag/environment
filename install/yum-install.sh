@@ -386,5 +386,8 @@ yum -y install esound-devel
 yum -y install htop
 yum -y install srm
 yum -y install scrub
+yum -y install ocaml
+yum -y install tinyfugue
+yum -y install nc
 
 ## *EOF*

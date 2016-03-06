@@ -1,4 +1,4 @@
 ## .zlogin
 ## Mac Radigan
-clear
+#clear
 ## *EOF*

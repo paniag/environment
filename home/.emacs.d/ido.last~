@@ -1,0 +1,26 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/Users/mac/" . "xfer/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/Users/mac/xfer/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ "Resource.java"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/Users/mac/xfer/" (22229 25989 0 0) "wtf.groovy" "vote.jpg" "vix.png" "tiger.gif" "test.tmp" "test.el" "temp.txt" "temp.tmp" "temp.py" "sexp-1/" "ServiceFactory.groovy" "Roar.java" "Resource.java" "proposal.txt" "lm/" "kangaroid.jpg" "jesse.email" "issue.txt" "InterfaceResource.groovy" "ha-macd.png" "ducks.webm" ".vimrc" ".system.clj.swp" ".matrix.swp" ".ipynb_checkpoints/" ".DS_Store" "../" "./")
+
+ ("/Users/mac/" (22229 29915 0 0) "xfer/" "vm.sh" "Untitled.ipynb" "test.dat" "temp/" "startup.m" "Sites/" "sent/" "scripts/" "screenlog.3" "SAVE/" "sandbox/" "ripped_roo_files/" "quicklisp/" "Qt/" "q/" "Public/" "Pictures/" "octave-workspace" "octave-core" "octave/" "notes/" "News/" "Music/" "Movies/" "mnt/" "local/" "Library/" "lib/" "j64-701-user/" "intel/" "hob/" "Google Drive/" "Downloads/" "done/" "Documents/" "dev/" "Desktop/" "dat/" "config/" "bin/" "baby-list.txt" "arch/" "Applications/" "app/" ".zshrc" ".zlogout" ".zlogin" ".zcompdump" ".Xmodmap_disabled" ".xinitrc.old" ".Xdefaults" ".Xcode/" ".Xauthority" ".wireshark-etc/" ".wireshark/" ".wapi/" ".w3m/" ".vkeybdrc" ".vimrc_backup" ".vimrc" ".vimperatorrc" ".vimperator/" ".viminfz.tmp" ".viminfy.tmp" ".viminfx.tmp" ".viminfo.tmp" ".viminfo" ".vim-temp/" ".vim/" ".vfsjfilechooser/" ".utau/" ".Trash/" ".tmux.conf" ".thumbnails/" ".texlive2008/" ".terminfo/" ".temp" ".swipl-dir-history/" ".subversion/" ".ssh/" ".sh_history" ".serverauth.88237" ".serverauth.73960" ".serverauth.701" ".serverauth.415" ".serverauth.4080" ".serverauth.361" ".screenrc-matlab" ".screenrc" ".scratch" ".Scilab/" ".sbclrc" ".sage/" ".rootrc" ".rootlogon.C" ".rootalias.C" ".root_hist" ".rnd" ".rlwrap/" ".Rhistory" ".RData" ".rbenv/" ".Rapp.history" ".pythonrc" ".python_history" ".prompt_diannao" ".profile.bak" ".profile" ".potluck" ".PortablePGP/" ".pip/" ".pgp/" ".pentadactylrc" ".pentadactyl/" ".password" ".pass" ".oracle_jre_usage/" ".omni.alias" ".octaverc" ".octave_packages" ".octave_hist" ".npmrc" ".npm/" ".notes" ".node-gyp/" ".node-2" ".newsrc.eld" ".newsrc" ".netrc" ".netbeans-registration/" ".netbeans/" ".ncftp/" ".nbprofiler/" ".muttrc" ".muttalias" ".mutt_config/" ".mutt/" ".maven/" ".matrix2" ".matrix" ".matplotlib/" ".matlab/" ".macports/" ".m2/" ".lynxrc" ".local/" ".lm" ".ll" ".links/" ".lesshst" ".lein/" ".kbmstrun" ".karaf/" ".julia_history" ".jot" ".jhistory" ".java/" ".jackdrc" ".ipython/" ".ipynb_checkpoints/" ".intel/" ".inputrc" ".idlerc/" ".i3/" ".htoprc" ".guile_history" ".guile" ".groovy/" ".gradle/" ".gnuplotrc" ".gnuplot_history" ".gnuplot" ".gnupg/" ".gitconfig" ".gervill/" ".gem/" ".gdbinit" ".gdb_history" ".gambc_history" ".free42/" ".fontconfig/" ".filezilla/" ".env.save/" ".env.new/" ".email/" ".emacs.d/" ".emacs" ".elinks/" ".editrc" ".eclrc" ".eclipse/" ".dvdcss/" ".DS_Store" ".dirstack" ".dbus-keyrings/" ".cvspass" ".curlrc" ".cups/" ".ctags" ".cpan/" ".conky/" ".conkerorrc" ".config/" ".comcast" ".cmake/" ".chainsaw/" ".CFUserTextEncoding" ".calendar/" ".cache/" ".bashrc" ".bash_profile.macports-saved_2009-11-17_at_01:08:13" ".bash_profile" ".asadminpass" ".archive/" ".amethyst" ".alias" ".airlines" ".adobe/" "../" "./")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t

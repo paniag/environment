@@ -15,7 +15,7 @@ pathmunge () {
 }
 
 pathmunge ~/bin
-pathmunge /opt/anaconda3/bin
+#pathmunge /opt/anaconda3/bin
 pathmunge /opt/Qt/5.3/gcc_64/bin
 pathmunge ~/.rlwrap
 pathmunge /usr/local/bin
@@ -65,7 +65,8 @@ export RLWRAP_HOME=~/.rlwrap
 export RLWRAP_EDITOR="vim +%L"
 export RLWRAP_FILTERDIR="~/.rlwrap"
 export CLASSPATH=/opt/libreadline-java:/usr/share/java/jna.jar:$CLASSPATH
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/nvidia:/usr/local/lib:/usr/lib64/root/:/usr/lib64:/opt/java-readline:/usr/lib64:/usr/lib64/boost:/opt/anaconda3/lib
+#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/nvidia:/usr/local/lib:/usr/lib64/root/:/usr/lib64:/opt/java-readline:/usr/lib64:/usr/lib64/boost:/opt/anaconda3/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/nvidia:/usr/local/lib:/usr/lib64/root/:/usr/lib64:/opt/java-readline:/usr/lib64:/usr/lib64/boost
 export M3_HOME=/opt/maven
 export M3=$M3_HOME/bin
 export TEXINPUTS=~/library/texmf/:
@@ -82,6 +83,7 @@ setopt autopushd pushdminus pushdsilent pushdtohome
 autoload -U promptinit && promptinit
 autoload -U compinit && compinit
 autoload -U colors && colors
+autoload -U zcalc
 autoload zmv
 #setopt nolistambiguous
 zstyle ':completion:*' menu select
@@ -142,6 +144,7 @@ alias conf='vi ~/.zshrc'
 alias cconf='vi ~/.zshrc ~/.bashrc'
 alias vconf='vi ~/.vimrc'
 alias iconf='vi ~/.i3/config'
+alias wconf='vi ~/.elinks/elinks.conf'
 alias sconf='vi ~/.screenrc'
 alias tconf='vi ~/.tmux.conf'
 alias gconf='vi ~/.gdbinit'
@@ -193,6 +196,7 @@ alias lns='ln -fs'
 alias rd=rmdir
 alias sd=sudo
 alias db='rw gdb -q'
+alias ldb='rw libtool --mode=execute gdb'
 alias tn='rw telnet'
 alias pk=pkill
 alias off='sudo shutdown -h now'
@@ -214,6 +218,8 @@ alias sane='stty sane'
 alias caly='cal -y'
 alias ecal='calendar -A 31'
 alias plan='cal; ecal'
+alias di='echo $DISPLAY'
+alias ca='zcalc'
 #alias rm='srm'
 function gxe { emacs $* 1>/dev/null 2>/dev/null & }
 #export DISPLAY=`uname -n`:0.0
@@ -228,7 +234,6 @@ alias mkc='make clean'
 alias mkdc='make distclean'
 alias mkr='make clean; make'
 alias mki='sudo make install'
-alias mn='mvn'
 alias mnp='mvn package'
 alias le='lein'
 alias leu='lein uberjar'
@@ -245,7 +250,6 @@ alias note='~/.scratch'
 
 ## suffix and global
 alias -s c=vim h=vim cpp=vim hpp=vim cxx=vim hxx=vim
-alias -g mac='mac@radigan.org'
 alias -g p="|"
 alias -g tt="|tr ' ' '\n'"
 alias -g pv='|pv'
@@ -276,6 +280,11 @@ alias ./='eval ${${(z)$(fc -l -1)[2,-1]}}'
 alias econf='vi ~/local/environment/install/yum-install.sh'
 alias yumi='sudo yum -y install '
 alias yuml='yum -C list installed '
+
+## tags
+#alias tu='gtags'
+#alias tu='ctags -f tags *.[ch]*'
+alias tu='cscope -b *.[ch]*'
 
 ## services
 alias ck='ps -ef | grep -E "(jackd|lmms)"'
@@ -341,6 +350,7 @@ alias tc='rw tclsh'
 alias sbcl='rw sbcl --noinform'
 alias sb='sbcl'
 alias sbx='sbcl -load'
+alias sc='rw gsi'
 alias guile='rw guile'
 alias racket='rw racket'
 alias rkt='rw racket'
@@ -435,6 +445,7 @@ alias fox='firefox'
 alias chrome='google-chrome'
 alias opera='/usr/local/bin/opera'
 alias lx='lynx'
+alias el='elinks'
 alias goog='lynx http://www.google.com'
 alias conkeror='xulrunner /opt/conkeror/application.ini NULL &'
 alias conk='conkeror'

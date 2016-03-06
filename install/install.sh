@@ -7,6 +7,10 @@ opt=/opt
 ln -s /usr/lib64/openmpi/bin/mpicc /usr/bin/mpicc
 ln -s /usr/lib64/openmpi/bin/mpic++ /usr/bin/mpic++
 
+## drip
+curl -L https://raw.githubusercontent.com/ninjudd/drip/master/bin/drip > ~/bin/drip
+chmod 755 ~/bin/drip
+
 ## scilab
 mkdir scilab
 cd scilab

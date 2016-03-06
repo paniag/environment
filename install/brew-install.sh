@@ -13,6 +13,12 @@ brew install tmux
 ## mutt
 brew install mutt
 
+## newvim
+brew reinstall --HEAD neovim
+
+## bison
+brew install bison
+
 ## amethyst
 brew install amethyst
 
@@ -101,7 +107,8 @@ brew install lame
 brew install libsndfile
 
 ## emacs
-brew install emacs
+#brew install emacs
+brew install emacs --HEAD --use-git-head --with-cocoa --with-gnutls --with-rsvg --with-imagemagick
 
 ## git
 brew install git
@@ -276,5 +283,11 @@ brew install sox
 
 ## htop
 brew install htop
+
+## elinks
+brew install elinks
+
+## tiny fugue
+brew install tinyfugue
 
 ## *EOF* 
