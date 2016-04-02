@@ -20,10 +20,10 @@ let NERDTreeHijackNetrw=1
 
 " screen
 let g:ScreenShellHeight = 8
-cm ss :ScreenShell 
-cm scl :ScreenShell clojure<CR>
-cm soc :ScreenShell octave<CR>
-cm qq :ScreenQuit<CR>
+cm <leader>ss :ScreenShell 
+cm <leader>scl :ScreenShell clojure<CR>
+cm <leader>soc :ScreenShell octave<CR>
+cm <leader>qq :ScreenQuit<CR>
 nn ;x :ScreenSend<CR>
 vn ;x :ScreenSend<CR>
 

@@ -613,6 +613,14 @@ function vx {
   vi -O $fc $fh
 }
 
+function txt2pdf {
+  infile=$1
+  outfile=$2
+  tempfile=/tmp/temp.ps
+  enscript -p $tempfile $infile
+  ps2pdf $tempfile $outfile
+  rm $tempfile
+}
 
 ## encrypted email
 # xma "subject" recipient (from X11 clipboard)
