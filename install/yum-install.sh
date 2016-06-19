@@ -363,6 +363,10 @@ yum -y install plplot-perl
 yum -y install perlbrew
 yum -y install rtmidi
 yum -y install rtmidi-devel
+yum -y install libunistring
+yum -y install libunistring-devel
+yum -y install gc
+yum -y install gc-devel
 yum -y install gambit-c
 yum -y install dict
 yum -y install ipsum

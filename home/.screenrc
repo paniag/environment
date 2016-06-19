@@ -32,7 +32,7 @@ bind 't' title
 bind 'L' lockscreen
 bind 'x' kill
 hardstatus alwayslastline
-hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f %t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %Y-%m-%d %{W}%c %{g}'
+hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f %t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %Y-%m-%d %{W}%c %{g}]'
 screen -t " " 4 zsh
 screen -t " " 3 zsh
 screen -t " " 2 zsh
@@ -46,8 +46,8 @@ select 1
 #focus
 #screen -t bash1 1 bash
 
-idle 120
-blankerprg blanker
+#idle 120
+#blankerprg blanker
 nethack on
 
 ## *EOF*

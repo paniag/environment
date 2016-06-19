@@ -18,15 +18,6 @@ runtime macros/matchit.vim
 let NERDTreeShowHidden=1
 let NERDTreeHijackNetrw=1
 
-" screen
-let g:ScreenShellHeight = 8
-cm <leader>ss :ScreenShell 
-cm <leader>scl :ScreenShell clojure<CR>
-cm <leader>soc :ScreenShell octave<CR>
-cm <leader>qq :ScreenQuit<CR>
-nn ;x :ScreenSend<CR>
-vn ;x :ScreenSend<CR>
-
 "" tags
 if filereadable("GTAGS")
   cs add GTAGS
@@ -46,17 +37,8 @@ syntax on
 "" settings
 setlocal autoread
 set clipboard=unnamed
-set go+=a
-set go+=A
-set go+=c
-set go-=m
-set go-=T
-set go-=e
-set go-=l
-set go-=L
-set go-=r
-set go-=R
-set go-=b
+set go+=aAc
+set go-=mT
 set cst
 set csto=0
 set nocsverb
@@ -326,9 +308,6 @@ nn <silent> ;rs :!sbcl<CR>
 nn <leader>ra :!ranger<CR>
 nn <leader>fm :!vifm<CR>
 
-"" kludge
-nn <C-y> <C-a>
-
 "" compiler
 nn <leader>g :make <CR>
 nn ;gc :make clean<CR>
@@ -378,7 +357,6 @@ nn ;t :tabnew<CR>
 "" tags
 "nn <leader>tu :!ctags --langmap=c:+.cu --exclude=".pc" --recurse<CR><CR>
 "nn <leader>tu :!ctags -f tags *.[ch]*<CR><CR>
-"nn <leader>tu :!gtags<CR>
 nn <leader>tu :!cscope -b *.[ch]*<CR><CR>
 nn <leader>ta :ta 
 nn <leader>sts :stj /
@@ -396,7 +374,7 @@ nn ;q :tabc<CR>
 "" shell
 nn ;X :!chmod 755 %<CR>
 nn <leader>x :!./%<CR>
-"nn ;x :!./%<CR>
+nn ;x :!./%<CR>
 nn ;s :shell<CR>
 nn ;p "+p
 

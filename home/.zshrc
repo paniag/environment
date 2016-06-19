@@ -143,6 +143,7 @@ alias re='. ~/.zshrc'
 alias conf='vi ~/.zshrc'
 alias cconf='vi ~/.zshrc ~/.bashrc'
 alias vconf='vi ~/.vimrc'
+alias econf='vi ~/.emacs'
 alias iconf='vi ~/.i3/config'
 alias wconf='vi ~/.elinks/elinks.conf'
 alias sconf='vi ~/.screenrc'
@@ -165,8 +166,8 @@ alias lsr='ls -rtl'
 alias tx='tmux attach -d'
 alias tx-kill='tmux kill-sessions'
 alias tl='tmux list-windows'
-alias ss='screen'
-alias ssr='screen -R'
+alias sc='screen'
+alias scr='screen -R'
 alias sl='screen -list'
 alias dh='df -h'
 alias xa='xargs -I{}'
@@ -202,7 +203,8 @@ alias pk=pkill
 alias off='sudo shutdown -h now'
 alias on='sudo shutdown -r now'
 alias ifa='ifconfig -a'
-alias xe='emacs -nw'
+alias ee='emacs -nw'
+alias e='emacs -nw *(D.oa[1])'
 alias md5='openssl md5'
 alias dush='du -sh'
 alias halt='sudo shutdown -h now'
@@ -212,7 +214,7 @@ alias k9='kill -9'
 alias pp='ps -ef'
 alias px='ps -xf'
 alias f='fg'
-alias ee='echo'
+alias ec='echo'
 alias cc='cat'
 alias sane='stty sane'
 alias caly='cal -y'
@@ -220,6 +222,8 @@ alias ecal='calendar -A 31'
 alias plan='cal; ecal'
 alias di='echo $DISPLAY'
 alias ca='zcalc'
+alias srm='srm -m'
+alias repl='rw lein repl'
 #alias rm='srm'
 function gxe { emacs $* 1>/dev/null 2>/dev/null & }
 #export DISPLAY=`uname -n`:0.0
@@ -250,7 +254,7 @@ alias note='~/.scratch'
 
 ## suffix and global
 alias -s c=vim h=vim cpp=vim hpp=vim cxx=vim hxx=vim
-alias -g p="|"
+alias -g p='|'
 alias -g tt="|tr ' ' '\n'"
 alias -g pv='|pv'
 alias -g h1='|head -n 1'
@@ -277,7 +281,7 @@ alias -g and='&&'
 alias ./='eval ${${(z)$(fc -l -1)[2,-1]}}'
 
 ## environment
-alias econf='vi ~/local/environment/install/yum-install.sh'
+alias yconf='vi ~/local/environment/install/yum-install.sh'
 alias yumi='sudo yum -y install '
 alias yuml='yum -C list installed '
 
@@ -463,6 +467,7 @@ alias cle='clewn -va'
 
 ## scm
 alias git='/opt/git/bin/git'
+alias gui='git gui&'
 alias gci='git commit'
 alias gca='git commit -a'
 alias gpu='git push'
@@ -481,6 +486,10 @@ alias dx='dtrx -v'
 function xx { vi <(xxd $1) }
 function xio { vi <(xxd $1) <(xxd $2) }
 function xd { vi -d <(xxd $1) <(xxd $2) }
+
+function aw { 
+  awk '{print $'$1'}'; 
+}
 
 function zb {
   f=$(basename $1)
@@ -576,13 +585,19 @@ fi
 }
 
 function bat {
-  r=` cat /proc/acpi/battery/BAT0/state | awk '$0~/remaining capacity:/{print $3".0"}' `
-  c=` cat /proc/acpi/battery/BAT0/info | awk '$0~/design capacity:/{print $3".0"}' `
-  b=$((100*r/c))
-  echo "$b[1,4]%"
+  os=`uname`
+  if [[ "$os" = "Darwin" ]] ; then
+    b=` pmset -g batt | grep remaining | awk '{print$2}' | sed 's/;//g' `
+    echo $b
+  else
+    r=` cat /proc/acpi/battery/BAT0/state | awk '$0~/remaining capacity:/{print $3".0"}' `
+    c=` cat /proc/acpi/battery/BAT0/info | awk '$0~/design capacity:/{print $3".0"}' `
+    b=$((100*r/c))
+    echo "$b[1,4]%"
+  fi
 }
 
-function say { espeak --stdout -f $1 | aplay }
+#function say { espeak --stdout -f $1 | aplay }
 function path { echo ${${1}:a} }
 function cdd { cd ${PWD:t} $1 }
 function fbreader { FBReader $* 2>/dev/null 1>/dev/null & }

@@ -55,6 +55,7 @@ alias reload='. ~/.zshrc'
 alias re='. ~/.zshrc'
 alias conf='vi ~/.zshrc'
 alias vconf='vi ~/.vimrc'
+alias econf='vi ~/.emacs'
 alias iconf='vi ~/.i3/config'
 alias wconf='vi ~/.elinks/elinks.conf'
 alias sconf='vi ~/.screenrc'
@@ -63,6 +64,8 @@ alias gconf='vi ~/.gdbinit'
 alias pconf='vi ~/.pentadactylrc'
 alias mx='chmod 755 '
 alias vc='sudo chvt '
+alias v='vi +":bl"'
+alias se='sudoedit'
 alias e='vim -- *(D.oa[1])'
 alias vi='vim -O '
 alias v='vi +":bl"'
@@ -76,8 +79,8 @@ alias lsr='ls -rtl'
 alias tx='tmux attach -d'
 alias tx-kill='tmux kill-sessions'
 alias tl='tmux list-windows'
-alias ss='screen'
-alias ssr='screen -R'
+alias sc='screen'
+alias scr='screen -R'
 alias sl='screen -list'
 alias sx='startx'
 #alias rw='rlwrap -pyellow -S ":>< " -c -a -m -z shell '
@@ -104,6 +107,7 @@ alias lns='ln -fs'
 alias rd=rmdir
 alias sd=sudo
 alias db='rw gdb -q'
+#alias gdb='rw gdb -q'
 alias ldb='rw libtool --mode=execute gdb'
 alias gg='rw gdb -q'
 alias tn='rw telnet'
@@ -156,7 +160,7 @@ alias jconf='vi ~/.scratch'
 alias note='~/.scratch'
 
 ## environment
-alias econf='vi ~/local/environment/install/'
+alias yconf='vi ~/local/environment/install/'
 alias yumi='sudo yum -y install '
 alias yuml='yum -C list installed '
 
@@ -337,6 +341,7 @@ alias cle='clewn -va'
 
 ## scm
 alias git='/opt/git/bin/git'
+alias gui='git gui&'
 alias gci='git commit'
 alias gpu='git push'
 alias ga='git add'
@@ -444,7 +449,7 @@ EOT
 fi
 }
 
-function say { espeak --stdout -f $1 | aplay }
+#function say { espeak --stdout -f $1 | aplay }
 function fbreader { FBReader $* 2>/dev/null 1>/dev/null & }
 
 ## filesystem navigation
