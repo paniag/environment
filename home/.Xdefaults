@@ -21,6 +21,6 @@ gnuplot*ctrlq:	off
 *urxvt*cursorBlink:	true
 URxvt.matcher.button:	1
 URxvt.perl-ext-common:	default,matcher
-URxvt.url-launcher:	/usr/bin/xdg-open
+#URxvt.url-launcher:	/usr/bin/xdg-open
 URxvt.inputMethod:	ibus
 URxvt.preeditType:	OverTheSpot

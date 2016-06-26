@@ -11,12 +11,29 @@
 #  status_command conky -c ~/.conky/conkyrc_1
 #}
 
+exec --no-startup-id scratch
+#exec --no-startup-id /usr/bin/urxvt -rv -name Scratch -fn "xft:Terminus:pixelsize=14" -e /bin/zsh
+#exec --no-startup-id /usr/bin/env XENVIRONMENT=/home/mac/.Xdefaults /usr/bin/urxvt -rv -name Scratch -fn "xft:Terminus:pixelsize=14" -e /bin/zsh
+for_window[class="URxvt" instance="Scratch"] move window to scratchpad, border 1pixel
+
+bar {
+  separator_symbol ":|:"
+  workspace_buttons yes
+  strip_workspace_numbers no
+  binding_mode_indicator yes
+  tray_output primary
+  position bottom
+}
+
+show_marks yes
+workspace_auto_back_and_forth yes
+
 set $mod Mod4
 
-# start dmenu (a program launcher)
+## start dmenu (a program launcher)
 bindsym $mod+d exec /usr/bin/dmenu_run
 
-# back and forth
+## back and forth
 #workspace_auto_back_and_forth yes
 #bindsym $mod+grave workspace back_and_forth
 ##bindsym $mod+Shift+grave move container to workspace back_and_forth
@@ -33,7 +50,7 @@ client.unfocused        $bg $bg $ia
 client.focused_inactive $bg $bg $ia
 client.urgent           $al $al $tx
 
-new_window 1pixel
+#new_window 1pixel
 #bindsym $mod+t border normal
 #bindsym $mod+y border 1pixel
 #bindsym $mod+u border none
@@ -41,42 +58,48 @@ new_window 1pixel
 bindsym $mod+u kill
 bindsym $mod+q kill
 
-# font for window titles. ISO 10646 = Unicode
+## font for window titles. ISO 10646 = Unicode
 font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 
-# Use Mouse+$mod to drag floating windows to their wanted position
+## Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# avstudio
+## avstudio
 bindsym $mod+y [class="figure"] focus
 bindsym $mod+Shift+Y [class="[1]"] focus
 
-# applications
-bindsym $mod+p exec xsel -o
-bindsym $mod+i workspace 1
-bindsym $mod+c exec xclip -o > ~/.clip
+## applications
+#bindsym $mod+p exec xsel -o
+bindsym $mod+o workspace 1
+#bindsym $mod+c exec xclip -o > ~/.clip
 bindsym $mod+g exec gvim
-bindsym $mod+Shift+W exec vncviewer 127.0.0.1:0
-bindsym $mod+Shift+b exec google-chrome
-bindsym $mod+b [class="Chrome"] focus
-bindsym $mod+Shift+N exec xulrunner /opt/conkeror/application.ini
-bindsym $mod+Shift+o exec /opt/firefox/firefox-bin
-bindsym $mod+o [class="Firefox"] focus
-bindsym $mod+Shift+T exec xterm -e top
-bindsym $mod+m exec conky
-bindsym $mod+Shift+M exec xterm -e watch qstat
-bindsym $mod+Shift+Z exec xscreensaver-command -lock
+#bindsym $mod+Shift+W exec vncviewer 127.0.0.1:0
+#bindsym $mod+Shift+o exec google-chrome
+#bindsym $mod+o [class="Chrome"] focus
+#bindsym $mod+o [class="InputOutput"] focus
+#bindsym $mod+Shift+N exec xulrunner /opt/conkeror/application.ini
+#bindsym $mod+Shift+o exec /opt/firefox/firefox-bin
+#bindsym $mod+o [class="Firefox"] focus
+bindsym $mod+m exec touchpad-toggle
+#bindsym $mod+m exec conky
+#bindsym $mod+Shift+M exec xterm -e watch qstat
+#bindsym $mod+Shift+Z exec xscreensaver-command -lock
 bindsym $mod+x exec i3lock -c 000000
-bindsym $mod+Control+0 exec i3-workspace-dev
-bindsym $mod+Control+9 exec i3-workspace-daw
+#bindsym $mod+Control+0 exec i3-workspace-dev
+#bindsym $mod+Control+9 exec i3-workspace-daw
 
-# start a terminal
+## start a terminal
 bindsym $mod+Return exec /usr/bin/urxvt
 #bindsym $mod+Return exec /usr/bin/xterm
 #bindsym $mod+Return exec /usr/bin/gnome-terminal
 
-# kill focused window
+## kill focused window
 bindsym $mod+Shift+Q kill
+
+## scratchpad
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+space scratchpad show
+bindsym $mod+i scratchpad show, fullscreen
 
 # change focus
 #bindsym $mod+j focus left
@@ -121,31 +144,33 @@ bindsym $mod+v split h
 bindsym $mod+Shift+S split v
 
 # split in vertical orientation
-bindsym $mod+s split v
-bindsym $mod+Shift+V split h
+#bindsym $mod+s split v
+#bindsym $mod+v split h
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
+bindsym $mod+w fullscreen
+bindsym $mod+Shift+space fullscreen
 
-# change container layout (stacked, tabbed, default)
-bindsym $mod+s layout stacked
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout default
+## change container layout (stacked, tabbed, default)
+#bindsym $mod+s layout stacked
+#bindsym $mod+s layout stacking
+#bindsym $mod+w layout tabbed
+#bindsym $mod+e layout default
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+Control+space floating toggle
 
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+## change focus between tiling / floating windows
+#bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
 
-# focus the child container
+## focus the child container
 #bindcode $mod+d focus child
 
-# switch to workspace
+## switch to workspace
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
 bindsym $mod+3 workspace 3
@@ -161,7 +186,7 @@ bindsym $mod+Control+L workspace prev
 bindsym $mod+Control+J workspace next
 bindsym $mod+Control+K workspace prev
 
-# move focused container to workspace
+## move focused container to workspace
 bindsym $mod+Shift+1 move workspace 1
 bindsym $mod+Shift+2 move workspace 2
 bindsym $mod+Shift+3 move workspace 3
@@ -233,9 +258,9 @@ bindsym Escape mode "default"
 
 bindsym $mod+r mode "resize"
 
-bindsym XF86AudioMute exec amixer set Master toggle
-bindsym XF86AudioLowerVolume exec amixer set Master 10%- unmute
-bindsym XF86AudioRaiseVolume exec amixer set Master 10%+ unmute
+# bindsym XF86AudioMute exec amixer set Master toggle
+# bindsym XF86AudioLowerVolume exec amixer set Master 10%- unmute
+# bindsym XF86AudioRaiseVolume exec amixer set Master 10%+ unmute
 
 # bindsym XF86AudioMute exec amixer set PCM toggle
 # bindsym XF86AudioLowerVolume exec amixer set PCM 10%- unmute

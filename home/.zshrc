@@ -179,7 +179,8 @@ alias unn='uname -n'
 alias me='ps -uxf'
 alias untar='tar -zxvf'
 alias sx='startx'
-alias rw='rlwrap -pyellow -S ":>< " -c -a -m -z shell '
+alias rw='rlwrap -pyellow -S ":>< " -c -a -m -n -z shell '
+alias en='enhance '
 #alias rw='enhance '
 alias dim='xbacklight'
 alias rs='rsync -avhr'
@@ -284,6 +285,8 @@ alias ./='eval ${${(z)$(fc -l -1)[2,-1]}}'
 alias yconf='vi ~/local/environment/install/yum-install.sh'
 alias yumi='sudo yum -y install '
 alias yuml='yum -C list installed '
+alias apti='sudo apt install -y '
+alias aptconf='vi ~/local/environment/install/apt-install.sh'
 
 ## tags
 #alias tu='gtags'
@@ -354,7 +357,10 @@ alias tc='rw tclsh'
 alias sbcl='rw sbcl --noinform'
 alias sb='sbcl'
 alias sbx='sbcl -load'
-alias sc='rw gsi'
+alias sc='en csi -q'
+alias rsc='rw csi -q'
+alias esc='en csi -q'
+alias csi='chicken-install'
 alias guile='rw guile'
 alias racket='rw racket'
 alias rkt='rw racket'
@@ -424,7 +430,6 @@ alias lo='locate'
 ## build
 alias genmake='/opt/genmake/bin/gen_make.sh'
 alias cmake='cmake28'
-alias make='gmake'
 
 ## kvm
 alias vstart='/usr/libexec/qemu-kvm -hda -redir tcp:2222::22 -hda'
@@ -444,16 +449,14 @@ alias openclprof='/opt/openclprof1.0/bin/openclprof'
 alias web='pentadactyl'
 alias pent='pentadactyl'
 alias pentadactyl='firefox'
-alias firefox='/opt/firefox/firefox-bin NULL &'
-alias fox='firefox'
-alias chrome='google-chrome'
+alias fox='firefox&'
+alias chr='chrome&'
 alias opera='/usr/local/bin/opera'
+alias b='w3m'
 alias lx='lynx'
 alias el='elinks'
-alias goog='lynx http://www.google.com'
 alias conkeror='xulrunner /opt/conkeror/application.ini NULL &'
 alias conk='conkeror'
-alias wiki='lynx http://en.wikipedia.org'
 alias gollum='/usr/local/rvm/gems/ruby-2.1.0/bin/gollum'
 alias ra='ranger'
 alias fm='vifm'
@@ -466,7 +469,6 @@ alias ddd='ddd 1>/dev/null 2>/dev/null &'
 alias cle='clewn -va'
 
 ## scm
-alias git='/opt/git/bin/git'
 alias gui='git gui&'
 alias gci='git commit'
 alias gca='git commit -a'
@@ -648,6 +650,14 @@ function fma { echo "" | mutt -s $1 -a $2 -- $3 }
 function ema { gpg -ea -r $2 -o - | mutt -s $1 $2 }
 # fema "subject" file recipient
 function fema { gpg -ea -r $3 -o - $2 | mutt -s $1 $3 }
+
+function ss {
+  w3m "google.com?q=$*"
+}
+
+function wiki {
+  w3m "wikipedia.org/wiki/$*"
+}
 
 ## encrypted filesystem
 # enc directory
