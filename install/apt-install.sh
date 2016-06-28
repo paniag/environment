@@ -47,6 +47,10 @@ apt install flex -y
 apt install cowsay -y
 apt install xpdf -y
 apt install texlive-latex-extra -y
+apt install texlive-science -y
+apt install texlive-full -y
+apt install python-pygments -y
+apt install htop -y
 
 add-apt-repository ppa:atareao/atareao
 apt install touchpad-indicator -y

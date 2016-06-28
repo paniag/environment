@@ -178,6 +178,9 @@ alias mc-tool='memcached-tool 127.0.0.1:11211 '
 ## logging
 alias mt='multitail'
 
+## multimedia
+alias ffm='ffmpeg'
+
 ## network
 alias wget='wget --user-agent="Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.3) Gecko/2008092416 Firefox/3.0.3" '
 
@@ -191,11 +194,19 @@ alias xm='finch'
 ## graphics
 alias qiv='qiv -R'
 alias xv='qiv -R'
-alias gimp='gimp -s 2>/dev/null 1>/dev/null &'
+#alias gimp='gimp -s 2>/dev/null 1>/dev/null &'
 alias ink='inkscape 2>/dev/null 1>/dev/null &'
 
 ## text
 alias fmpp='/opt/fmpp/bin/fmpp'
+
+## network
+alias nmc='nmcli'
+alias nmcl='nmcli con show'
+alias nmcd='nmcli con delete'
+alias nmci='nmcli con show id'
+alias con='nmcli con show'
+alias wifi='nmcli d wifi'
 
 ## encryption
 alias decfs='ecryptfs-mount-private'
@@ -265,8 +276,8 @@ alias py='ipython3 --pylab --profile sh --no-confirm-exit --no-banner --quick --
 alias java='/opt/jdk/jre/bin/java'
 
 ## groovy
-alias groovy='/opt/groovy/bin/groovy'
-alias gy='rw groovy'
+alias gy='groovy'
+alias gyi='rw groovy'
 
 ## language
 #alias im-server='ibus --xim'
@@ -485,6 +496,21 @@ function enc {
 # dec file
 function dec { 
   cat $1 | gpg -d | tar -xv
+}
+
+function wifi-connect {
+  ssid=$1
+  name=$ssid
+  sudo nmcli con add type wifi con-name $name ifname wlo1 ssid $ssid
+  if [[ "$#" -gt 1 ]]; then
+    password=$2
+    sudo nmcli con modify $name wifi-sec.key-mgmt wpa-psk
+    sudo nmcli con modify $name wifi-sec.psk $password
+  fi
+  echo "bringing up connection: $name"
+  sudo nmcli con up $name
+  sudo nmcli con show id $name
+  sudo nmcli con show
 }
 
 if [ -f ~/.`uname -n`.alias ]; 

@@ -32,6 +32,7 @@ set $mod Mod4
 
 ## start dmenu (a program launcher)
 bindsym $mod+d exec /usr/bin/dmenu_run
+bindsym $mod+Shift+space exec /usr/bin/dmenu_run
 
 ## back and forth
 #workspace_auto_back_and_forth yes
@@ -150,7 +151,7 @@ bindsym $mod+Shift+S split v
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
 bindsym $mod+w fullscreen
-bindsym $mod+Shift+space fullscreen
+#bindsym $mod+Shift+space fullscreen
 
 ## change container layout (stacked, tabbed, default)
 #bindsym $mod+s layout stacked
