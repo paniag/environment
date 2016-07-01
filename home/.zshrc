@@ -389,7 +389,8 @@ alias pli='rw perl -d -e 1'
 #alias python='python2.6'
 alias python='/opt/anaconda3/bin/python'
 alias pip='pip3'
-alias py='ipython3 --pylab --profile sh --no-confirm-exit --no-banner --quick --nosep'
+#alias py='ipython3 --pylab --profile sh --no-confirm-exit --no-banner --quick --nosep'
+alias py='ipython --pylab --profile sh --no-confirm-exit --no-banner --quick --nosep'
 
 ## java
 alias java='/opt/jdk/jre/bin/java'
@@ -437,7 +438,6 @@ alias lo='locate'
 
 ## build
 alias genmake='/opt/genmake/bin/gen_make.sh'
-alias cmake='cmake28'
 
 ## kvm
 alias vstart='/usr/libexec/qemu-kvm -hda -redir tcp:2222::22 -hda'

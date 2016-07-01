@@ -290,4 +290,7 @@ brew install elinks
 ## tiny fugue
 brew install tinyfugue
 
+## gnuradio
+brew install gnuradio
+
 ## *EOF* 

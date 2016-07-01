@@ -14,6 +14,7 @@ apt install xfonts-terminus -y
 apt install console-terminus -y
 apt install git -y
 apt install i3 -y
+apt install stumpwm -y
 apt install elinks -y
 apt install lynx -y
 apt install links -y
@@ -50,7 +51,20 @@ apt install texlive-latex-extra -y
 apt install texlive-science -y
 apt install texlive-full -y
 apt install python-pygments -y
+apt install ipython -y
+apt install python-numpy -y
+apt install python-matplotlib -y
+apt install cython -y
 apt install htop -y
+apt install ikarus -y
+apt install root-system -y
+apt install sbcl -y
+apt install clisp -y
+apt install axiom -y
+apt install cmake -y
+apt install ecl -y
+apt install libboost-all-dev -y
+apt install gnuradio -y
 
 add-apt-repository ppa:atareao/atareao
 apt install touchpad-indicator -y
