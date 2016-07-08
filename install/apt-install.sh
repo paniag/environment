@@ -65,6 +65,29 @@ apt install cmake -y
 apt install ecl -y
 apt install libboost-all-dev -y
 apt install gnuradio -y
+apt install liblapack-devel -y
+apt install jack -y
+apt install julia -y
+apt install pdl -y
+apt install inkscape -y
+apt install blender -y
+apt install libeigen3-dev -y
+apt install xmonad -y
+apt install llvm-dev -y
+apt install hovercraft -y
+apt install kvm -y
+apt install tcl-dev -y
+apt install libzmq5-dev -y
+apt install ocaml -y
+apt install groovy -y
+apt install scala -y
+apt install expect -y
+apt install spark -y
+apt install finch -y
+apt install yacas -y
+apt install maximus -y
+apt install ikvm -y
+apt install mutt/xenial -y
 
 add-apt-repository ppa:atareao/atareao
 apt install touchpad-indicator -y
