@@ -216,7 +216,6 @@ alias pp='ps -ef'
 alias px='ps -xf'
 alias f='fg'
 alias ec='echo'
-alias cc='cat'
 alias sane='stty sane'
 alias caly='cal -y'
 alias ecal='calendar -A 31'
@@ -236,6 +235,7 @@ alias cnm='./configure && make'
 alias pc='pkg-config'
 alias mk='make'
 alias mkc='make clean'
+alias mkb='make clobber'
 alias mkdc='make distclean'
 alias mkr='make clean; make'
 alias mki='sudo make install'
@@ -686,6 +686,11 @@ function dec {
     echo "cat $1 | gpg --passphrase $PASSPHRASE -d | tar -xv"
     cat $1 | gpg --batch --passphrase $PASSPHRASE -d | tar -xv
   fi
+}
+
+function fix-dbus {
+  eval `dbus-launch`
+  export DBUS_SESSION_BUS_ADDRESS
 }
 
 function wifi-connect {

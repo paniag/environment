@@ -13,5 +13,6 @@ gem install gollum
 gem install bundler
 gem install rails
 gem install sinatra
+gem install ffi -v 1.9.13
 
 ## *EOF*

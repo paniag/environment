@@ -22,6 +22,7 @@ apt install xclip -y
 apt install gambc -y
 apt install chicken-bin -y
 apt install guile-2.0 -y
+apt install guile-2.0-dev -y
 apt install mit-scheme -y
 apt install clisp -y
 apt install scbl -y
@@ -36,6 +37,7 @@ apt install eog -y
 apt install lilypond -y
 apt install imagemagick -y
 apt install octave -y
+apt install liboctave-dev -y
 apt install gnuplot -y
 apt install graphviz -y
 apt install wmctrl -y
@@ -88,6 +90,12 @@ apt install yacas -y
 apt install maximus -y
 apt install ikvm -y
 apt install mutt/xenial -y
+apt install ruby -y
+apt install ruby-dev -y
+apt install libz-dev -y
+apt install libicu-dev -y
+apt install build-essential -y
+apt install python3-dev -y
 
 add-apt-repository ppa:atareao/atareao
 apt install touchpad-indicator -y
