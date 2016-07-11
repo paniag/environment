@@ -1,6 +1,7 @@
 #!/bin/bash
 # Mac Radigan
 
+chicken-install sicp
 chicken-install salmonella
 chicken-install cock
 chicken-install cock-utils
