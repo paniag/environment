@@ -96,6 +96,7 @@ apt install libz-dev -y
 apt install libicu-dev -y
 apt install build-essential -y
 apt install python3-dev -y
+apt install enscript -y
 
 add-apt-repository ppa:atareao/atareao
 apt install touchpad-indicator -y

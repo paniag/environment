@@ -517,6 +517,12 @@ function wifi-connect {
   sudo nmcli con show
 }
 
+function txt2pdf {
+  fn=${1}; shift
+  b=${fn%.*}
+  enscript ${fn} -o - | ps2pdf - ${b}.pdf
+}
+
 if [ -f ~/.`uname -n`.alias ]; 
 then
  . ~/.`uname -n`.alias
