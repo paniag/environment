@@ -8,8 +8,8 @@ bind index g group-reply
 #source "gpg2 -dq ~/.password.gpg |"
 source "cat ~/.password |"
 source ~/.muttalias
-source ~/.mutt_config/pgp2.rc
-source ~/.mutt_config/gpg.rc
+source ~/.mutt_config/pgp2_hack.rc
+source ~/.mutt_config/gpg_hack.rc
 
 set header_cache = "~/.cache/mutt"
 set imap_check_subscribed
@@ -19,12 +19,12 @@ set mail_check = 60
 set mbox_type=Maildir
 
 set pgp_use_gpg_agent = yes
-set pgp_sign_as = D4193C82
+set pgp_sign_as = C079EFC3
 set pgp_timeout = 3600
 set crypt_autosign = yes
 set crypt_replyencrypt = yes
-set pgp_mime_signature_filename="signature.asc"
-set pgp_mime_signature_description="digital signature"
+#set pgp_mime_signature_filename="signature.asc"
+#set pgp_mime_signature_description="digital signature"
 
 unset recall
 unset arrow_cursor

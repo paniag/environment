@@ -56,6 +56,8 @@ apt install python-pygments -y
 apt install ipython -y
 apt install python-numpy -y
 apt install python-matplotlib -y
+apt install python-pip -y
+apt install python3-pip -y
 apt install cython -y
 apt install htop -y
 apt install ikarus -y
@@ -97,6 +99,16 @@ apt install libicu-dev -y
 apt install build-essential -y
 apt install python3-dev -y
 apt install enscript -y
+apt install autoconf -y
+apt install automake -y
+apt install libopenblas-base -y
+apt install libopenblas-dev -y
+apt install cscope -y
+apt install global -y
+apt install default-jdk -y
+apt install racket -y
+apt install ack-grep -y
+apt install mdk -y
 
 add-apt-repository ppa:atareao/atareao
 apt install touchpad-indicator -y

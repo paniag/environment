@@ -293,4 +293,7 @@ brew install tinyfugue
 ## gnuradio
 brew install gnuradio
 
+## haskell
+brew install ghc
+
 ## *EOF* 

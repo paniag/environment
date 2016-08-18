@@ -54,6 +54,7 @@ export XMODIFIERS="@im=SCIM"
 export GTK_IM_MODULE="scim"
 export XIM_PROGRAM="scim -d"
 export QT_IM_MODULE="scim"
+export LC_ALL=C
 #export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64
 export GUILE_LOAD_PATH=/usr/share/guile/1.8
 export GUILE_IMPLEMENTATION_PATH=/usr/share/guile/1.8
@@ -127,7 +128,7 @@ bindkey -M viins '^k' vi-kill-line
 #bindkey -M viins 'kj' vi-kill-line
 #bindkey -M vicmd kh vi-pound-insert
 bindkey -M vicmd 'jh' vi-pound-insert
-#bindkey -M viins 'jl' clear-screen
+bindkey -M viins 'jl' clear-screen
 #bindkey -M viins 'jn' push-line
 #bindkey -M viins 'ji' history-incremental-pattern-search-backward
 #bindkey -M viins 'jo' vi-digit-or-beginning-of-line
@@ -152,14 +153,13 @@ alias gconf='vi ~/.gdbinit'
 alias pconf='vi ~/.pentadactylrc'
 alias mx='chmod 755 '
 alias vc='sudo chvt '
-alias e='vim -- *(D.oa[1])'
 alias vi='vim -O '
 alias v='vi +":bl"'
 alias se='sudoedit'
 alias vio='vim -o '
 alias vip='vim -c ":Project vimprojects"'
 alias gvim='gvim -c ":colorscheme torte"'
-alias e='vim -- *(D.oa[1])'
+#alias e='vim -- *(D.oa[1])'
 alias ll='ls -l'
 alias la='ls -la'
 alias lsr='ls -rtl'
@@ -205,12 +205,13 @@ alias off='sudo shutdown -h now'
 alias on='sudo shutdown -r now'
 alias ifa='ifconfig -a'
 alias ee='emacs -nw'
-alias e='emacs -nw *(D.oa[1])'
+alias e='emacs -nw '
+#alias e='emacs -nw *(D.oa[1])'
 alias md5='openssl md5'
 alias dush='du -sh'
 alias halt='sudo shutdown -h now'
 alias gu='guile'
-alias cs='rw csi -q'
+alias cs='csi -q'
 alias k9='kill -9'
 alias pp='ps -ef'
 alias px='ps -xf'
@@ -223,7 +224,7 @@ alias plan='cal; ecal'
 alias di='echo $DISPLAY'
 alias ca='zcalc'
 alias srm='srm -m'
-alias repl='rw lein repl'
+alias repl='lein repl'
 #alias rm='srm'
 function gxe { emacs $* 1>/dev/null 2>/dev/null & }
 #export DISPLAY=`uname -n`:0.0
@@ -289,9 +290,9 @@ alias apti='sudo apt install -y '
 alias aptconf='vi ~/local/environment/install/apt-install.sh'
 
 ## tags
-#alias tu='gtags'
+alias tu='gtags'
 #alias tu='ctags -f tags *.[ch]*'
-alias tu='cscope -b *.[ch]*'
+#alias tu='cscope -b *.[ch]*'
 
 ## services
 alias ck='ps -ef | grep -E "(jackd|lmms)"'
@@ -358,36 +359,33 @@ alias ro='root -l'
 alias rx='root -l -q -x -b'
 
 ## tcl
-alias tcl='rw tclsh'
-alias tc='rw tclsh'
+alias tcl='tclsh'
+alias tc='tclsh'
 
 ## lisp
-alias sbcl='rw sbcl --noinform'
+alias sbcl='sbcl --noinform'
 alias sb='sbcl'
 alias sbx='sbcl -load'
-alias sc='en csi -q'
-alias rsc='rw csi -q'
-alias esc='en csi -q'
-alias csi='chicken-install'
-alias gu='en guile'
-alias racket='rw racket'
-alias rkt='rw racket'
-alias ecl='rw ecl'
+alias sc='csi -q'
+alias rsc='csi -q'
+alias esc='csi -q'
+alias gu='guile'
+alias rkt='racket'
+alias ecl='ecl'
 alias ec='ecl'
 alias ecx='ecl -load'
-alias cl='rw clisp'
+alias cl='clisp'
 alias clx='clisp -load'
 alias closure='java -jar /opt/closure/compiler.jar --compilation_level ADVANCED_OPTIMIZATIONS --js '
 
 ## perl
 alias pl='perl'
 alias pln='perl -lne'
-alias pli='rw perl -d -e 1'
+alias pli='perl -d -e 1'
 
 ## python
 #alias python='python3'
 #alias python='python2.6'
-alias python='/opt/anaconda3/bin/python'
 alias pip='pip3'
 #alias py='ipython3 --pylab --profile sh --no-confirm-exit --no-banner --quick --nosep'
 alias py='ipython --pylab --profile sh --no-confirm-exit --no-banner --quick --nosep'
@@ -397,7 +395,7 @@ alias java='/opt/jdk/jre/bin/java'
 
 ## groovy
 alias gy='groovy'
-alias gyi='rw groovy'
+alias gyi='groovy'
 
 ## language
 #alias im-server='ibus --xim'
@@ -406,21 +404,21 @@ alias im-server='scim -d 1>/dev/null 2>/dev/null &'
 
 ## scientific
 #alias octave='/opt/octave/bin/octave -q'
-alias R='rw R -q --no-save'
-alias oc='rw octave -q'
-alias ml='rw octave -q'
+alias R='R -q --no-save'
+alias oc='octave -q'
+alias ml='octave -q'
 alias scilab='/opt/scilab/bin/scilab'
 alias gp='gnuplot'
-alias ij='rw /opt/j/bin/jconsole'
+alias ij='/opt/j/bin/jconsole'
 alias jbrk='/opt/j/bin/jbrk'
 alias jython='/opt/jython/bin/jython'
 alias h5='h5dump -H'
-alias kx='rw q'
+alias kx='q'
 alias kona='k'
-alias k='rw k'
-alias eli='rw elix'
+alias k='k'
+alias eli='elix'
 alias julia='/opt/julia/bin/julia --color=no'
-alias ju='rw julia'
+alias ju='julia'
 alias gdl='/opt/gdl/bin/gdl -q'
 alias pro='gdl'
 
@@ -504,13 +502,13 @@ function aw {
 function zb {
   f=$(basename $1)
   zip -r $f-`date +%F`-a.zip $f
-  openssl md5 $f-`date +%F`-a.zip > $f-`date +%F`-a.zip.md5
+  openssl sha1 $f-`date +%F`-a.zip > $f-`date +%F`-a.zip.sha1
 }
 
 function tb {
   f=$(basename $1)
   tar -zcvf $f-`date +%F`-a.tar.gz $f
-  openssl md5 $f-`date +%F`-a.tar.gz > $f-`date +%F`-a.tar.gz.md5
+  openssl sha1 $f-`date +%F`-a.tar.gz > $f-`date +%F`-a.tar.gz.sha1
 }
 
 function unrpm {
@@ -572,7 +570,7 @@ if [[ -z $url ]] || [[ -z $ext ]]
 then
   echo "scrape <url> <extension>"
 else
-python2.6 - <<EOT
+python - <<EOT
 from BeautifulSoup import BeautifulSoup
 import urllib2
 import urlparse

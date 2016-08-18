@@ -2,14 +2,16 @@
 "" Mac Radigan
 
 "" pathogen
-let g:pathogen_disabled = []
-"silent! call add(g:pathogen_disabled, 'nerdtree')
-silent! call add(g:pathogen_disabled, 'lusty')
-silent! execute pathogen#infect()
+"let g:pathogen_disabled = []
+"call add(g:pathogen_disabled, 'nerdtree')
+"call add(g:pathogen_disabled, 'lusty')
+"execute pathogen#infect()
 
 "" conque term
 "let g:ConqueTerm_InsertOnEnter = 0
 "let g:ConqueTerm_EscKey = '<Esc><Esc>'
+
+"au FileType arc call PareditInitBuffer()
 
 "" matching
 runtime macros/matchit.vim
@@ -28,11 +30,22 @@ set omnifunc=syntaxcomplete#Complete
 set tags+=./tags;./src/tags;/
 set cscopeprg=gtags-cscope
 
+"" compiler
+"set mp=(/usr/bin/make)
+
 "" syntax
 filetype plugin on
 syntax on
 "color torte
 "color delek
+
+" local configuration
+if filereadable(glob("./vimrc.local")) 
+  source ./vimrc.local
+endif
+if filereadable(glob("./.vimrc.local")) 
+  source ./.vimrc.local
+endif
 
 "" settings
 setlocal autoread
@@ -42,9 +55,7 @@ set go-=mT
 set cst
 set csto=0
 set nocsverb
-"set mp=(gmake\ -j -C.\ $*)
-"set mp=(gmake\ -j -C.\ $*)
-let &makeprg='make -j -C . '
+set mp=(/usr/bin/make)
 set fdm=manual
 set foldlevel=10000
 set list
@@ -82,12 +93,30 @@ set incsearch
 set confirm
 set wmnu
 set wim=list:longest,full
+set viminfo^=%
+set dictionary=/usr/share/dict/words
+set complete=.,w,k
+set keywordprg=dict
+set equalprg=astyle\ -s2\ -xG\ -S\ --style=allman
+
+set viminfo^=%
+set stl=%#Tag#[\ 
+set stl+=\ %#Folded#%n%#ModeMsg#\ 
+set stl+=%#MoreMsg#%f%#ModeMsg#\ 
+set stl+=\ %#Tag#]\ 
+set stl+=%#VisualNos#%m%h%q%w%r%y%#ModeMsg#
+set stl+=%#MoreMsg#(%#ModeMsg#%4l\,%#Folded#%4c%#MoreMsg#)%#ModeMsg#\ 
+set stl+=%<%P\ 
+set stl+=of\ %L\ 
+set stl+=%#Tag#[%#VisualNos#O:0x%-6O\ o:%-6o%#Tag#]%#VisualNos#\ 
+set stl+=%#Tag#[%#VisualNos#B:0x%-3B\ b:%-3b%#Tag#]%#VisualNos#\ 
 
 "" toggle
 nn <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 let g:fld=0
 let g:win=10
+let g:mac=0
 
 "" autocmd
 au QuickFixCmdPost [^l]* nested cwindow
@@ -111,10 +140,10 @@ au BufReadPost *
 let mapleader = ","
 nn ;w :w<CR>
 nn ;a :qall<CR>
-ino ;c <ESC>
-map <leader>, <ESC>
+"ino ;c <ESC>
+"map <leader>, <ESC>
 nn <leader>. .n<CR>
-ino <silent> <leader>, <Esc>
+"ino <silent> <leader>, <Esc>
 nn <leader>/ :noh<CR>
 
 "" reflow text
@@ -328,7 +357,7 @@ nn <leader>lpu :!enscript -b"HEADER" -h -G -L65 -r -fCourier7 -2 %<CR>
 nn ;i :cd %:h<CR>:e .<CR>
 
 "" windows
-nn <leader>e :e .<CR>
+nn <leader>e :e %:h<CR>
 nn <leader>E :Sex!<CR>
 nn ;e :e 
 nn ;E :Sex<CR>
@@ -356,8 +385,7 @@ nn ;t :tabnew<CR>
 
 "" tags
 "nn <leader>tu :!ctags --langmap=c:+.cu --exclude=".pc" --recurse<CR><CR>
-"nn <leader>tu :!ctags -f tags *.[ch]*<CR><CR>
-nn <leader>tu :!cscope -b *.[ch]*<CR><CR>
+nn <leader>tu :!ctags -f tags *.[ch]*<CR><CR>
 nn <leader>ta :ta 
 nn <leader>sts :stj /
 nn <leader>ts :tj /
@@ -376,7 +404,10 @@ nn ;X :!chmod 755 %<CR>
 nn <leader>x :!./%<CR>
 nn ;x :!./%<CR>
 nn ;s :shell<CR>
+
+"" clipboard
 nn ;p "+p
+nn ;y "+y
 
 "" drill
 nn <leader>d 
@@ -385,8 +416,8 @@ nn <leader>D 
 "" split window
 nn <leader>v :vs<CR>
 nn <leader>s :sp<CR>
-nnoremap <leader>nn <C-W>_<C-W><Bar>
-nnoremap <leader>NN <C-W>_<C-W>=
+nn <leader>nn <C-W>_<C-W><Bar>
+nn <leader>NN <C-W>_<C-W>=
 
 "" window
 nn <leader>i :hid<CR>
@@ -403,6 +434,7 @@ nn <leader>gr :vimgrep
 nn <leader>GR :!grep 
 
 "" macros
+vm <leader>W :normal! @q<CR>
 nn <leader>gm :exe @g<CR>
 nn <leader>QQ :call DoNMacro()<CR>
 nn <leader>QB :bufdo! normal! @q<CR>
@@ -413,6 +445,7 @@ vn / y:execute "/".escape(@",'[]/\.*')<CR>
 nn <leader>V <C-V>
 nn ;v <C-V>
 nn ;V 0{j<C-V>}k
+nn <leader>A ggVG
 
 "" scroll
 nn <Space> }
@@ -431,9 +464,13 @@ nn <leader>@ :setlocal spell!<CR>
 nn <leader># :set invnu<CR>
 nn <leader>$ :set invlist<CR>
 nn <leader>% :call ToggleSyntax()<CR>
-nn <leader>m :call ToggleSyntax()<CR> :set invlist<CR> :set invnu<CR>
+nn <leader>* :call ToggleSyntax()<CR> :set invlist<CR> :set invnu<CR>
 nn <leader>^ :colorscheme 
 nn <leader>) :set invcul<CR>
+
+"" macros
+nm <leader>m :call ToggleMac()<CR>
+nm ;m @q
 
 "" text objects
 nn <C-i> "*p
@@ -560,6 +597,15 @@ else
 endif
 
 "" functions
+ 
+function! ToggleMac()
+  if g:mac == 1
+    let g:mac = 0
+    :normal!
+  else
+    let g:mac = 1
+    :normal!qqmq
+endfunction
 
 function! ToggleFold()
   if g:fld == 1
@@ -634,51 +680,14 @@ function! Browser()
 endfunction
 map <leader>w :call Browser()<CR>
 
-"" tabline
-if exists("+showtabline")
-  function MyTabLabel(n)
-    let buflist = tabpagebuflist(a:n)
-    let winnr = tabpagewinnr(a:n)
-    return '[' . buflist[winnr - 1] . '] ' .  bufname(buflist[winnr - 1])
-  endfunction
-  function MyTabLine()
-    let s = ''
-    for i in range(tabpagenr('$'))
-      " select the highlighting
-      if i + 1 == tabpagenr()
-        let s .= '%#TabLineSel#'
-      else
-        let s .= '%#TabLine#'
-      endif
-      " set the tab page number (for mouse clicks)
-      let s .= '%' . (i + 1) . 'T'
-      " the label is made by MyTabLabel()
-      let s .= ' %{MyTabLabel(' . (i + 1) . ')} '
-    endfor
-    " after the last tab fill with TabLineFill and reset tab page nr
-    let s .= '%#TabLineFill#%T'
-    " right-align the label to close the current tab page
-    if tabpagenr('$') > 1
-      let s .= '%=%#TabLine#%999Xclose'
-    endif
-    return s
-  endfunction
-  set stal=2
-  set tabline=%!MyTabLine()
-  hi TabLineFill ctermfg=White  ctermbg=White
-  hi TabLine     ctermfg=White  ctermbg=Black
-  hi TabLineSel  ctermfg=Yellow ctermbg=White
-endif
-
 hi Folded ctermfg=yellow ctermbg=black guifg=yellow guibg=black
-hi Search ctermfg=black  ctermbg=red   guifg=black  guibg=red
-"hi Folded ctermfg=yellow ctermbg=black guifg=yellow guibg=black
 
 "" indent text object
-onoremap <silent>ai :<C-U>cal <SID>IndTxtObj(0)<CR>
-onoremap <silent>ii :<C-U>cal <SID>IndTxtObj(1)<CR>
-vnoremap <silent>ai :<C-U>cal <SID>IndTxtObj(0)<CR><Esc>gv
-vnoremap <silent>ii :<C-U>cal <SID>IndTxtObj(1)<CR><Esc>gv
+ono <silent>ai :<C-U>cal <SID>IndTxtObj(0)<CR>
+ono <silent>ii :<C-U>cal <SID>IndTxtObj(1)<CR>
+vno <silent>ai :<C-U>cal <SID>IndTxtObj(0)<CR><Esc>gv
+vno <silent>ii :<C-U>cal <SID>IndTxtObj(1)<CR><Esc>gv
+nn <leader>> =a{
 
 function! s:IndTxtObj(inner)
   let curline = line(".")
@@ -705,5 +714,44 @@ function! s:IndTxtObj(inner)
     normal! $
   endif
 endfunction
+
+if exists("+tabline")
+  function MyTabLabel(n)
+    let buflist = tabpagebuflist(a:n)
+    let winnr = tabpagewinnr(a:n)
+    return "[" . buflist[winnr - 1] . "] " . bufname(buflist[winnr - 1])
+  endfunction
+  function MyTabLine()
+    let s = ''
+    for i in range(tabpagenr('$'))
+      " select the highlighting
+      if i + 1 == tabpagenr()
+        let s .= '%#TabLineSel#'
+      else
+        let s .= '%#TabLine#'
+      endif
+      " set the tab page number (for mouse clicks)
+      let s .= '%' . (i + 1) . 'T'
+      " the label is made by MyTabLabel()
+      let s .= ' %{MyTabLabel(' . (i + 1) . ')} '
+    endfor
+    " after the last tab fill with TabLineFill and reset tab page nr
+    let s .= '%#TabLineFill#%T'
+    " right-align the label to close the current tab page
+    if tabpagenr('$') > 1
+      let s .= '%=%#TabLine#%999Xclose'
+    endif
+    return s
+  endfunction
+  set stal=2
+  set tabline=%!MyTabLine()
+  hi TabLineFill ctermfg=Black  ctermbg=White
+  hi TabLine     ctermfg=White  ctermbg=Black
+  hi TabLineSel  ctermfg=Green  ctermbg=Black
+endif
+
+" syntax off
+" set nohlsearch
+" set t_Co=0
 
 "" *EOF*

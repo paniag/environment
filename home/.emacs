@@ -1,6 +1,7 @@
 ;; .emacs
 ;; Mac Radigan
 
+
   (add-to-list 'load-path "~/.emacs.d/helm")
   (add-to-list 'load-path "~/.emacs.d/evil")
   (add-to-list 'load-path "~/.emacs.d/powerline")
@@ -24,7 +25,15 @@
   (show-paren-mode 1)
   (electric-pair-mode 1)
   (global-font-lock-mode 't)
-  (setq confirm-kill-emacs 'yes-or-no-p)
+  (setq confirm-kill-emacs nil)
+  (setq confirm-nonexistent-file-or-buffer nil)
+
+  (defun 2-windows-vertical-to-horizontal ()
+  (let ((buffers (mapcar 'window-buffer (window-list))))
+    (when (= 2 (length buffers))
+      (delete-other-windows)
+      (set-window-buffer (split-window-horizontally) (cadr buffers)))))
+  (add-hook 'emacs-startup-hook '2-windows-vertical-to-horizontal)
 
   (require 'cl)
 

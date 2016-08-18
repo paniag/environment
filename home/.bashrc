@@ -27,6 +27,7 @@ export XMODIFIERS="@im=SCIM"
 export GTK_IM_MODULE="scim"
 export XIM_PROGRAM="scim -d"
 export QT_IM_MODULE="scim"
+export LC_ALL=C
 export JAVA_HOME=/opt/jdk/jre
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 export VST_PATH=~/dat/music/lmms/vst
@@ -110,7 +111,7 @@ alias db='rw gdb -q'
 #alias gdb='rw gdb -q'
 alias ldb='rw libtool --mode=execute gdb'
 alias gg='rw gdb -q'
-alias tn='rw telnet'
+alias tn='telnet'
 alias pk=pkill
 alias off='sudo shutdown -h now'
 alias on='sudo shutdown -r now'
@@ -119,7 +120,7 @@ alias xe='emacs -nw'
 alias md5='openssl md5'
 alias dush='du -sh'
 alias halt='sudo shutdown -h now'
-alias cs='rw csi -q'
+alias cs='csi -q'
 alias k9='kill -9'
 alias pe='ps -ef'
 alias px='ps -xf'
@@ -166,9 +167,9 @@ alias apti='sudo apt install -y '
 alias aptconf='vi ~/local/environment/install/apt-install.sh'
 
 ## tags
-#alias tu='gtags'
+alias tu='gtags'
 #alias tu='ctags -f tags *.[ch]*'
-alias tu='cscope -b *.[ch]*'
+#alias tu='cscope -b *.[ch]*'
 
 ## services
 alias ck='ps -ef | grep -E "(jackd|lmms)"'
@@ -238,36 +239,34 @@ alias finch='finch'
 alias xm='mcabber'
 
 ## root
-alias ro='rw root -l'
-alias rx='rw root -l -q -x -b'
+alias ro='root -l'
+alias rx='root -l -q -x -b'
 
 ## tcl
-alias tcl='rw tclsh'
-alias tc='rw tclsh'
+alias tcl='tclsh'
+alias tc='tclsh'
 
 ## lisp
-alias racket='rw racket'
-alias rkt='rw racket'
-alias gu='en guile'
-alias sc='rw gsi'
-alias sbcl='rw sbcl --noinform'
+alias rkt='racket'
+alias gu='guile'
+alias sc='gsi'
+alias sbcl='sbcl --noinform'
 alias sb='sbcl'
 alias sbx='sbcl -load'
-alias ecl='rw ecl'
+alias ecl='ecl'
 alias ec='ecl'
 alias ecx='ecl -load'
-alias cl='rw clisp'
+alias cl='clisp'
 alias clx='clisp -load'
 alias closure='java -jar /opt/closure/compiler.jar --compilation_level ADVANCED_OPTIMIZATIONS --js '
 
 ## perl
 alias pl='perl'
 alias pln='perl -lne'
-alias pli='rw perl -d -e 1'
+alias pli='perl -d -e 1'
 
 ## python
 #alias python='python3'
-alias python='python2.6'
 alias pip='pip3'
 alias py='ipython3 --pylab --profile sh --no-confirm-exit --no-banner --quick --nosep'
 
@@ -276,7 +275,7 @@ alias java='/opt/jdk/jre/bin/java'
 
 ## groovy
 alias gy='groovy'
-alias gyi='rw groovy'
+alias gyi='groovy'
 
 ## language
 #alias im-server='ibus --xim'
@@ -284,22 +283,22 @@ alias im-setup='scim-setup'
 alias im-server='scim -d 1>/dev/null 2>/dev/null &'
 
 ## scientific
-alias R='rw R -q --no-save'
-alias oc='rw octave -q'
-alias ml='rw octave -q'
+alias R='R -q --no-save'
+alias oc='octave -q'
+alias ml='octave -q'
 #alias scilab='/opt/scilab/bin/scilab'
 alias scilab='/opt/scilab/bin/scilab -nw'
 alias gp='gnuplot'
-alias ij='rw /opt/j/bin/jconsole'
+alias ij='/opt/j/bin/jconsole'
 alias jbrk='/opt/j/bin/jbrk'
 alias jython='/opt/jython/bin/jython'
 alias h5='h5dump -H'
-alias kx='rw q'
+alias kx='q'
 alias kona='k'
-alias k='rw k'
-alias eli='rw elix'
+alias k='k'
+alias eli='elix'
 alias julia='/opt/julia/bin/julia --color=no'
-alias ju='rw julia'
+alias ju='julia'
 alias gdl='/opt/gdl/bin/gdl -q'
 alias pro='gdl'
 

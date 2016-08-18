@@ -37,4 +37,6 @@ pip3 install mido
 pip3 --allow-external pyodbc --allow-unverified pyodbc pyodbc
 pip3 jinja2
 
+pip3 install git+https://github.com/brombo/galgebra.git
+
 ## *EOF*
