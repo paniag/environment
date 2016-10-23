@@ -706,6 +706,12 @@ function wifi-connect {
   sudo nmcli con show
 }
 
+function gacl {
+  eval "$(ssh-agent -s)"
+  ssh-add ~/.ssh/id_rsa
+  ssh -vT git@github.com
+}
+
 function txt2pdf {
   fn=${1}; shift
   b=${fn%.*}
