@@ -2,6 +2,8 @@
 ## torque-configure.sh
 ## Mac Radigan
 
+echo `uname -n` > /var/spool/torque/server_name
+
 qmgr -c "set server scheduling=true"
 qmgr -c "create queue batch queue_type=execution"
 qmgr -c "set queue batch started=true"

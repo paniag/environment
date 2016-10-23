@@ -109,6 +109,11 @@ apt install default-jdk -y
 apt install racket -y
 apt install ack-grep -y
 apt install mdk -y
+apt install torque-server -y
+apt install torque-client -y
+apt install torque-mom -y
+apt install torque-pam -y
+apt install docker -y
 
 add-apt-repository ppa:atareao/atareao
 apt install touchpad-indicator -y

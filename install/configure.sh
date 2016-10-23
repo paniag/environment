@@ -2,6 +2,7 @@
 # configure.sh
 # Mac Radigan
 
+ufw allow 22
 chkconfig sshd on
 service sshd start
 
