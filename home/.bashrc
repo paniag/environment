@@ -133,6 +133,7 @@ alias ecal='calendar -A 31'
 alias plan='cal; ecal'
 alias di='echo $DISPLAY'
 #alias rm='srm'
+alias doc='docker'
 function gxe { emacs $* 1>/dev/null 2>/dev/null & }
 #export DISPLAY=`uname -n`:0.0
 

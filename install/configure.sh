@@ -3,6 +3,7 @@
 # Mac Radigan
 
 ufw allow 22
+iptables -A INPUT -p tcp --dport ssh -j ACCEPT
 chkconfig sshd on
 service sshd start
 
@@ -44,5 +45,7 @@ service mysqld start
 
 chkconfig slapd on
 service slapd start
+
+sudo usermod -aG docker $(whoami)
 
 ## *EOF*

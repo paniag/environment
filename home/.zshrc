@@ -225,6 +225,7 @@ alias di='echo $DISPLAY'
 alias ca='zcalc'
 alias srm='srm -m'
 alias repl='lein repl'
+alias doc='docker'
 #alias rm='srm'
 function gxe { emacs $* 1>/dev/null 2>/dev/null & }
 #export DISPLAY=`uname -n`:0.0
