@@ -114,6 +114,11 @@ apt install torque-client -y
 apt install torque-mom -y
 apt install torque-pam -y
 apt install docker -y
+apt install libglew-dev -y
+apt install freeglut3-dev -y
+apt install libglm-dev -y
+apt install docker -y
+apt install libxcursor-dev -y
 
 add-apt-repository ppa:atareao/atareao
 apt install touchpad-indicator -y
