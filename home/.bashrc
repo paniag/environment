@@ -352,6 +352,7 @@ alias cle='clewn -va'
 ## scm
 alias gui='git gui&'
 alias gci='git commit'
+alias gca='git commit -a -S'
 alias gpu='git push'
 alias ga='git add'
 alias gist='git log --oneline --decorate'

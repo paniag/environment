@@ -119,6 +119,15 @@ apt install freeglut3-dev -y
 apt install libglm-dev -y
 apt install docker -y
 apt install libxcursor-dev -y
+apt install haskell-platform -y
+apt install chromium-browser -y
+apt install g++-multilib -y
+apt install libc6-dev -y
+apt install libc6-dev-i386 -y
+apt install timidity -y
+apt install libgl1-mesa-glx:i386 -y
+apt install libasound2:i386 -y
+apt install libfreetype6:i386 -y
 
 apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" | sudo tee /etc/apt/sources.list.d/docker.list

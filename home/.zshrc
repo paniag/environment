@@ -36,6 +36,8 @@ pathmunge /opt/firefox
 pathmunge /opt/midiedit/bin
 pathmunge /opt/gradle/bin
 pathmunge /usr/lib64/gambit-c/bin
+pathmunge /usr/lib/x86_64-linux-gnu
+pathmunge /usr/lib/x86_64-linux-gnu/mesa
 
 ## directories
 hash -d s=~/sandbox
@@ -477,7 +479,7 @@ alias cle='clewn -va'
 ## scm
 alias gui='git gui&'
 alias gci='git commit'
-alias gca='git commit -a'
+alias gca='git commit -a -S'
 alias gpu='git push'
 alias ga='git add'
 alias gist='git log --oneline --decorate'
