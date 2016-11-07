@@ -482,7 +482,7 @@ alias gci='git commit'
 alias gca='git commit -a -S'
 alias gpu='git push'
 alias ga='git add'
-alias gist='git log --oneline --decorate'
+alias gist='git log --oneline --decorate --pretty="format:%h %G? %aN %s"'
 alias gh-pages='git checkout gh-pages'
 alias gh-master='git checkout master'
 

@@ -2,7 +2,7 @@
 ## yum-install.sh
 ## Mac Radigan
 
-yum --releasever=6x update -y sl-release
+yum --releasever=6x update -y sl-release 
 yum update -y --skip-broken --exclude hdf5-devel
 yum -y install R R-\*
 yum -y install supercollider
