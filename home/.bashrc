@@ -349,6 +349,9 @@ alias pst=" sh -c 'xsel | xvkbd -xsendevent -file - 2>/dev/null' "
 alias ddd='ddd 1>/dev/null 2>/dev/null &'
 alias cle='clewn -va'
 
+## grive
+alias fuse='google-drive-ocamlfuse ~/gdrive'
+
 ## scm
 alias gui='git gui&'
 alias gci='git commit'
