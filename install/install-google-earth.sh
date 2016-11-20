@@ -13,7 +13,7 @@
   apt-get install -y libxext6:i386
   apt-get install -y libxrender1:i386
   apt-get install -y libx11-6:i386
-  apt-get install -y libfontconfig16:i386
+  apt-get install -y libfontconfig1:i386
   apt-get install -y lsb-core
 
   #wget -O /tmp/google-earth64.deb http://dl.google.com/dl/earth/client/current/google-earth-stable_current_i386.deb
