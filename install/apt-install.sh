@@ -1,6 +1,20 @@
 ## apt-install.sh
 ## Mac Radigan
 
+apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118e89f3a912897c070adbf76221572c52609d
+echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" | sudo tee /etc/apt/sources.list.d/docker.list
+apt-get update
+apt-cache policy docker-engine
+apt install -y docker-engine
+systemctl status docker
+
+add-apt-repository ppa:atareao/atareao
+apt install touchpad-indicator -y
+
+add-apt-repository ppa:nilarimogard/webupd8
+add-get update
+apt install gdrive -y
+
 apt install openssh-server -y
 apt install vim -y
 apt install vim-gnome -y
@@ -128,15 +142,10 @@ apt install timidity -y
 apt install libgl1-mesa-glx:i386 -y
 apt install libasound2:i386 -y
 apt install libfreetype6:i386 -y
-
-apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" | sudo tee /etc/apt/sources.list.d/docker.list
-apt-get update
-apt-cache policy docker-engine
-apt install -y docker-engine
-systemctl status docker
-
-add-apt-repository ppa:atareao/atareao
-apt install touchpad-indicator -y
+apt install postgis2_93 -y
+apt install pandoc -y
+apt install gpp -y
+apt install wine -y
+apt install ditaa -y
 
 ## *EOF*
