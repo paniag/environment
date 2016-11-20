@@ -2,6 +2,8 @@
 ## install-google-earth
 ## Mac Radigan
 
+  dpkg --add-architecture i386
+
   apt-get install -y msttcorefonts
   apt-get install -y libc6-i386
   apt-get install -y libglib2.0-0:i386
