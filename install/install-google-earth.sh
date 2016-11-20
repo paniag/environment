@@ -13,7 +13,8 @@
   apt-get install -y libfontconfig16:i386
   apt-get install -y lsb-core
 
-  wget -O /tmp/google-earth64.deb http://dl.google.com/dl/earth/client/current/google-earth-stable_current_i386.deb
+  #wget -O /tmp/google-earth64.deb http://dl.google.com/dl/earth/client/current/google-earth-stable_current_i386.deb
+  wget -O /tmp/google-earth64.deb http://dl.google.com/dl/earth/client/current/google-earth-stable_current_amd64.deb
   dpkg -i /tmp/google-earth64.deb
   rm -f /tmp/google-earth64.deb
 
