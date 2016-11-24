@@ -491,14 +491,44 @@ function ema { gpg -ea -r $2 -o - | mutt -s $1 $2 }
 # fema "subject" file recipient
 function fema { gpg -ea -r $3 -o - $2 | mutt -s $1 $3 }
 
-## encrypted filesystem
-# enc directory
-function enc { 
-  find $1 -print0 | tar -cv --null -T - | gpg -a -c -o $1.tar.gpg
+function enc {
+  fn=$1; shift; d=${fn%/*}; f=${fn##*/}; n=${f%.*}; e=${f##*.}
+  cwd=`pwd`
+  x=aes-256-cbc
+  to=z
+  te=`echo $to |sed 's/v//g'`
+  ext=.tg$te.$x
+  if [[ -z "$PASS" ]]; then
+    (cd $d; find $f -print0 | tar -c$to --null -T - | openssl enc -$x -salt -out $cwd/$f$ext)
+  else
+    (cd $d; find $f -print0 | tar -c$to --null -T - | openssl enc -$x -pass env:PASS -salt -out $cwd/$f$ext)
+  fi
 }
-# dec file
-function dec { 
-  cat $1 | gpg -d | tar -xv
+function dec {
+  fn=$1; shift; d=${fn%/*}; f=${fn##*/}; n=${f%.*}; e=${f##*.}
+  x=$e
+  to=z
+  if [[ -z "$PASS" ]]; then
+    cat $fn | openssl enc -d -$x -salt | tar -x$to
+  else
+    cat $fn | openssl enc -d -$x -pass env:PASS -salt | tar -x$to
+  fi
+}
+function encd { 
+  fn=$1; shift; d=${fn%/*}; f=${fn##*/}; n=${f%.*}; e=${f##*.}
+  if [[ -z "$PASS" ]]; then
+    find $f -print0 | tar -c --null -T - | gpg -a -c -o $f.tar.gpg
+  else
+    find $f -print0 | tar -c --null -T - | gpg --batch --passphrase $PASS -a -c -o $f.tar.gpg
+  fi
+}
+function decd { 
+  fn=$1; shift; d=${fn%/*}; f=${fn##*/}; n=${f%.*}; e=${f##*.}
+  if [[ -z "$PASS" ]]; then
+    cat $f | gpg -d | tar -xv
+  else
+    cat $f | gpg --batch --passphrase $PASS -d | tar -xv
+  fi
 }
 
 function fix-dbus {

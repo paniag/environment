@@ -237,11 +237,11 @@ alias are='autoreconf --install'
 alias cn='./configure'
 alias cnm='./configure && make'
 alias pc='pkg-config'
-alias mk='make'
-alias mkc='make clean'
-alias mkb='make clobber'
-alias mkdc='make distclean'
-alias mkr='make clean; make'
+alias mk='make -j'
+alias mkc='make -j clean'
+alias mkb='make -j clobber'
+alias mkdc='make -j distclean'
+alias mkr='make -j clean; make -j'
 alias mki='sudo make install'
 alias mnp='mvn package'
 alias le='lein'
@@ -671,23 +671,43 @@ function wiki {
   w3m "wikipedia.org/wiki/$*"
 }
 
-## encrypted filesystem
-# enc directory
-function enc { 
-  if [[ -z "$PASSPHRASE" ]]; then
-    find $1 -print0 | tar -cv --null -T - | gpg -a -c -o $1.tar.gpg
+function enc {
+  fn=$1; shift; d=${fn%/*}; f=${fn##*/}; n=${f%.*}; e=${f##*.}
+  cwd=`pwd`
+  x=aes-256-cbc
+  to=z
+  te=`echo $to |sed 's/v//g'`
+  ext=.tg$te.$x
+  if [[ -z "$PASS" ]]; then
+    (cd $d; find $f -print0 | tar -c$to --null -T - | openssl enc -$x -salt -out $cwd/$f$ext)
   else
-    echo "find $1 -print0 | tar -cv --null -T - | gpg --passphrase $PASSPHRASE -a -c -o $1.tar.gpg"
-    find $1 -print0 | tar -cv --null -T - | gpg --batch --passphrase $PASSPHRASE -a -c -o $1.tar.gpg
+    (cd $d; find $f -print0 | tar -c$to --null -T - | openssl enc -$x -pass env:PASS -salt -out $cwd/$f$ext)
   fi
 }
-# dec file
-function dec { 
-  if [[ -z "$PASSPHRASE" ]]; then
-    cat $1 | gpg -d | tar -xv
+function dec {
+  fn=$1; shift; d=${fn%/*}; f=${fn##*/}; n=${f%.*}; e=${f##*.}
+  x=$e
+  to=z
+  if [[ -z "$PASS" ]]; then
+    cat $fn | openssl enc -d -$x -salt | tar -x$to
   else
-    echo "cat $1 | gpg --passphrase $PASSPHRASE -d | tar -xv"
-    cat $1 | gpg --batch --passphrase $PASSPHRASE -d | tar -xv
+    cat $fn | openssl enc -d -$x -pass env:PASS -salt | tar -x$to
+  fi
+}
+function encd { 
+  fn=$1; shift; d=${fn%/*}; f=${fn##*/}; n=${f%.*}; e=${f##*.}
+  if [[ -z "$PASS" ]]; then
+    find $f -print0 | tar -c --null -T - | gpg -a -c -o $f.tar.gpg
+  else
+    find $f -print0 | tar -c --null -T - | gpg --batch --passphrase $PASS -a -c -o $f.tar.gpg
+  fi
+}
+function decd { 
+  fn=$1; shift; d=${fn%/*}; f=${fn##*/}; n=${f%.*}; e=${f##*.}
+  if [[ -z "$PASS" ]]; then
+    cat $f | gpg -d | tar -xv
+  else
+    cat $f | gpg --batch --passphrase $PASS -d | tar -xv
   fi
 }
 

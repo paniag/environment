@@ -151,5 +151,7 @@ apt-get install -y pandoc
 apt-get install -y gpp 
 apt-get install -y wine 
 apt-get install -y ditaa 
+apt-get install -y tightvncserver
+apt-get install -y vncclient
 
 ## *EOF*
