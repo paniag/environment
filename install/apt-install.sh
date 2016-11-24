@@ -153,5 +153,8 @@ apt-get install -y wine
 apt-get install -y ditaa 
 apt-get install -y tightvncserver
 apt-get install -y vncclient
+apt-get install -y twm
+apt-get install -y fvwm
+apt-get install -y compiz-config-settings-manager
 
 ## *EOF*
