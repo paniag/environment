@@ -3,6 +3,7 @@
 
   set editor-command=urxvt -e vim %s
   set spell-checking=true
+  set download-path=~/xfer
 # set auto-load-images false
   ino <CR>i <CR>T
   nn I J
@@ -10,5 +11,6 @@
   nn ;a :q<CR>
   nn ;g :o http://google.com<CR>
   nn ;h :o https://fanglingsu.github.io/vimb/<CR>
+  nn ;e :open http://finviz.com/quote.ashx?t=
 
 ## *EOF*

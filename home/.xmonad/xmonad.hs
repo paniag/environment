@@ -25,7 +25,7 @@ main = xmonad $ defaultConfig
               color = "-fg white -bg black"
               urxvt = "urxvt -vb +sb" in 
           [ 
-             ((modm,               xK_o),      spawn "vimb")
+             ((modm,               xK_o),      spawn "vimb -c ~/.vimbrc")
            , ((modm,               xK_Return), spawn $ XMonad.terminal conf)
            , ((modm,               xK_colon ), spawn "dmenu_run")
            , ((modm,               xK_u     ), kill)
