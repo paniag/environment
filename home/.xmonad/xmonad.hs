@@ -27,7 +27,7 @@ main = xmonad $ defaultConfig
           [ 
              ((modm,               xK_o),      spawn "vimb -c ~/.vimbrc")
            , ((modm,               xK_Return), spawn $ XMonad.terminal conf)
-           , ((modm,               xK_colon ), spawn "dmenu_run")
+           , ((modm,               xK_i ),     spawn "dmenu_run")
            , ((modm,               xK_u     ), kill)
           ]
 
