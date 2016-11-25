@@ -579,6 +579,9 @@ nn s yiw
 nn [ vito
 nn ] vit
 
+"" clipboard
+nn ;xo :r!xclip -o<CR>
+
 "" quick fix
 "nn <C-j> :cn<CR>
 "nn <C-k> :cp<CR>

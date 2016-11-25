@@ -1,6 +1,8 @@
 ## i3 config
 ## Mac Radigan
 
+exec xterm
+
 exec --no-startup-id nm-applet
 
 #exec --no-startup-id feh --bg-scale /home/mac/dat/themes/wallpaper/default.jpg

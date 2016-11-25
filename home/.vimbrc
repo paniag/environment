@@ -1,0 +1,14 @@
+## .vimbrc
+## Mac Radigan
+
+  set editor-command=urxvt -e vim %s
+  set spell-checking=true
+# set auto-load-images false
+  ino <CR>i <CR>T
+  nn I J
+  nn O K
+  nn ;a :q<CR>
+  nn ;g :o http://google.com<CR>
+  nn ;h :o https://fanglingsu.github.io/vimb/<CR>
+
+## *EOF*

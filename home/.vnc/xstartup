@@ -1,0 +1,15 @@
+#!/bin/sh
+## xstartup
+## Mac Radigan
+
+xrdb $HOME/.Xresources
+xsetroot -solid grey
+export XKL_XMODMAP_DISABLE=1
+#/etc/X11/Xsession
+
+#/usr/bin/twm &
+#/usr/bin/fvwm &
+#/usr/bin/i3 &
+/usr/bin/xmonad &
+
+## *EOF*

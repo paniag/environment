@@ -146,8 +146,11 @@ alias re='. ~/.zshrc'
 alias conf='vi ~/.zshrc'
 alias cconf='vi ~/.zshrc ~/.bashrc'
 alias vconf='vi ~/.vimrc'
+alias bconf='vi ~/.vimbrc'
 alias econf='vi ~/.emacs'
 alias iconf='vi ~/.i3/config'
+alias xconf='vi ~/.xmonad/xmonad.hs'
+alias xcheck='xmonad --recompile'
 alias wconf='vi ~/.elinks/elinks.conf'
 alias sconf='vi ~/.screenrc'
 alias tconf='vi ~/.tmux.conf'
@@ -461,6 +464,7 @@ alias fox='firefox&'
 alias chr='chrome&'
 alias opera='/usr/local/bin/opera'
 alias b='w3m'
+alias bb='vimb -c ~/.vimbrc '
 alias lx='lynx'
 alias el='elinks'
 alias conkeror='xulrunner /opt/conkeror/application.ini NULL &'
@@ -735,6 +739,10 @@ function gacl {
   eval "$(ssh-agent -s)"
   ssh-add ~/.ssh/id_rsa
   ssh -vT git@github.com
+}
+
+function xget {
+  curl -O $(xclip -o)
 }
 
 function txt2pdf {

@@ -156,5 +156,14 @@ apt-get install -y vncclient
 apt-get install -y twm
 apt-get install -y fvwm
 apt-get install -y compiz-config-settings-manager
+apt-get install -y x11vnc
+apt-get install -y xvnc4viewer
+apt-get install -y vnc4server
+apt-get install -y libxrandr-dev
+apt-get install -y midori
+apt-get install -y libsoup2.4-dev 
+apt-get install -y libwebkit-dev
+apt-get install -y libgtk-3-dev
+apt-get install -y libwebkitgtk-3.0-dev
 
 ## *EOF*
