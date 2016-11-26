@@ -230,10 +230,17 @@ alias di='echo $DISPLAY'
 alias ca='zcalc'
 alias srm='srm -m'
 alias repl='lein repl'
-alias doc='docker'
 #alias rm='srm'
 function gxe { emacs $* 1>/dev/null 2>/dev/null & }
 #export DISPLAY=`uname -n`:0.0
+
+## docker
+alias dk='docker'
+alias dks='docker ps'
+alias dki='docker images'
+alias dke='docker exec'
+alias dkn='docker start'
+alias dkk='docker stop'
 
 ## build systems
 alias are='autoreconf --install'

@@ -21,9 +21,6 @@ main = xmonad $ defaultConfig
       
       inskeys :: XConfig l -> [((KeyMask, KeySym), X ())]
       inskeys conf@(XConfig {modMask = modm}) =
-          let font = "Terminus"
-              color = "-fg white -bg black"
-              urxvt = "urxvt -vb +sb" in 
           [ 
              ((modm,               xK_o),      spawn "vimb -c ~/.vimbrc")
            , ((modm,               xK_Return), spawn $ XMonad.terminal conf)
