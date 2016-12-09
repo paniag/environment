@@ -22,13 +22,12 @@ pathmunge /opt/firefox
 pathmunge /opt/midiedit/bin
 pathmunge /opt/gradle/bin
 
-#export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64
 export XMODIFIERS="@im=SCIM"
 export GTK_IM_MODULE="scim"
 export XIM_PROGRAM="scim -d"
 export QT_IM_MODULE="scim"
 export LC_ALL=C
-export JAVA_HOME=/opt/jdk/jre
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 export VST_PATH=~/dat/music/lmms/vst
 export RLWRAP_HOME=~/.rlwrap
