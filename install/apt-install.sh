@@ -167,5 +167,9 @@ apt-get install -y libgtk-3-dev
 apt-get install -y libwebkitgtk-3.0-dev
 apt-get install -y influxdb
 apt-get install -y nodejs
+apt-get install -y poppler-utils
+apt-get install -y cuneiform
+apt-get install -y qiv
+apt-get install -y mvn
 
 ## *EOF*

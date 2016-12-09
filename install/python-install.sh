@@ -7,6 +7,7 @@ easy_install pip
 pip3 install --upgrade numpy
 easy_install pyopengl
 easy_install mako
+easy_install jinja2
 easy_install pyopencl
 easy_install GDAL
 pip3 install numexpr
@@ -27,6 +28,7 @@ pip3 install pyzmq
 pip3 install pyhull
 pip3 install PIL
 pip3 install appy
+pip3 install networkx
 #easy_install pyalsa
 #pip3 install pyalsa
 easy_install BeautifulSoup
