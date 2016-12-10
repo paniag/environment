@@ -46,7 +46,7 @@ hash -d d=~/dev
 hash -d l=~/local
 hash -d t=~/temp
 hash -d x=~/xfer
-hash -d g=~/Google\ Drive
+hash -d g=~/gdrive
 hash -d e=~/local/environment
 
 export KiB=$((1024))
@@ -240,6 +240,9 @@ alias dki='docker images'
 alias dke='docker exec'
 alias dkn='docker start'
 alias dkk='docker stop'
+alias dkr='docker run'
+alias dkb='docker build .'
+alias dkp='docker pull'
 
 ## build systems
 alias are='autoreconf --install'

@@ -145,6 +145,9 @@ alias dki='docker images'
 alias dke='docker exec'
 alias dkn='docker start'
 alias dkk='docker stop'
+alias dkr='docker run'
+alias dkb='docker build .'
+alias dkp='docker pull'
 
 ## build systems
 alias are='autoreconf --install'
