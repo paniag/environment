@@ -243,6 +243,7 @@ alias dkk='docker stop'
 alias dkr='docker run'
 alias dkb='docker build .'
 alias dkp='docker pull'
+alias dkip="docker inspect -f '{{.NetworkSettings.IPAddress}}'"
 
 ## build systems
 alias are='autoreconf --install'

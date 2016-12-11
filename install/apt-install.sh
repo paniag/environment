@@ -171,5 +171,7 @@
   apt-get install -y cuneiform
   apt-get install -y qiv
   apt-get install -y mvn
+  apt-get install -y mongodb
+  apt-get install -y uzbl
 
 ## *EOF*
