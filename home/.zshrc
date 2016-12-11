@@ -66,6 +66,7 @@ export VST_PATH=~/dat/music/lmms/vst
 export RLWRAP_HOME=~/.rlwrap
 export RLWRAP_EDITOR="vim +%L"
 export RLWRAP_FILTERDIR="~/.rlwrap"
+export UZBL_EDITOR="vim -g"
 export CLASSPATH=/opt/libreadline-java:/usr/share/java/jna.jar:$CLASSPATH
 #export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/nvidia:/usr/local/lib:/usr/lib64/root/:/usr/lib64:/opt/java-readline:/usr/lib64:/usr/lib64/boost:/opt/anaconda3/lib
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/nvidia:/usr/local/lib:/usr/lib64/root/:/usr/lib64:/opt/java-readline:/usr/lib64:/usr/lib64/boost

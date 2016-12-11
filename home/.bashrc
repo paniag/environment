@@ -33,6 +33,7 @@ export VST_PATH=~/dat/music/lmms/vst
 export RLWRAP_HOME=~/.rlwrap
 export RLWRAP_EDITOR="vim +%L"
 export RLWRAP_FILTERDIR="~/.rlwrap"
+export UZBL_EDITOR="vim -g"
 export GUILE_LOAD_PATH=/usr/share/guile/1.8
 export GUILE_IMPLEMENTATION_PATH=/usr/share/guile/1.8
 export SCHEME_LIBRARY_PATH=/usr/share/guile/1.8
