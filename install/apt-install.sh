@@ -173,5 +173,7 @@
   apt-get install -y mvn
   apt-get install -y mongodb
   apt-get install -y uzbl
+  apt-get install -y grafana
+  apt-get install -y elasticsearch
 
 ## *EOF*
