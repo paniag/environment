@@ -175,5 +175,6 @@
   apt-get install -y uzbl
   apt-get install -y grafana
   apt-get install -y elasticsearch
+  apt-get install -y hydrogen
 
 ## *EOF*
