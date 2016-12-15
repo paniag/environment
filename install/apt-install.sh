@@ -177,5 +177,6 @@
   apt-get install -y elasticsearch
   apt-get install -y hydrogen
   apt-get install -y libportmidi-dev
+  apt-get install -y libasound-dev
 
 ## *EOF*
