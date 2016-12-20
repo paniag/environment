@@ -13,5 +13,6 @@ install PDL::Graphics::Gnuplot
 install PDL::Demos::TriD2::run
 install PDL::Graphics::Prima
 install Dancer2
+install Pod::Usage::CommandLine;
 
 ## *EOF*

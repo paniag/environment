@@ -25,6 +25,7 @@ main = xmonad $ defaultConfig
              ((modm,               xK_o),      spawn "vimb -c ~/.vimbrc")
            , ((modm,               xK_Return), spawn $ XMonad.terminal conf)
            , ((modm,               xK_i ),     spawn "dmenu_run")
+           , ((modm,               xK_z ),     spawn "i3lock -c 000000")
            , ((modm,               xK_u     ), kill)
           ]
 
