@@ -1,6 +1,11 @@
 ## apt-install.sh
 ## Mac Radigan
 
+  apt-add-repository 'deb http://download.virtualbox.org/virtualbox/debian xenial contrib' -y
+  wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | sudo apt-key add -
+  apt-get update
+  apt-get install -y virtualbox-4.3
+
   apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118e89f3a912897c070adbf76221572c52609d
   echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" | sudo tee /etc/apt/sources.list.d/docker.list
   apt-get update
@@ -178,5 +183,7 @@
   apt-get install -y hydrogen
   apt-get install -y libportmidi-dev
   apt-get install -y libasound-dev
+  apt-get install -y vagrant
+  apt-get install -y gnss-sdr
 
 ## *EOF*

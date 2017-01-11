@@ -8,6 +8,10 @@ curl -sSL https://get.rvm.io | bash -s stable --ruby
 rvm install 2.0.0
 rvm use 2.0.0
 
+gem install rubygems-update
+update_rubygems
+gem update --system
+
 gem install nokogiri
 gem install gollum
 gem install bundler

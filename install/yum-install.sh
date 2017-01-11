@@ -394,5 +394,6 @@ yum -y install ocaml
 yum -y install tinyfugue
 yum -y install nc
 yum -y install libgtk-3-dev
+yum -y install vagrant
 
 ## *EOF*
