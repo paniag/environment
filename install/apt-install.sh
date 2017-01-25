@@ -185,5 +185,9 @@
   apt-get install -y libasound-dev
   apt-get install -y vagrant
   apt-get install -y gnss-sdr
+  apt-get install -y ansible
+  apt-get install -y gradle
+  apt-get install -y cdrecord
+  apt-get install -y python3-tk
 
 ## *EOF*

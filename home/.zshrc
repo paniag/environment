@@ -61,6 +61,11 @@
  #bindkey -M viins 'ji' history-incremental-pattern-search-backward
  #bindkey -M viins 'jo' vi-digit-or-beginning-of-line
 
+ ## editing
+ autoload -U edit-command-line
+ zle -N edit-command-line
+ bindkey -M vicmd v edit-command-line
+
   ## suffix and globals
   alias -s c=vim h=vim cpp=vim hpp=vim cxx=vim hxx=vim
   alias -g p='|'
