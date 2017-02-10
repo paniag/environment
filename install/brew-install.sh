@@ -296,4 +296,7 @@ brew install gnuradio
 ## haskell
 brew install ghc
 
+## cmucl
+brew install Caskroom/cask/cmucl
+
 ## *EOF* 
