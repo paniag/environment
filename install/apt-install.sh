@@ -48,7 +48,7 @@
   apt-get install -y guile-2.0-dev 
   apt-get install -y mit-scheme 
   apt-get install -y clisp 
-  apt-get install -y scbl 
+  apt-get install -y sbcl 
   apt-get install -y ranger 
   apt-get install -y csound 
   apt-get install -y snd 
